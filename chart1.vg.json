@@ -1,0 +1,70 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Sugar Content in Australian Packaged Foods",
+    "subtitle": "Sugar per 100g across food categories",
+    "fontSize": 20,
+    "subtitleFontSize": 13,
+    "anchor": "start"
+  },
+  "width": 550,
+  "height": 350,
+  "data": {
+    "url": "OpenHSR.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(datum.sugars_g_per_100g)",
+      "as": "Sugar"
+    },
+    {
+      "filter": "isValid(datum.Sugar) && isFinite(datum.Sugar) && datum.Sugar >= 0 && datum.Sugar <= 100"
+    },
+    {
+      "filter": "isValid(datum['Product type']) && datum['Product type'] !== ''"
+    }
+  ],
+  "mark": {
+    "type": "boxplot",
+    "extent": 1.5,
+    "size": 30
+  },
+  "encoding": {
+    "x": {
+      "field": "Product type",
+      "type": "nominal",
+      "title": "Food Category",
+      "axis": {
+        "labelAngle": -30,
+        "labelFontSize": 11
+      }
+    },
+    "y": {
+      "field": "Sugar",
+      "type": "quantitative",
+      "title": "Sugar (g per 100g)",
+      "scale": {
+        "zero": true
+      }
+    },
+    "color": {
+      "field": "Product type",
+      "type": "nominal",
+      "legend": null
+    }
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "titleFontSize": 13,
+      "grid": true,
+      "gridOpacity": 0.2
+    }
+  }
+}
