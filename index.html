@@ -1,10 +1,15 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
   <title>Health Star Rating Dashboard</title>
 
+  <!-- Vega libraries -->
   <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
@@ -13,43 +18,189 @@
     body {
       font-family: Arial, sans-serif;
       background: #f5f7fa;
-      margin: 30px;
+      color: #243244;
+      margin: 0;
+      line-height: 1.6;
     }
 
-    h1 {
+    header {
+      background: #153b50;
+      color: white;
       text-align: center;
+      padding: 65px 20px;
+    }
+
+    header h1 {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    section {
+      margin-bottom: 45px;
+    }
+
+    h2 {
+      color: #153b50;
     }
 
     .dashboard {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 20px;
     }
 
-    .chart {
+    .chart-card {
       background: white;
-      padding: 20px;
+      padding: 22px;
       border-radius: 12px;
-      min-width: 0;
+      overflow-x: auto;
+    }
+
+    .chart-card h3 {
+      margin-top: 0;
+    }
+
+    .insight {
+      background: #e7f0f5;
+      padding: 20px;
+      border-left: 4px solid #367f9d;
+      border-radius: 6px;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #153b50;
+      color: white;
+    }
+
+    @media (max-width: 700px) {
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <h1>Health Star Rating Dashboard</h1>
+<header>
+  <h1>What's Behind Australia's
+      Health Star Ratings?</h1>
 
-  <div class="dashboard">
-    <div class="chart" id="chart1"></div>
-    <div class="chart" id="chart2"></div>
-    <div class="chart" id="chart3"></div>
-  </div>
+  <p>Exploring food categories, nutritional
+     information and product ratings</p>
+</header>
 
-  <script>
-    vegaEmbed("#chart1", "chart1.vl.json");
-    vegaEmbed("#chart2", "chart2.vl.json");
-    vegaEmbed("#chart3", "chart3.vl.json");
-  </script>
+<main>
+
+  <section>
+    <h2>Introduction</h2>
+
+    <p>
+      The Health Star Rating system helps
+      consumers compare the nutritional
+      profiles of packaged food products.
+      This dashboard explores the products
+      represented in the dataset and
+      highlights patterns across categories.
+    </p>
+  </section>
+
+  <section>
+    <h2>01 — The Food Landscape</h2>
+
+    <p>
+      We begin by exploring how food products
+      are distributed across different
+      categories.
+    </p>
+
+    <div class="dashboard">
+
+      <div class="chart-card">
+        <h3>Products by Food Category</h3>
+        <div id="chart1"></div>
+      </div>
+
+      <div class="chart-card">
+        <h3>Exploring Product Ratings</h3>
+        <div id="chart2"></div>
+      </div>
+
+    </div>
+
+    <div class="insight">
+      <strong>Key observation:</strong>
+      Describe the most important patterns
+      you notice in these two charts.
+    </div>
+  </section>
+
+  <section>
+    <h2>02 — A Closer Look at Nutrition</h2>
+
+    <p>
+      This section examines another aspect
+      of the dataset to understand how food
+      products differ.
+    </p>
+
+    <div class="chart-card">
+      <h3>Food Product Comparison</h3>
+      <div id="chart3"></div>
+    </div>
+
+    <div class="insight">
+      <strong>What does this reveal?</strong>
+      Add your interpretation of the third
+      chart here.
+    </div>
+  </section>
+
+  <section>
+    <h2>Conclusion</h2>
+
+    <p>
+      Together, these visualisations provide
+      an overview of the food products
+      represented in the dataset. The
+      findings should be interpreted in
+      relation to the dataset's coverage.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  FIT3179 Data Visualisation |
+  Health Star Rating Dashboard
+</footer>
+
+<script>
+  const charts = [
+    ["#chart1", "chart1.vg.json"],
+    ["#chart2", "chart2.vg.json"],
+    ["#chart3", "chart3.vg.json"]
+  ];
+
+  charts.forEach(([target, file]) => {
+    vegaEmbed(target, file, {
+      actions: false
+    }).catch(error => {
+      console.error(error);
+      document.querySelector(target).textContent =
+        "Chart could not load: " + error.message;
+    });
+  });
+</script>
 
 </body>
 </html>
