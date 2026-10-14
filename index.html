@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Health Star Rating Dashboard</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      margin: 30px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .chart {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      min-width: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Health Star Rating Dashboard</h1>
+
+  <div class="dashboard">
+    <div class="chart" id="chart1"></div>
+    <div class="chart" id="chart2"></div>
+    <div class="chart" id="chart3"></div>
+  </div>
+
+  <script>
+    vegaEmbed("#chart1", "chart1.vl.json");
+    vegaEmbed("#chart2", "chart2.vl.json");
+    vegaEmbed("#chart3", "chart3.vl.json");
+  </script>
+
+</body>
+</html>
