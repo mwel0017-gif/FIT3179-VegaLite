@@ -13,19 +13,18 @@
 
   <title>The Trolley Check | FIT3179</title>
 
-  <!-- Fonts -->
+  <!-- FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link
     href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&display=swap"
     rel="stylesheet"
   >
 
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
+  <!-- CORRECTED CSS PATH -->
+  <link rel="stylesheet" href="style.css">
 
-  <!-- Vega libraries -->
+  <!-- VEGA LIBRARIES -->
   <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
@@ -50,8 +49,7 @@
       margin: 24px auto;
     }
 
-
-    /* FLEXIBLE VEGA CHART CONTAINER */
+    /* FLEXIBLE VEGA CHART CONTAINERS */
 
     .chart-card .chart-stage,
     .chart-card .chart-host {
@@ -90,6 +88,8 @@
     .chart-card .vega-bindings select {
       max-width: 100%;
     }
+
+    /* TWO-COLUMN CHART PAIRS */
 
     #aisle-1 .chart-pair,
     #aisle-4 .chart-pair {
@@ -172,11 +172,11 @@
       padding: 8px 0;
     }
 
+    /* HSR PICTOGRAM LAYOUT */
+
     #aisle-2 > #hsr-distribution {
       display: grid !important;
-      grid-template-columns:
-        minmax(0, 3fr)
-        minmax(0, 1fr);
+      grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
       column-gap: 22px;
       row-gap: 18px;
       align-items: start;
@@ -230,14 +230,11 @@
       border-top: 1px solid #cbd1c8;
     }
 
-
-    /* AISLE 4: CHOROPLETH MAP */
+    /* CHOROPLETH MAP LAYOUT */
 
     #aisle-4 > #fresh {
       display: grid !important;
-      grid-template-columns:
-        minmax(0, 17fr)
-        minmax(0, 3fr);
+      grid-template-columns: minmax(0, 17fr) minmax(0, 3fr);
       column-gap: 18px;
       row-gap: 16px;
       align-items: start;
@@ -295,8 +292,7 @@
       margin: 16px 0;
     }
 
-
-    /*FULL-WIDTH AISLE EXPLANATIONS */
+    /* FULL-WIDTH AISLE EXPLANATIONS */
 
     .aisle .aisle-intro {
       max-width: none !important;
@@ -318,8 +314,7 @@
       text-align-last: left;
     }
 
-
-    /*  CONCLUSION AND AI ACKNOWLEDGEMENT */
+    /* CONCLUSION AND AI ACKNOWLEDGEMENT */
 
     #conclusion > p,
     #ai-acknowledgement > p {
@@ -329,7 +324,6 @@
       text-align: justify !important;
       text-align-last: left;
     }
-
 
     /* DATA SOURCE LINKS */
 
@@ -354,7 +348,6 @@
       overflow-wrap: anywhere;
     }
 
-
     /* RESPONSIVE LAYOUT */
 
     @media (max-width: 1100px) {
@@ -365,7 +358,6 @@
     }
 
     @media (max-width: 1050px) {
-
       #aisle-2 > #hsr-distribution,
       #aisle-4 > #fresh {
         grid-template-columns: minmax(0, 1fr);
@@ -390,12 +382,10 @@
       #hsr-distribution > .chart-explanation {
         justify-content: flex-start;
       }
-
     }
 
   </style>
 </head>
-
 
 <body>
 
@@ -404,7 +394,6 @@
   <!-- NAVIGATION -->
 
   <nav class="site-nav" aria-label="Dashboard sections">
-
     <a class="brand" href="#top">
       🛒 The Trolley Check
     </a>
@@ -416,13 +405,12 @@
       <a href="#aisle-4">Across Australia</a>
       <a href="#aisle-5">Final Checkout</a>
     </div>
-
   </nav>
 
+  <!-- HERO -->
+
   <header class="hero">
-
     <div class="hero-copy">
-
       <p class="section-label">
         FIT3179 · Food Product Nutrition
       </p>
@@ -434,7 +422,6 @@
         in our supermarket trolleys, and how much
         nutrition do these foods provide?
       </p>
-
     </div>
 
     <div
@@ -442,16 +429,12 @@
       aria-label="39 percent HSR uptake compared with the 70 percent target"
     >
       <span>39%</span>
-
       <p>
         Health Star Rating uptake<br>
         2025 target: 70%
       </p>
-
     </div>
-
   </header>
-
 
   <main>
 
@@ -490,8 +473,7 @@
 
     </section>
 
-
-    <!--  AISLE 1: BEHIND THE NUTRITION LABEL -->
+    <!-- AISLE 1 -->
 
     <section class="aisle aisle-1" id="aisle-1">
 
@@ -501,9 +483,7 @@
       </header>
 
       <div class="aisle-intro">
-
         <h3>What's Really Inside Packaged Foods?</h3>
-
         <p>
           Everyday foods can have very different nutrient
           profiles. In this aisle, we take a closer look
@@ -513,9 +493,7 @@
           added sugars, and how sodium levels vary across
           Australian packaged food products.
         </p>
-
       </div>
-
 
       <!-- CHART 1: NUTRIENT HEATMAP -->
 
@@ -539,7 +517,6 @@
         <div class="chart-explanation">
 
           <h4>How to read</h4>
-
           <p>
             Each cell shows the amount of a nutrient
             per 100 g of food. The colour indicates
@@ -552,7 +529,6 @@
           <hr>
 
           <h4>Key insight</h4>
-
           <p>
             Nutritional strengths often come with trade-offs.
             Breakfast cereals lead in fibre (7.8 g) but
@@ -565,14 +541,11 @@
           </p>
 
         </div>
-
       </article>
-
 
       <!-- CHART PAIR: SUGAR AND SODIUM -->
 
       <div class="chart-pair nutrient-pair">
-
 
         <!-- CHART 2: SUGAR -->
 
@@ -596,7 +569,6 @@
           <div class="chart-explanation">
 
             <h4>How to read</h4>
-
             <p>
               Each bar shows average sugars per 100 g.
               Gold represents added sugars, while
@@ -606,7 +578,6 @@
             <hr>
 
             <h4>Key insight</h4>
-
             <p>
               Not all sugar comes from the same source.
               Sweet biscuits contain the most sugar
@@ -621,9 +592,7 @@
             </p>
 
           </div>
-
         </article>
-
 
         <!-- CHART 3: SODIUM -->
 
@@ -647,7 +616,6 @@
           <div class="chart-explanation">
 
             <h4>How to read</h4>
-
             <p>
               Each lollipop shows median sodium
               in milligrams per 100 g. Use the
@@ -657,7 +625,6 @@
             <hr>
 
             <h4>Key insight</h4>
-
             <p>
               Sodium isn't just found in obviously salty
               foods. Commercial savoury sauces lead with
@@ -671,15 +638,12 @@
             </p>
 
           </div>
-
         </article>
 
       </div>
-
     </section>
 
-
-    <!-- AISLE 2: THE HEALTH STAR PUZZLE -->
+    <!-- AISLE 2 -->
 
     <section class="aisle aisle-2" id="aisle-2">
 
@@ -689,9 +653,7 @@
       </header>
 
       <div class="aisle-intro">
-
         <h3>What Do the Stars Actually Reveal?</h3>
-
         <p>
           Health Star Ratings can help shoppers compare
           packaged foods, but ratings are not evenly
@@ -700,11 +662,9 @@
           a food type, and the shapes of rating
           distributions across categories.
         </p>
-
       </div>
 
-
-      <!--  CHART 4: HSR PICTOGRAM -->
+      <!-- CHART 4: HSR PICTOGRAM -->
 
       <article class="chart-card" id="hsr-distribution">
 
@@ -726,22 +686,17 @@
         <div class="chart-explanation">
 
           <div class="hsr-text-block">
-
             <h4>How to read</h4>
-
             <p>
               Each star represents about 1% of the
               246 rated products. Gold indicates
               0.5–2.0 stars, teal 2.5–3.5,
               and mint 4.0–5.0.
             </p>
-
           </div>
 
           <div class="hsr-text-block">
-
             <h4>Key insight</h4>
-
             <p>
               Lower-rated products make up the largest
               group, with 94 of 246 products (38.2%)
@@ -758,13 +713,10 @@
               not represent all packaged foods sold
               in Australia.
             </p>
-
           </div>
 
         </div>
-
       </article>
-
 
       <!-- CHART 5: HSR DOT PLOT -->
 
@@ -788,7 +740,6 @@
         <div class="chart-explanation">
 
           <h4>How to read</h4>
-
           <p>
             Small dots are individual products.
             Gold marks the lowest rating and mint
@@ -799,7 +750,6 @@
           <hr>
 
           <h4>Key insight</h4>
-
           <p>
             Even within the same food category, Health
             Star Ratings can differ dramatically.
@@ -818,9 +768,7 @@
           </p>
 
         </div>
-
       </article>
-
 
       <!-- CHART 6: RIDGELINE -->
 
@@ -844,7 +792,6 @@
         <div class="chart-explanation">
 
           <h4>How to read</h4>
-
           <p>
             Each ridge represents the distribution
             of ratings within a food category.
@@ -855,7 +802,6 @@
           <hr>
 
           <h4>Key insight</h4>
-
           <p>
             Even within the same food category,
             Health Star Ratings can tell very
@@ -873,13 +819,11 @@
           </p>
 
         </div>
-
       </article>
 
     </section>
 
-
-    <!-- AISLE 3: BEYOND THE STARS -->
+    <!-- AISLE 3 -->
 
     <section class="aisle aisle-3" id="aisle-3">
 
@@ -889,9 +833,7 @@
       </header>
 
       <div class="aisle-intro">
-
         <h3>What Lies Behind a Single Score?</h3>
-
         <p>
           A Health Star Rating summarises a product,
           but its underlying nutrients tell a more
@@ -900,9 +842,7 @@
           and snack bars, then examine four individual
           cereals with contrasting ratings.
         </p>
-
       </div>
-
 
       <!-- CHART 7: PARALLEL COORDINATES -->
 
@@ -926,7 +866,6 @@
         <div class="chart-explanation">
 
           <h4>How to read</h4>
-
           <p>
             Each line represents a packaged food product,
             showing its nutritional profile across five
@@ -943,7 +882,6 @@
           <hr>
 
           <h4>Key insight</h4>
-
           <p>
             Lower-rated products often show higher relative
             levels of sugar, saturated fat or sodium,
@@ -958,9 +896,7 @@
           </p>
 
         </div>
-
       </article>
-
 
       <!-- CHART 8: SCATTER PLOT -->
 
@@ -984,7 +920,6 @@
         <div class="chart-explanation">
 
           <h4>How to read</h4>
-
           <p>
             Each dot represents a packaged food product,
             with colour distinguishing breakfast cereals
@@ -1000,7 +935,6 @@
           <hr>
 
           <h4>Key insight</h4>
-
           <p>
             Breakfast cereals show considerable nutritional
             variation, with some containing less than 10 g
@@ -1016,9 +950,7 @@
           </p>
 
         </div>
-
       </article>
-
 
       <!-- CHART 9: RADAR CHARTS -->
 
@@ -1042,7 +974,6 @@
         <div class="chart-explanation">
 
           <h4>How to read</h4>
-
           <p>
             Each radar chart shows the nutritional profile
             of a cereal across five key nutrients: sugar,
@@ -1059,7 +990,6 @@
           <hr>
 
           <h4>Key insight</h4>
-
           <p>
             Even within breakfast cereals, nutritional
             profiles differ significantly. Weet-Bix
@@ -1077,13 +1007,11 @@
           </p>
 
         </div>
-
       </article>
 
     </section>
 
-
-    <!-- AISLE 4: BEYOND THE SUPERMARKET SHELF -->
+    <!-- AISLE 4 -->
 
     <section class="aisle aisle-4" id="aisle-4">
 
@@ -1093,9 +1021,7 @@
       </header>
 
       <div class="aisle-intro">
-
         <h3>How Does Food Availability Vary Across Australia?</h3>
-
         <p>
           The nutrition story extends beyond individual
           packages. Explore geographic differences in
@@ -1105,14 +1031,11 @@
           These figures concern food availability,
           not what individuals actually eat.
         </p>
-
       </div>
 
-
-      <!-- CHART PAIR: REGIONAL MAPS -->
+      <!-- MAP PAIR -->
 
       <div class="chart-pair map-pair">
-
 
         <!-- CHART 10: REGIONAL NUTRIENT MAP -->
 
@@ -1136,7 +1059,6 @@
           <div class="chart-explanation">
 
             <h4>How to read</h4>
-
             <p>
               Circles show estimated nutrient availability
               per 10,000 kJ. Gold marks metropolitan
@@ -1148,7 +1070,6 @@
             <hr>
 
             <h4>Key insight</h4>
-
             <p>
               Free sugar availability varies considerably
               across Australian regions, ranging from
@@ -1166,9 +1087,7 @@
             </p>
 
           </div>
-
         </article>
-
 
         <!-- CHART 11: SWEET DRINK MAP -->
 
@@ -1192,7 +1111,6 @@
           <div class="chart-explanation">
 
             <h4>How to read</h4>
-
             <p>
               The circle area shows estimated availability;
               the number in each circle is grams per
@@ -1203,7 +1121,6 @@
             <hr>
 
             <h4>Key insight</h4>
-
             <p>
               Sweet drink availability varies considerably
               across Australia. The Northern Territory
@@ -1220,14 +1137,11 @@
             </p>
 
           </div>
-
         </article>
 
       </div>
 
-
-      <!-- CHART 12: CHOROPLETH
-           85% CHART / 15% DESCRIPTION -->
+      <!-- CHART 12: CHOROPLETH -->
 
       <article class="chart-card" id="fresh">
 
@@ -1249,7 +1163,6 @@
         <div class="chart-explanation">
 
           <h4>How to read</h4>
-
           <p>
             Mint indicates lower and gold higher estimated
             availability per 10,000 kJ. Uncoloured regions
@@ -1260,7 +1173,6 @@
           <hr>
 
           <h4>Key insight</h4>
-
           <p>
             Packaged food availability varies across
             Australian regions, with the highest
@@ -1278,13 +1190,11 @@
           </p>
 
         </div>
-
       </article>
 
     </section>
 
-
-    <!-- AISLE 5: THE FINAL CHECKOUT -->
+    <!-- AISLE 5 -->
 
     <section class="aisle aisle-5" id="aisle-5">
 
@@ -1294,19 +1204,15 @@
       </header>
 
       <div class="aisle-intro">
-
         <h3>Are Health Star Ratings Reaching Shoppers?</h3>
-
         <p>
           Finish the journey by comparing reported
           use of Health Star Rating labels with
           the 70% uptake target.
         </p>
-
       </div>
 
-
-      <!-- CHART 13: WAFFLE CHART -->
+      <!-- CHART 13: WAFFLE -->
 
       <article class="chart-card" id="stars">
 
@@ -1328,7 +1234,6 @@
         <div class="chart-explanation">
 
           <h4>How to read</h4>
-
           <p>
             Each square represents one percentage point.
             The two grids compare reported Health Star
@@ -1338,7 +1243,6 @@
           <hr>
 
           <h4>Key insight</h4>
-
           <p>
             Reported uptake is 39%, compared with
             the 70% target: a shortfall of 31 percentage
@@ -1350,11 +1254,9 @@
           </p>
 
         </div>
-
       </article>
 
     </section>
-
 
     <!-- CONCLUSION -->
 
@@ -1396,8 +1298,7 @@
 
     </section>
 
-
-    <!--  DATA SOURCES -->
+    <!-- DATA SOURCES -->
 
     <section class="intro-receipt" id="data-sources">
 
@@ -1497,7 +1398,6 @@
 
     </section>
 
-
     <!-- AI ACKNOWLEDGEMENT -->
 
     <section class="intro-receipt" id="ai-acknowledgement">
@@ -1518,8 +1418,7 @@
 
   </main>
 
-
-  <!--   FOOTER -->
+  <!-- FOOTER -->
 
   <footer class="site-footer">
 
@@ -1539,9 +1438,10 @@
 
 </div>
 
-<script src="js/charts.js"></script>
+<!-- CORRECTED JAVASCRIPT PATH -->
+<script src="charts.js"></script>
 
-<!--FIT CHARTS TO AVAILABLE SPACE -->
+<!-- FIT CHARTS TO AVAILABLE SPACE -->
 
 <script>
 (() => {
