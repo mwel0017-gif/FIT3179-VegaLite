@@ -5,7 +5,7 @@
   "title": {
     "text": [
       "How are Health Star Ratings distributed across",
-       "the products in the dataset?"
+      "the products in the dataset?"
     ],
     "anchor": "start",
     "font": "Bricolage Grotesque",
@@ -16,7 +16,7 @@
     "offset": 22
   },
   "width": 1400,
-  "height": 550,
+  "height": 790,
   "padding": 0,
   "config": {
     "view": {
@@ -92,8 +92,16 @@
           "field": "band",
           "type": "nominal",
           "scale": {
-            "domain": ["Lower", "Middle", "Higher"],
-            "range": ["#E9B75B", "#7FB7AD", "#CDEBD9"]
+            "domain": [
+              "Lower",
+              "Middle",
+              "Higher"
+            ],
+            "range": [
+              "#E9B75B",
+              "#7FB7AD",
+              "#CDEBD9"
+            ]
           },
           "legend": null
         }
@@ -161,7 +169,7 @@
     },
     {
       "data": {
-        "url": "../data/OpenHSR.csv",
+        "url": "OpenHSR.csv",
         "format": {
           "type": "csv"
         }
@@ -264,8 +272,16 @@
           "field": "band",
           "type": "nominal",
           "scale": {
-            "domain": ["Lower", "Middle", "Higher"],
-            "range": ["#E9B75B", "#7FB7AD", "#CDEBD9"]
+            "domain": [
+              "Lower",
+              "Middle",
+              "Higher"
+            ],
+            "range": [
+              "#E9B75B",
+              "#7FB7AD",
+              "#CDEBD9"
+            ]
           },
           "legend": null
         },
@@ -294,7 +310,7 @@
     },
     {
       "data": {
-       "url": "../data/OpenHSR.csv",
+        "url": "OpenHSR.csv",
         "format": {
           "type": "csv"
         }
@@ -381,8 +397,12 @@
         "color": "#C7DBD3"
       },
       "encoding": {
-        "x": {"value": 43},
-        "y": {"value": 725},
+        "x": {
+          "value": 43
+        },
+        "y": {
+          "value": 725
+        },
         "text": {
           "value": "Each star represents approximately 1% of products with a valid HSR (rounded to 100 stars)."
         }
