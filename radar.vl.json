@@ -1,3 +1,4 @@
+
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "description": "Four breakfast cereal radar plots with nutrient callouts in the unused outer-side space for Weet-Bix, Corn Flakes, Coco Pops and Splitstix.",
@@ -12,7 +13,7 @@
     "offset": 22
   },
   "data": {
-    "url": "../data/OpenHSR.csv",
+    "url": "OpenHSR.csv",
     "format": {
       "type": "csv"
     }
