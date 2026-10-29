@@ -226,7 +226,7 @@
             ]
           },
           "data": {
-            "url": "../data/AUSNUT_Cereals_SnackBars_Excel_NEW.csv",
+            "url": "AUSNUT_Cereals_SnackBars_Excel_NEW.csv",
             "format": {
               "type": "csv",
               "parse": {
