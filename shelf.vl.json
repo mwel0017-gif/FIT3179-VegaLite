@@ -1,3 +1,4 @@
+
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "background": "#3C6461",
@@ -76,7 +77,7 @@
       "padding": {"left": 24, "right": 30, "top": 24, "bottom": 18},
 
       "data": {
-        "url": "../data/OpenHSR.csv",
+        "url": "OpenHSR.csv",
         "format": {"type": "csv"}
       },
 
