@@ -1,0 +1,490 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Health Star Rating uptake waffle chart with left and right annotations.",
+  "background": "#3C6461",
+  "width": 1420,
+  "height": 558,
+  "padding": 0,
+
+  "title": {
+    "text": "How Far Is Australia from the 70% HSR Target?",
+    "anchor": "start",
+    "font": "Bricolage Grotesque",
+    "fontSize": 30,
+    "fontWeight": "bold",
+    "color": "#F8F0E4",
+    "offset": 22
+  },
+
+  "config": {
+    "view": {"stroke": null},
+    "font": "Bricolage Grotesque"
+  },
+
+  "layer": [
+    {
+      "data": {
+        "sequence": {
+          "start": 0,
+          "stop": 200,
+          "step": 1
+        }
+      },
+      "transform": [
+        {
+          "calculate": "floor(datum.data / 100)",
+          "as": "panel"
+        },
+        {
+          "calculate": "datum.data % 100",
+          "as": "index"
+        },
+        {
+          "calculate": "datum.panel === 0 ? 39 : 70",
+          "as": "count"
+        },
+        {
+          "calculate": "datum.index < datum.count",
+          "as": "is_filled"
+        },
+        {
+          "calculate": "(datum.panel === 0 ? 270 : 760) + (datum.index % 10) * 39",
+          "as": "x_start"
+        },
+        {
+          "calculate": "datum.x_start + 34",
+          "as": "x_end"
+        },
+        {
+          "calculate": "142 + floor(datum.index / 10) * 39",
+          "as": "y_start"
+        },
+        {
+          "calculate": "datum.y_start + 34",
+          "as": "y_end"
+        },
+        {
+          "calculate": "datum.panel === 0 ? '2025 actual uptake' : '2025 target'",
+          "as": "measure"
+        },
+        {
+          "calculate": "datum.panel === 0 ? (datum.is_filled ? 'HSR label displayed (39%)' : 'HSR label not displayed (61%)') : (datum.is_filled ? 'Part of the 70% target' : 'Outside the 70% target')",
+          "as": "meaning"
+        }
+      ],
+
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 2
+      },
+
+      "encoding": {
+        "x": {
+          "field": "x_start",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 1420],
+            "range": [0, 1420],
+            "nice": false,
+            "zero": false
+          },
+          "axis": null
+        },
+        "x2": {"field": "x_end"},
+        "y": {
+          "field": "y_start",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 558],
+            "range": [0, 558],
+            "nice": false,
+            "zero": false
+          },
+          "axis": null
+        },
+        "y2": {"field": "y_end"},
+        "color": {
+          "condition": {
+            "test": "datum.is_filled",
+            "value": "#9FC7BC"
+          },
+          "value": "#294F49",
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "measure",
+            "type": "nominal",
+            "title": "Comparison"
+          },
+          {
+            "field": "count",
+            "type": "quantitative",
+            "title": "Highlighted out of 100"
+          },
+          {
+            "field": "meaning",
+            "type": "nominal",
+            "title": "Square represents"
+          }
+        ]
+      }
+    },
+
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "circle",
+        "size": 260,
+        "filled": true,
+        "color": "#9FC7BC"
+      },
+      "encoding": {
+        "x": {"value": 270},
+        "y": {"value": 38}
+      }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontSize": 24,
+        "align": "left",
+        "baseline": "middle",
+        "color": "#F8F0E4"
+      },
+      "encoding": {
+        "x": {"value": 292},
+        "y": {"value": 38},
+        "text": {"value": "Actual / target share"}
+      }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "circle",
+        "size": 260,
+        "filled": true,
+        "color": "#294F49"
+      },
+      "encoding": {
+        "x": {"value": 534},
+        "y": {"value": 38}
+      }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontSize": 24,
+        "align": "left",
+        "baseline": "middle",
+        "color": "#F8F0E4"
+      },
+      "encoding": {
+        "x": {"value": 556},
+        "y": {"value": 38},
+        "text": {"value": "Remaining to 100"}
+      }
+    },
+
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontSize": 22,
+        "fontWeight": "bold",
+        "align": "left",
+        "baseline": "middle",
+        "color": "#F8F0E4"
+      },
+      "encoding": {
+        "x": {"value": 270},
+        "y": {"value": 100},
+        "text": {"value": "Actual uptake: 39 in 100"}
+      }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontSize": 22,
+        "fontWeight": "bold",
+        "align": "left",
+        "baseline": "middle",
+        "color": "#F8F0E4"
+      },
+      "encoding": {
+        "x": {"value": 760},
+        "y": {"value": 100},
+        "text": {"value": "2025 target: 70 in 100"}
+      }
+    },
+
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "rule",
+        "stroke": "#E5B456",
+        "strokeWidth": 2.5,
+        "strokeDash": [4, 3]
+      },
+      "encoding": {
+        "x": {"value": 238},
+        "x2": {"value": 270},
+        "y": {"value": 277},
+        "y2": {"value": 277}
+      }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "circle",
+        "filled": false,
+        "stroke": "#E5B456",
+        "strokeWidth": 2.5,
+        "size": 175
+      },
+      "encoding": {
+        "x": {"value": 270},
+        "y": {"value": 277}
+      }
+    },
+
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "rule",
+        "stroke": "#9FC7BC",
+        "strokeWidth": 2.5,
+        "strokeDash": [4, 3]
+      },
+      "encoding": {
+        "x": {"value": 1145},
+        "x2": {"value": 1172},
+        "y": {"value": 394},
+        "y2": {"value": 394}
+      }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "circle",
+        "filled": false,
+        "stroke": "#9FC7BC",
+        "strokeWidth": 2.5,
+        "size": 175
+      },
+      "encoding": {
+        "x": {"value": 1145},
+        "y": {"value": 394}
+      }
+    },
+
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "rect",
+        "fill": "#FFFBF2",
+        "stroke": "#E5B456",
+        "strokeWidth": 2,
+        "cornerRadius": 10
+      },
+      "encoding": {
+        "x": {"value": 20},
+        "x2": {"value": 238},
+        "y": {"value": 224},
+        "y2": {"value": 428}
+      }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "rect",
+        "fill": "#FFFBF2",
+        "stroke": "#9FC7BC",
+        "strokeWidth": 2,
+        "cornerRadius": 10
+      },
+      "encoding": {
+        "x": {"value": 1172},
+        "x2": {"value": 1400},
+        "y": {"value": 224},
+        "y2": {"value": 428}
+      }
+    },
+
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontSize": 15,
+        "fontWeight": "bold",
+        "align": "left",
+        "baseline": "middle",
+        "color": "#3C6461"
+      },
+      "encoding": {
+        "x": {"value": 38},
+        "y": {"value": 254},
+        "text": {"value": "ACTUAL UPTAKE"}
+      }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontSize": 37,
+        "fontWeight": "bold",
+        "align": "left",
+        "baseline": "middle",
+        "color": "#1E2F2C"
+      },
+      "encoding": {
+        "x": {"value": 38},
+        "y": {"value": 309},
+        "text": {"value": "39%"}
+      }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontSize": 17,
+        "align": "left",
+        "baseline": "middle",
+        "color": "#1E2F2C"
+      },
+      "encoding": {
+        "x": {"value": 38},
+        "y": {"value": 351},
+        "text": {"value": "39 of every 100"}
+      }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontSize": 17,
+        "align": "left",
+        "baseline": "middle",
+        "color": "#1E2F2C"
+      },
+      "encoding": {
+        "x": {"value": 38},
+        "y": {"value": 375},
+        "text": {"value": "show an HSR label."}
+      }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontSize": 17,
+        "fontWeight": "bold",
+        "align": "left",
+        "baseline": "middle",
+        "color": "#7A3E5C"
+      },
+      "encoding": {
+        "x": {"value": 38},
+        "y": {"value": 403},
+        "text": {"value": "61 do not."}
+      }
+    },
+
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontSize": 15,
+        "fontWeight": "bold",
+        "align": "left",
+        "baseline": "middle",
+        "color": "#3C6461"
+      },
+      "encoding": {
+        "x": {"value": 1190},
+        "y": {"value": 254},
+        "text": {"value": "2025 TARGET"}
+      }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontSize": 37,
+        "fontWeight": "bold",
+        "align": "left",
+        "baseline": "middle",
+        "color": "#1E2F2C"
+      },
+      "encoding": {
+        "x": {"value": 1190},
+        "y": {"value": 309},
+        "text": {"value": "70%"}
+      }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontSize": 16,
+        "align": "left",
+        "baseline": "middle",
+        "color": "#1E2F2C"
+      },
+      "encoding": {
+        "x": {"value": 1190},
+        "y": {"value": 351},
+        "text": {"value": "31 percentage points"}
+      }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontSize": 16,
+        "align": "left",
+        "baseline": "middle",
+        "color": "#1E2F2C"
+      },
+      "encoding": {
+        "x": {"value": 1190},
+        "y": {"value": 375},
+        "text": {"value": "above reported uptake."}
+      }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "align": "left",
+        "baseline": "middle",
+        "color": "#7A3E5C"
+      },
+      "encoding": {
+        "x": {"value": 1190},
+        "y": {"value": 403},
+        "text": {"value": "Target not reached."}
+      }
+    }
+  ]
+}

@@ -1,0 +1,392 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "#3C6461",
+  "title": {
+    "text": [
+      "How are Health Star Ratings distributed across",
+       "the products in the dataset?"
+    ],
+    "anchor": "start",
+    "font": "Bricolage Grotesque",
+    "fontSize": 30,
+    "fontWeight": "bold",
+    "color": "#F8F0E4",
+    "lineHeight": 36,
+    "offset": 22
+  },
+  "width": 1400,
+  "height": 550,
+  "padding": 0,
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Bricolage Grotesque",
+    "axis": {
+      "labelFont": "Bricolage Grotesque",
+      "titleFont": "Bricolage Grotesque"
+    },
+    "legend": {
+      "labelFont": "Bricolage Grotesque",
+      "titleFont": "Bricolage Grotesque"
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "x": 55,
+            "y": 55,
+            "band": "Lower",
+            "label_x": 79,
+            "label": "Lower · 0.5–2.0 stars"
+          },
+          {
+            "x": 374,
+            "y": 55,
+            "band": "Middle",
+            "label_x": 399,
+            "label": "Middle · 2.5–3.5 stars"
+          },
+          {
+            "x": 718,
+            "y": 55,
+            "band": "Higher",
+            "label_x": 743,
+            "label": "Higher · 4.0–5.0 stars"
+          }
+        ]
+      },
+      "mark": {
+        "type": "point",
+        "shape": "M0,-1L0.224,-0.309L0.951,-0.309L0.363,0.118L0.588,0.809L0,0.382L-0.588,0.809L-0.363,0.118L-0.951,-0.309L-0.224,-0.309Z",
+        "filled": true,
+        "size": 360
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 1050],
+            "range": [0, 1050],
+            "zero": false,
+            "nice": false
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 790],
+            "range": [0, 790],
+            "zero": false,
+            "nice": false
+          },
+          "axis": null
+        },
+        "color": {
+          "field": "band",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Lower", "Middle", "Higher"],
+            "range": ["#E9B75B", "#7FB7AD", "#CDEBD9"]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 55,
+            "y": 55,
+            "label_x": 79,
+            "label": "Lower · 0.5–2.0 stars"
+          },
+          {
+            "x": 374,
+            "y": 55,
+            "label_x": 399,
+            "label": "Middle · 2.5–3.5 stars"
+          },
+          {
+            "x": 718,
+            "y": 55,
+            "label_x": 743,
+            "label": "Higher · 4.0–5.0 stars"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontSize": 19,
+        "color": "#C7DBD3",
+        "align": "left",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "x": {
+          "field": "label_x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 1050],
+            "range": [0, 1050],
+            "zero": false,
+            "nice": false
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 790],
+            "range": [0, 790],
+            "zero": false,
+            "nice": false
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "../data/OpenHSR.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "toNumber(datum.HSR)",
+          "as": "hsr"
+        },
+        {
+          "filter": "isValid(datum.hsr) && datum.hsr >= 0.5 && datum.hsr <= 5"
+        },
+        {
+          "calculate": "datum.hsr <= 2 ? 1 : 0",
+          "as": "low"
+        },
+        {
+          "calculate": "datum.hsr > 2 && datum.hsr <= 3.5 ? 1 : 0",
+          "as": "mid"
+        },
+        {
+          "aggregate": [
+            {
+              "op": "sum",
+              "field": "low",
+              "as": "low_n"
+            },
+            {
+              "op": "sum",
+              "field": "mid",
+              "as": "mid_n"
+            },
+            {
+              "op": "count",
+              "as": "total_n"
+            }
+          ]
+        },
+        {
+          "calculate": "sequence(0,100)",
+          "as": "icons"
+        },
+        {
+          "flatten": ["icons"],
+          "as": ["i"]
+        },
+        {
+          "calculate": "datum.i < round(100 * datum.low_n / datum.total_n) ? 'Lower' : datum.i < round(100 * (datum.low_n + datum.mid_n) / datum.total_n) ? 'Middle' : 'Higher'",
+          "as": "band"
+        },
+        {
+          "calculate": "120 + (datum.i % 10) * 82",
+          "as": "x"
+        },
+        {
+          "calculate": "125 + floor(datum.i / 10) * 49",
+          "as": "y"
+        },
+        {
+          "calculate": "datum.band === 'Lower' ? datum.low_n : datum.band === 'Middle' ? datum.mid_n : datum.total_n - datum.low_n - datum.mid_n",
+          "as": "band_n"
+        },
+        {
+          "calculate": "100 * datum.band_n / datum.total_n",
+          "as": "pct"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "shape": "M0,-1L0.224,-0.309L0.951,-0.309L0.363,0.118L0.588,0.809L0,0.382L-0.588,0.809L-0.363,0.118L-0.951,-0.309L-0.224,-0.309Z",
+        "filled": true,
+        "size": 850,
+        "stroke": "#F8F0E4",
+        "strokeWidth": 0.55
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 1050],
+            "range": [0, 1050],
+            "zero": false,
+            "nice": false
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 790],
+            "range": [0, 790],
+            "zero": false,
+            "nice": false
+          },
+          "axis": null
+        },
+        "color": {
+          "field": "band",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Lower", "Middle", "Higher"],
+            "range": ["#E9B75B", "#7FB7AD", "#CDEBD9"]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "band",
+            "title": "HSR group"
+          },
+          {
+            "field": "band_n",
+            "title": "Products in group",
+            "format": ",.0f"
+          },
+          {
+            "field": "total_n",
+            "title": "Products with valid ratings",
+            "format": ",.0f"
+          },
+          {
+            "field": "pct",
+            "title": "Share (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+       "url": "../data/OpenHSR.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "toNumber(datum.HSR)",
+          "as": "hsr"
+        },
+        {
+          "filter": "isValid(datum.hsr) && datum.hsr >= 0.5 && datum.hsr <= 5"
+        },
+        {
+          "calculate": "datum.hsr <= 2 ? 'Lower' : datum.hsr <= 3.5 ? 'Middle' : 'Higher'",
+          "as": "band"
+        },
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "n"
+            }
+          ],
+          "groupby": ["band"]
+        },
+        {
+          "joinaggregate": [
+            {
+              "op": "sum",
+              "field": "n",
+              "as": "total"
+            }
+          ]
+        },
+        {
+          "calculate": "datum.band === 'Lower' ? 43 : datum.band === 'Middle' ? 373 : 707",
+          "as": "x"
+        },
+        {
+          "calculate": "datum.band + ': ' + format(datum.n / datum.total * 100, '.1f') + '% (' + format(datum.n, ',d') + ' products)'",
+          "as": "label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontWeight": "bold",
+        "fontSize": 18,
+        "color": "#F8F0E4",
+        "align": "left",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 1050],
+            "range": [0, 1050],
+            "zero": false,
+            "nice": false
+          },
+          "axis": null
+        },
+        "y": {
+          "value": 657
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [{}]
+      },
+      "mark": {
+        "type": "text",
+        "font": "Bricolage Grotesque",
+        "fontSize": 17,
+        "align": "left",
+        "baseline": "middle",
+        "color": "#C7DBD3"
+      },
+      "encoding": {
+        "x": {"value": 43},
+        "y": {"value": 725},
+        "text": {
+          "value": "Each star represents approximately 1% of products with a valid HSR (rounded to 100 stars)."
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,299 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Median sodium content across seven everyday Australian food categories.",
+  "background": "#3C6461",
+  "title": {
+    "text": [
+      "How does sodium content vary across",
+      "everyday Australian food categories?"
+    ],
+    "anchor": "start",
+    "font": "Bricolage Grotesque",
+    "fontSize": 30,
+    "fontWeight": "bold",
+    "color": "#F8F0E4",
+    "lineHeight": 36,
+    "offset": 24
+  },
+  "width": 400,
+  "height": 400,
+  "padding": {
+    "left": 14,
+    "right": 42,
+    "top": 18,
+    "bottom": 14
+  },
+  "data": {
+    "values": [
+      {
+        "category": "Commercial savoury sauces",
+        "median": 913,
+        "value_label": "913",
+        "n": 35,
+        "min": 50,
+        "max": 8255,
+        "lower_quartile": 482,
+        "upper_quartile": 1602,
+        "highest_food": "Sauce, fish, commercial"
+      },
+      {
+        "category": "Cheese",
+        "median": 602.5,
+        "value_label": "602.5",
+        "n": 56,
+        "min": 24,
+        "max": 1440,
+        "lower_quartile": 338.5,
+        "upper_quartile": 881.2,
+        "highest_food": "Cheese spread, cream cheese, reduced fat"
+      },
+      {
+        "category": "Potato crisps",
+        "median": 591.5,
+        "value_label": "591.5",
+        "n": 8,
+        "min": 43,
+        "max": 970,
+        "lower_quartile": 553.2,
+        "upper_quartile": 727,
+        "highest_food": "Potato crisps or chips, salt & vinegar flavoured"
+      },
+      {
+        "category": "Savoury biscuits",
+        "median": 552,
+        "value_label": "552",
+        "n": 34,
+        "min": 41,
+        "max": 1053,
+        "lower_quartile": 376,
+        "upper_quartile": 765,
+        "highest_food": "Biscuit, savoury, wheat, stick, salted"
+      },
+      {
+        "category": "Bread & rolls",
+        "median": 481,
+        "value_label": "481",
+        "n": 73,
+        "min": 169,
+        "max": 971,
+        "lower_quartile": 401.5,
+        "upper_quartile": 558.5,
+        "highest_food": "Bread, croutons"
+      },
+      {
+        "category": "Breakfast cereals",
+        "median": 215,
+        "value_label": "215",
+        "n": 87,
+        "min": 1,
+        "max": 658,
+        "lower_quartile": 32,
+        "upper_quartile": 355,
+        "highest_food": "Breakfast cereal, rice, puffed or popped, added vitamins B2, B3, B6 & folate, Fe & Zn"
+      },
+      {
+        "category": "Snack bars",
+        "median": 195.5,
+        "value_label": "195.5",
+        "n": 28,
+        "min": 23,
+        "max": 593,
+        "lower_quartile": 75.5,
+        "upper_quartile": 267.8,
+        "highest_food": "Bar, meal replacement, added vitamins & minerals"
+      }
+    ]
+  },
+  "encoding": {
+    "x": {
+      "field": "median",
+      "type": "quantitative",
+      "scale": {
+        "domain": [0, 1080],
+        "nice": false,
+        "zero": true
+      },
+      "axis": {
+        "title": "Median sodium (mg per 100 g)",
+        "values": [0, 200, 400, 600, 800, 1000],
+        "grid": true,
+        "gridColor": "#8FB0A6",
+        "gridOpacity": 0.32,
+        "labelColor": "#C7DBD3",
+        "titleColor": "#F8F0E4",
+        "labelFont": "Bricolage Grotesque",
+        "titleFont": "Bricolage Grotesque",
+        "labelFontSize": 15,
+        "titleFontSize": 17,
+        "labelPadding": 10,
+        "titlePadding": 20,
+        "tickColor": "#A6D0C1",
+        "domainColor": "#A6D0C1"
+      }
+    },
+    "y": {
+      "field": "category",
+      "type": "nominal",
+      "sort": {
+        "field": "median",
+        "op": "max",
+        "order": "descending"
+      },
+      "axis": {
+        "title": "Food category",
+        "labelColor": "#C7DBD3",
+        "titleColor": "#F8F0E4",
+        "labelFont": "Bricolage Grotesque",
+        "titleFont": "Bricolage Grotesque",
+        "labelFontSize": 16,
+        "titleFontSize": 17,
+        "labelPadding": 10,
+        "titlePadding": 20,
+        "labelLimit": 300,
+        "grid": false,
+        "ticks": false,
+        "domain": false
+      }
+    },
+    "tooltip": [
+      {
+        "field": "category",
+        "type": "nominal",
+        "title": "Food category"
+      },
+      {
+        "field": "n",
+        "type": "quantitative",
+        "title": "Profiles analysed",
+        "format": ",.0f"
+      },
+      {
+        "field": "median",
+        "type": "quantitative",
+        "title": "Median sodium (mg/100g)",
+        "format": ",.1f"
+      },
+      {
+        "field": "lower_quartile",
+        "type": "quantitative",
+        "title": "Lower quartile (mg/100g)",
+        "format": ",.1f"
+      },
+      {
+        "field": "upper_quartile",
+        "type": "quantitative",
+        "title": "Upper quartile (mg/100g)",
+        "format": ",.1f"
+      },
+      {
+        "field": "min",
+        "type": "quantitative",
+        "title": "Minimum (mg/100g)",
+        "format": ",.0f"
+      },
+      {
+        "field": "max",
+        "type": "quantitative",
+        "title": "Maximum (mg/100g)",
+        "format": ",.0f"
+      },
+      {
+        "field": "highest_food",
+        "type": "nominal",
+        "title": "Highest-sodium profile"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 3.5,
+        "color": "#A6D0C1",
+        "opacity": 0.5
+      },
+      "encoding": {
+        "x2": {
+          "value": 0
+        },
+        "opacity": {
+          "condition": {
+            "test": "focus_group === 'All categories' || datum.category === focus_group",
+            "value": 0.8
+          },
+          "value": 0.38
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 295,
+        "filled": true,
+        "stroke": "#F8F0E4",
+        "strokeWidth": 0.9
+      },
+      "encoding": {
+        "color": {
+          "condition": {
+            "test": "focus_group === 'All categories' || datum.category === focus_group",
+            "value": "#E9B75B"
+          },
+          "value": "#A6D0C1"
+        },
+        "opacity": {
+          "value": 1
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 18,
+        "font": "Bricolage Grotesque",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "color": "#F8F0E4"
+      },
+      "encoding": {
+        "text": {
+          "field": "value_label",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Bricolage Grotesque",
+      "titleFont": "Bricolage Grotesque"
+    },
+    "font": "Bricolage Grotesque"
+  },
+  "params": [
+    {
+      "name": "focus_group",
+      "value": "Bread & rolls",
+      "bind": {
+        "input": "select",
+        "name": "Highlight food group: ",
+        "options": [
+          "All categories",
+          "Bread & rolls",
+          "Commercial savoury sauces",
+          "Cheese",
+          "Potato crisps",
+          "Savoury biscuits",
+          "Breakfast cereals",
+          "Snack bars"
+        ]
+      }
+    }
+  ]
+}

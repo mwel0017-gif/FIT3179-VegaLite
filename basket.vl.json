@@ -1,0 +1,367 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Australian regional nutrient availability map",
+  "background": "#3C6461",
+  "spacing": 10,
+  "center": true,
+
+  "title": {
+    "text": [
+      "How does the nutrient mix of packaged food",
+      "purchases vary across Australian regions?"
+    ],
+    "anchor": "start",
+    "font": "Bricolage Grotesque",
+    "fontSize": 25,
+    "fontWeight": "bold",
+    "color": "#F8F0E4",
+    "lineHeight": 31,
+    "offset": 22
+  },
+
+  "vconcat": [
+    {
+      "width": 600,
+      "height": 100,
+      "data": {
+        "values": [{}]
+      },
+
+      "layer": [
+        {
+          "mark": {
+            "type": "circle",
+            "fill": "#FFB52E",
+            "stroke": "#FFB52E",
+            "strokeWidth": 1.5,
+            "fillOpacity": 0.75
+          },
+          "encoding": {
+            "x": {"value": 42},
+            "y": {"value": 30},
+            "size": {"value": 150}
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "font": "Bricolage Grotesque",
+            "fontSize": 16,
+            "color": "#F8F0E4",
+            "align": "left",
+            "baseline": "middle"
+          },
+          "encoding": {
+            "x": {"value": 62},
+            "y": {"value": 30},
+            "text": {"value": "Metro cluster"}
+          }
+        },
+        {
+          "mark": {
+            "type": "circle",
+            "fill": "#B6DDCB",
+            "stroke": "#B6DDCB",
+            "strokeWidth": 1.5,
+            "fillOpacity": 0.75
+          },
+          "encoding": {
+            "x": {"value": 300},
+            "y": {"value": 30},
+            "size": {"value": 150}
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "font": "Bricolage Grotesque",
+            "fontSize": 16,
+            "color": "#F8F0E4",
+            "align": "left",
+            "baseline": "middle"
+          },
+          "encoding": {
+            "x": {"value": 320},
+            "y": {"value": 30},
+            "text": {"value": "Regional cluster"}
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "font": "Bricolage Grotesque",
+            "fontSize": 16,
+            "color": "#F8F0E4",
+            "align": "left",
+            "baseline": "middle"
+          },
+          "encoding": {
+            "x": {"value": 25},
+            "y": {"value": 78},
+            "text": {
+              "value": "Circle size = free sugars (g per 10,000 kJ):"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "circle",
+            "filled": false,
+            "stroke": "#F8F0E4",
+            "strokeWidth": 1.5
+          },
+          "encoding": {
+            "x": {"value": 380},
+            "y": {"value": 78},
+            "size": {"value": 167}
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "font": "Bricolage Grotesque",
+            "fontSize": 15,
+            "color": "#DCECE5",
+            "align": "left",
+            "baseline": "middle"
+          },
+          "encoding": {
+            "x": {"value": 400},
+            "y": {"value": 78},
+            "text": {"value": "65 g"}
+          }
+        },
+        {
+          "mark": {
+            "type": "circle",
+            "filled": false,
+            "stroke": "#F8F0E4",
+            "strokeWidth": 1.5
+          },
+          "encoding": {
+            "x": {"value": 458},
+            "y": {"value": 78},
+            "size": {"value": 400}
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "font": "Bricolage Grotesque",
+            "fontSize": 15,
+            "color": "#DCECE5",
+            "align": "left",
+            "baseline": "middle"
+          },
+          "encoding": {
+            "x": {"value": 480},
+            "y": {"value": 78},
+            "text": {"value": "75 g"}
+          }
+        },
+        {
+          "mark": {
+            "type": "circle",
+            "filled": false,
+            "stroke": "#F8F0E4",
+            "strokeWidth": 1.5
+          },
+          "encoding": {
+            "x": {"value": 535},
+            "y": {"value": 78},
+            "size": {"value": 633}
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "font": "Bricolage Grotesque",
+            "fontSize": 15,
+            "color": "#DCECE5",
+            "align": "left",
+            "baseline": "middle"
+          },
+          "encoding": {
+            "x": {"value": 558},
+            "y": {"value": 78},
+            "text": {"value": "85 g"}
+          }
+        }
+      ]
+    },
+
+    {
+      "width": 600,
+      "height": 550,
+      "projection": {
+        "type": "mercator"
+      },
+
+      "layer": [
+        {
+          "data": {
+            "url": "../data/SA4_free_sugars_2023_24.geojson",
+            "format": {
+              "type": "json",
+              "property": "features"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#496F6A",
+            "fillOpacity": 0.7,
+            "stroke": "#8FB0A6",
+            "strokeOpacity": 0.45,
+            "strokeWidth": 0.55
+          },
+          "encoding": {
+            "tooltip": [
+              {
+                "field": "properties.SA4_NAME21",
+                "type": "nominal",
+                "title": "SA4 region"
+              },
+              {
+                "field": "properties.STE_NAME21",
+                "type": "nominal",
+                "title": "State or territory"
+              }
+            ]
+          }
+        },
+
+        {
+          "data": {
+            "url": "../data/SA4_regional_nutrient_points.csv",
+            "format": {
+              "type": "csv",
+              "parse": {
+                "longitude": "number",
+                "latitude": "number",
+                "free_sugars_g": "number",
+                "fibre_g": "number",
+                "sodium_mg": "number",
+                "sat_fat_g": "number",
+                "protein_g": "number",
+                "is_capital": "boolean",
+                "show_by_default": "boolean"
+              }
+            }
+          },
+
+          "transform": [
+            {"filter": "datum.show_by_default"},
+            {
+              "calculate": "datum.is_capital ? 'Metro cluster' : 'Regional cluster'",
+              "as": "region_type"
+            }
+          ],
+
+          "mark": {
+            "type": "circle",
+            "fillOpacity": 0.88,
+            "strokeWidth": 1.5
+          },
+
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "color": {
+              "condition": {
+                "test": "datum.is_capital",
+                "value": "#FFB52E"
+              },
+              "value": "#B6DDCB",
+              "legend": null
+            },
+            "stroke": {
+              "value": "#3C6461"
+            },
+            "size": {
+              "field": "free_sugars_g",
+              "type": "quantitative",
+              "scale": {
+                "domain": [60, 90],
+                "range": [35, 500],
+                "zero": false,
+                "nice": false,
+                "clamp": true
+              },
+              "legend": null
+            },
+
+            "tooltip": [
+              {
+                "field": "region",
+                "type": "nominal",
+                "title": "SA4 region"
+              },
+              {
+                "field": "state",
+                "type": "nominal",
+                "title": "State / territory"
+              },
+              {
+                "field": "region_type",
+                "type": "nominal",
+                "title": "Area grouping"
+              },
+              {
+                "field": "free_sugars_g",
+                "type": "quantitative",
+                "title": "Free sugars (g / 10,000 kJ)",
+                "format": ",.1f"
+              },
+              {
+                "field": "fibre_g",
+                "type": "quantitative",
+                "title": "Dietary fibre (g / 10,000 kJ)",
+                "format": ",.1f"
+              },
+              {
+                "field": "sodium_mg",
+                "type": "quantitative",
+                "title": "Sodium (mg / 10,000 kJ)",
+                "format": ",.1f"
+              },
+              {
+                "field": "sat_fat_g",
+                "type": "quantitative",
+                "title": "Saturated fat (g / 10,000 kJ)",
+                "format": ",.1f"
+              },
+              {
+                "field": "protein_g",
+                "type": "quantitative",
+                "title": "Protein (g / 10,000 kJ)",
+                "format": ",.1f"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+
+  "config": {
+    "font": "Bricolage Grotesque",
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFont": "Bricolage Grotesque",
+      "titleFont": "Bricolage Grotesque"
+    },
+    "axis": {
+      "labelFont": "Bricolage Grotesque",
+      "titleFont": "Bricolage Grotesque"
+    }
+  }
+}

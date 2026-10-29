@@ -1,0 +1,699 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Four breakfast cereal radar plots with nutrient callouts in the unused outer-side space for Weet-Bix, Corn Flakes, Coco Pops and Splitstix.",
+  "background": "#3C6461",
+  "title": {
+    "text": "What Nutrients Set High and Low Star Cereals Apart?",
+    "anchor": "start",
+    "font": "Bricolage Grotesque",
+    "fontSize": 30,
+    "fontWeight": "bold",
+    "color": "#F8F0E4",
+    "offset": 22
+  },
+  "data": {
+    "url": "../data/OpenHSR.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "filter": "indexof(lower(datum.product_name), 'weet-bix') >= 0 || lower(trim(datum.product_name)) == 'corn flakes' || lower(trim(datum.product_name)) == 'coco pops' || lower(trim(datum.product_name)) == 'splitstix'"
+    },
+    {
+      "calculate": "(indexof(lower(datum.product_name), 'weet-bix') >= 0 ? '01 Weet-Bix' : lower(trim(datum.product_name)) == 'corn flakes' ? '02 Corn Flakes' : lower(trim(datum.product_name)) == 'coco pops' ? '03 Coco Pops' : '04 Splitstix') + ' | ' + format(toNumber(datum.HSR), '.1f') + ' stars'",
+      "as": "cereal"
+    },
+    {
+      "fold": [
+        "sugars_g_per_100g",
+        "sat_fat_g_per_100g",
+        "sodium_mg_per_100g",
+        "protein_g_per_100g",
+        "fiber_g_per_100g"
+      ],
+      "as": [
+        "metric",
+        "rawValue"
+      ]
+    },
+    {
+      "calculate": "datum.metric == 'sugars_g_per_100g' ? 0 : datum.metric == 'sat_fat_g_per_100g' ? 1 : datum.metric == 'sodium_mg_per_100g' ? 2 : datum.metric == 'protein_g_per_100g' ? 3 : 4",
+      "as": "axisOrder"
+    },
+    {
+      "calculate": "datum.axisOrder == 0 ? 'Sugar' : datum.axisOrder == 1 ? 'Sat. fat' : datum.axisOrder == 2 ? 'Sodium' : datum.axisOrder == 3 ? 'Protein' : 'Fibre'",
+      "as": "nutrient"
+    },
+    {
+      "calculate": "toNumber(datum.rawValue)",
+      "as": "actualValue"
+    },
+    {
+      "filter": "isValid(datum.actualValue)"
+    },
+    {
+      "calculate": "datum.axisOrder == 0 ? 40 : datum.axisOrder == 1 ? 11 : datum.axisOrder == 2 ? 550 : datum.axisOrder == 3 ? 12 : 11",
+      "as": "referenceMax"
+    },
+    {
+      "calculate": "min(1, max(0, datum.actualValue / datum.referenceMax))",
+      "as": "normalised"
+    },
+    {
+      "calculate": "-PI/2 + datum.axisOrder * 2 * PI/5",
+      "as": "angle"
+    },
+    {
+      "calculate": "datum.normalised * cos(datum.angle)",
+      "as": "plotX"
+    },
+    {
+      "calculate": "-datum.normalised * sin(datum.angle)",
+      "as": "plotY"
+    },
+    {
+      "calculate": "(datum.axisOrder == 2 ? format(datum.actualValue, ',.0f') + ' mg' : format(datum.actualValue, '.1f') + ' g') + ' per 100 g'",
+      "as": "actualDisplay"
+    },
+    {
+      "calculate": "(datum.axisOrder == 2 ? format(datum.referenceMax, ',.0f') + ' mg' : format(datum.referenceMax, '.0f') + ' g') + ' per 100 g'",
+      "as": "referenceDisplay"
+    },
+    {
+      "calculate": "format(datum.normalised * 100, '.0f') + '% of comparison scale'",
+      "as": "scaleDisplay"
+    }
+  ],
+  "facet": {
+    "field": "cereal",
+    "type": "nominal",
+    "sort": "ascending",
+    "header": {
+      "title": null,
+      "labelColor": "#F8F0E4",
+      "labelFont": "Bricolage Grotesque",
+      "labelFontSize": 23,
+      "labelFontWeight": "bold",
+      "labelPadding": 15,
+      "labelLimit": 440
+    }
+  },
+  "columns": 2,
+  "spacing": 40,
+  "spec": {
+    "width": 560,
+    "height": 350,
+    "encoding": {
+      "x": {
+        "field": "plotX",
+        "type": "quantitative",
+        "scale": {
+          "domain": [
+            -1.95,
+            1.95
+          ],
+          "nice": false,
+          "zero": false
+        },
+        "axis": null
+      },
+      "y": {
+        "field": "plotY",
+        "type": "quantitative",
+        "scale": {
+          "domain": [
+            -1.37,
+            1.37
+          ],
+          "nice": false,
+          "zero": false
+        },
+        "axis": null
+      }
+    },
+    "layer": [
+      {
+        "data": {
+          "sequence": {
+            "start": 0,
+            "stop": 20,
+            "as": "i"
+          }
+        },
+        "transform": [
+          {
+            "calculate": "floor(datum.i / 5)",
+            "as": "ring"
+          },
+          {
+            "calculate": "datum.i % 5",
+            "as": "spoke"
+          },
+          {
+            "calculate": "(datum.ring + 1) / 4",
+            "as": "radius"
+          },
+          {
+            "calculate": "-PI/2 + datum.spoke * 2 * PI/5",
+            "as": "angle"
+          },
+          {
+            "calculate": "datum.radius * cos(datum.angle)",
+            "as": "plotX"
+          },
+          {
+            "calculate": "-datum.radius * sin(datum.angle)",
+            "as": "plotY"
+          }
+        ],
+        "mark": {
+          "type": "line",
+          "interpolate": "linear-closed",
+          "stroke": "#89ADA6",
+          "strokeWidth": 1.1,
+          "opacity": 0.55
+        },
+        "encoding": {
+          "detail": {
+            "field": "ring",
+            "type": "nominal"
+          },
+          "order": {
+            "field": "spoke",
+            "type": "quantitative"
+          }
+        }
+      },
+      {
+        "data": {
+          "sequence": {
+            "start": 0,
+            "stop": 5,
+            "as": "spoke"
+          }
+        },
+        "transform": [
+          {
+            "calculate": "0",
+            "as": "plotX"
+          },
+          {
+            "calculate": "0",
+            "as": "plotY"
+          },
+          {
+            "calculate": "-PI/2 + datum.spoke * 2 * PI/5",
+            "as": "angle"
+          },
+          {
+            "calculate": "cos(datum.angle)",
+            "as": "endX"
+          },
+          {
+            "calculate": "-sin(datum.angle)",
+            "as": "endY"
+          }
+        ],
+        "mark": {
+          "type": "rule",
+          "stroke": "#89ADA6",
+          "strokeWidth": 1,
+          "opacity": 0.48
+        },
+        "encoding": {
+          "x2": {
+            "field": "endX"
+          },
+          "y2": {
+            "field": "endY"
+          }
+        }
+      },
+      {
+        "data": {
+          "values": [
+            {
+              "label": "Sugar",
+              "plotX": 0,
+              "plotY": 1.21
+            },
+            {
+              "label": "Sat. fat",
+              "plotX": 1.2,
+              "plotY": 0.4
+            },
+            {
+              "label": "Sodium",
+              "plotX": 0.75,
+              "plotY": -1.06
+            },
+            {
+              "label": "Protein",
+              "plotX": -0.75,
+              "plotY": -1.06
+            },
+            {
+              "label": "Fibre",
+              "plotX": -1.2,
+              "plotY": 0.4
+            }
+          ]
+        },
+        "mark": {
+          "type": "text",
+          "font": "Bricolage Grotesque",
+          "fontSize": 17,
+          "color": "#F8F0E4",
+          "align": "center",
+          "baseline": "middle"
+        },
+        "encoding": {
+          "text": {
+            "field": "label"
+          }
+        }
+      },
+      {
+        "data": {
+          "values": [
+            {
+              "plotX": 0.14,
+              "plotY": 0.04,
+              "label": "0%"
+            },
+            {
+              "plotX": 0.14,
+              "plotY": 0.5,
+              "label": "50%"
+            },
+            {
+              "plotX": 0.14,
+              "plotY": 1.0,
+              "label": "100%"
+            }
+          ]
+        },
+        "mark": {
+          "type": "text",
+          "font": "Bricolage Grotesque",
+          "fontSize": 13,
+          "color": "#B6D8CB",
+          "align": "left",
+          "baseline": "middle",
+          "opacity": 0.95
+        },
+        "encoding": {
+          "text": {
+            "field": "label"
+          }
+        }
+      },
+      {
+        "mark": {
+          "type": "line",
+          "interpolate": "linear-closed",
+          "stroke": "#8CDAC7",
+          "strokeWidth": 3,
+          "fill": "#72BDB0",
+          "fillOpacity": 0.24
+        },
+        "encoding": {
+          "order": {
+            "field": "axisOrder",
+            "type": "quantitative"
+          }
+        }
+      },
+      {
+        "mark": {
+          "type": "point",
+          "filled": true,
+          "color": "#D8A94B",
+          "size": 105,
+          "stroke": "#153B3D",
+          "strokeWidth": 1
+        },
+        "encoding": {
+          "tooltip": [
+            {
+              "field": "product_name",
+              "type": "nominal",
+              "title": "Cereal"
+            },
+            {
+              "field": "cereal",
+              "type": "nominal",
+              "title": "HSR comparison"
+            },
+            {
+              "field": "nutrient",
+              "type": "nominal",
+              "title": "Nutrient"
+            },
+            {
+              "field": "actualDisplay",
+              "type": "nominal",
+              "title": "Actual nutrient content"
+            },
+            {
+              "field": "referenceDisplay",
+              "type": "nominal",
+              "title": "Scale maximum"
+            },
+            {
+              "field": "scaleDisplay",
+              "type": "nominal",
+              "title": "Radar position"
+            }
+          ]
+        }
+      },
+      {
+        "description": "Side-positioned callouts in the unused outer green margins, connected to the underlying Weet-Bix fibre and Splitstix sugar values.",
+        "transform": [
+          {
+            "filter": "(indexof(datum.cereal, '01 Weet-Bix') == 0 && datum.axisOrder == 4) || (indexof(datum.cereal, '04 Splitstix') == 0 && datum.axisOrder == 0)"
+          },
+          {
+            "calculate": "datum.axisOrder == 4 ? -1.90 : 0.84",
+            "as": "boxLeft"
+          },
+          {
+            "calculate": "datum.axisOrder == 4 ? -0.82 : 1.90",
+            "as": "boxRight"
+          },
+          {
+            "calculate": "1.29",
+            "as": "boxTop"
+          },
+          {
+            "calculate": "0.84",
+            "as": "boxBottom"
+          },
+          {
+            "calculate": "datum.axisOrder == 4 ? -1.36 : 1.37",
+            "as": "labelX"
+          },
+          {
+            "calculate": "1.155",
+            "as": "labelY"
+          },
+          {
+            "calculate": "0.965",
+            "as": "subtitleY"
+          },
+          {
+            "calculate": "datum.axisOrder == 4 ? -0.98 : 0.84",
+            "as": "connectorX"
+          },
+          {
+            "calculate": "datum.axisOrder == 4 ? 0.84 : 1.06",
+            "as": "connectorY"
+          },
+          {
+            "calculate": "datum.axisOrder == 4 ? 'Fibre stands out' : 'Sugar stands out'",
+            "as": "calloutText"
+          },
+          {
+            "calculate": "datum.axisOrder == 4 ? 'Weet-Bix · 5.0 stars' : 'Splitstix · 0.5 stars'",
+            "as": "subtitleText"
+          }
+        ],
+        "layer": [
+          {
+            "mark": {
+              "type": "rule",
+              "color": "#FFB52E",
+              "strokeWidth": 2,
+              "strokeDash": [
+                4,
+                3
+              ]
+            },
+            "encoding": {
+              "x2": {
+                "field": "connectorX"
+              },
+              "y2": {
+                "field": "connectorY"
+              }
+            }
+          },
+          {
+            "mark": {
+              "type": "point",
+              "filled": false,
+              "stroke": "#FFB52E",
+              "strokeWidth": 2.5,
+              "size": 250
+            }
+          },
+          {
+            "mark": {
+              "type": "rect",
+              "color": "#F8F0E4",
+              "stroke": "#FFB52E",
+              "strokeWidth": 2,
+              "cornerRadius": 5
+            },
+            "encoding": {
+              "x": {
+                "field": "boxLeft",
+                "type": "quantitative"
+              },
+              "x2": {
+                "field": "boxRight"
+              },
+              "y": {
+                "field": "boxTop",
+                "type": "quantitative"
+              },
+              "y2": {
+                "field": "boxBottom"
+              }
+            }
+          },
+          {
+            "mark": {
+              "type": "text",
+              "font": "Bricolage Grotesque",
+              "fontSize": 14,
+              "fontWeight": "bold",
+              "color": "#1E2F2C",
+              "align": "center",
+              "baseline": "middle"
+            },
+            "encoding": {
+              "x": {
+                "field": "labelX",
+                "type": "quantitative"
+              },
+              "y": {
+                "field": "labelY",
+                "type": "quantitative"
+              },
+              "text": {
+                "field": "calloutText",
+                "type": "nominal"
+              }
+            }
+          },
+          {
+            "mark": {
+              "type": "text",
+              "font": "Bricolage Grotesque",
+              "fontSize": 12,
+              "fontWeight": "normal",
+              "color": "#3C6461",
+              "align": "center",
+              "baseline": "middle"
+            },
+            "encoding": {
+              "x": {
+                "field": "labelX",
+                "type": "quantitative"
+              },
+              "y": {
+                "field": "subtitleY",
+                "type": "quantitative"
+              },
+              "text": {
+                "field": "subtitleText",
+                "type": "nominal"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "description": "Two additional outer-side callouts: Corn Flakes sodium (right), Coco Pops sugar (left).",
+        "transform": [
+          {
+            "filter": "(indexof(datum.cereal, '02 Corn Flakes') == 0 && datum.axisOrder == 2) || (indexof(datum.cereal, '03 Coco Pops') == 0 && datum.axisOrder == 0)"
+          },
+          {
+            "calculate": "indexof(datum.cereal, '02 Corn Flakes') == 0 ? 0.84 : -1.90",
+            "as": "boxLeft"
+          },
+          {
+            "calculate": "indexof(datum.cereal, '02 Corn Flakes') == 0 ? 1.90 : -0.86",
+            "as": "boxRight"
+          },
+          {
+            "calculate": "indexof(datum.cereal, '02 Corn Flakes') == 0 ? -0.42 : 1.27",
+            "as": "boxTop"
+          },
+          {
+            "calculate": "indexof(datum.cereal, '02 Corn Flakes') == 0 ? -0.88 : 0.83",
+            "as": "boxBottom"
+          },
+          {
+            "calculate": "indexof(datum.cereal, '02 Corn Flakes') == 0 ? 1.445 : -1.38",
+            "as": "labelX"
+          },
+          {
+            "calculate": "indexof(datum.cereal, '02 Corn Flakes') == 0 ? -0.54 : 1.16",
+            "as": "labelY"
+          },
+          {
+            "calculate": "indexof(datum.cereal, '02 Corn Flakes') == 0 ? -0.76 : 0.94",
+            "as": "subtitleY"
+          },
+          {
+            "calculate": "indexof(datum.cereal, '02 Corn Flakes') == 0 ? 0.84 : -0.86",
+            "as": "connectorX"
+          },
+          {
+            "calculate": "indexof(datum.cereal, '02 Corn Flakes') == 0 ? -0.65 : 0.85",
+            "as": "connectorY"
+          },
+          {
+            "calculate": "indexof(datum.cereal, '02 Corn Flakes') == 0 ? 'Sodium stands out' : 'Sugar stands out'",
+            "as": "calloutText"
+          },
+          {
+            "calculate": "indexof(datum.cereal, '02 Corn Flakes') == 0 ? 'Corn Flakes · 3.5 stars' : 'Coco Pops · 2.0 stars'",
+            "as": "subtitleText"
+          }
+        ],
+        "layer": [
+          {
+            "mark": {
+              "type": "rule",
+              "color": "#FFB52E",
+              "strokeWidth": 2,
+              "strokeDash": [
+                4,
+                3
+              ]
+            },
+            "encoding": {
+              "x2": {
+                "field": "connectorX"
+              },
+              "y2": {
+                "field": "connectorY"
+              }
+            }
+          },
+          {
+            "mark": {
+              "type": "point",
+              "filled": false,
+              "stroke": "#FFB52E",
+              "strokeWidth": 2.5,
+              "size": 250
+            }
+          },
+          {
+            "mark": {
+              "type": "rect",
+              "color": "#F8F0E4",
+              "stroke": "#FFB52E",
+              "strokeWidth": 2,
+              "cornerRadius": 5
+            },
+            "encoding": {
+              "x": {
+                "field": "boxLeft",
+                "type": "quantitative"
+              },
+              "x2": {
+                "field": "boxRight"
+              },
+              "y": {
+                "field": "boxTop",
+                "type": "quantitative"
+              },
+              "y2": {
+                "field": "boxBottom"
+              }
+            }
+          },
+          {
+            "mark": {
+              "type": "text",
+              "font": "Bricolage Grotesque",
+              "fontSize": 13,
+              "fontWeight": "bold",
+              "color": "#1E2F2C",
+              "align": "center",
+              "baseline": "middle"
+            },
+            "encoding": {
+              "x": {
+                "field": "labelX",
+                "type": "quantitative"
+              },
+              "y": {
+                "field": "labelY",
+                "type": "quantitative"
+              },
+              "text": {
+                "field": "calloutText",
+                "type": "nominal"
+              }
+            }
+          },
+          {
+            "mark": {
+              "type": "text",
+              "font": "Bricolage Grotesque",
+              "fontSize": 11,
+              "fontWeight": "normal",
+              "color": "#3C6461",
+              "align": "center",
+              "baseline": "middle"
+            },
+            "encoding": {
+              "x": {
+                "field": "labelX",
+                "type": "quantitative"
+              },
+              "y": {
+                "field": "subtitleY",
+                "type": "quantitative"
+              },
+              "text": {
+                "field": "subtitleText",
+                "type": "nominal"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "config": {
+    "font": "Bricolage Grotesque",
+    "view": {
+      "stroke": null
+    },
+    "header": {
+      "labelColor": "#F8F0E4",
+      "labelFont": "Bricolage Grotesque"
+    }
+  }
+}

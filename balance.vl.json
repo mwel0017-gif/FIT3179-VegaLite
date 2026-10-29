@@ -1,0 +1,353 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Scatterplot comparing sugar and fibre in 96 AUSNUT 2023 breakfast cereals and snack bars; heading is inside the Vega-Lite chart. The dashed line shows median fibre of 7.6 g per 100 g.",
+  "title": {
+    "text": ["How Do Sugar and Fibre Levels Compare", 
+    "Between Cereals and Snack Bars?"],
+    "anchor": "start",
+    "font": "Bricolage Grotesque",
+    "fontSize": 30,
+    "fontWeight": "bold",
+    "color": "#F8F0E4",
+    "lineHeight": 35,
+    "offset": 22
+  },
+  "background": "#3C6461",
+  "spacing": 0,
+  "center": false,
+  "vconcat": [
+    {
+      "width": 1050,
+      "height": 88,
+      "data": {
+        "values": [
+          {}
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "font": "Bricolage Grotesque",
+            "fontSize": 18,
+            "fontWeight": "bold",
+            "color": "#C7DBD3",
+            "align": "left",
+            "baseline": "middle"
+          },
+          "encoding": {
+            "x": {
+              "value": 28
+            },
+            "y": {
+              "value": 19
+            },
+            "text": {
+              "value": "Food category"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "circle",
+            "fill": "#B6DDCB",
+            "stroke": "#B6DDCB",
+            "strokeWidth": 1,
+            "opacity": 0.95
+          },
+          "encoding": {
+            "x": {
+              "value": 44
+            },
+            "y": {
+              "value": 53
+            },
+            "size": {
+              "value": 165
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "font": "Bricolage Grotesque",
+            "fontSize": 16,
+            "fontWeight": "normal",
+            "color": "#F8F0E4",
+            "align": "left",
+            "baseline": "middle"
+          },
+          "encoding": {
+            "x": {
+              "value": 66
+            },
+            "y": {
+              "value": 53
+            },
+            "text": {
+              "value": "Breakfast cereals"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "circle",
+            "fill": "#FFB52E",
+            "stroke": "#FFB52E",
+            "strokeWidth": 1,
+            "opacity": 0.95
+          },
+          "encoding": {
+            "x": {
+              "value": 294
+            },
+            "y": {
+              "value": 53
+            },
+            "size": {
+              "value": 165
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "font": "Bricolage Grotesque",
+            "fontSize": 16,
+            "fontWeight": "normal",
+            "color": "#F8F0E4",
+            "align": "left",
+            "baseline": "middle"
+          },
+          "encoding": {
+            "x": {
+              "value": 317
+            },
+            "y": {
+              "value": 53
+            },
+            "text": {
+              "value": "Snack bars"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "width": 1000,
+      "height": 500,
+      "layer": [
+        {
+          "mark": {
+            "type": "circle",
+            "size": 150,
+            "opacity": 0.85,
+            "stroke": "#3C6461",
+            "strokeWidth": 0.8
+          },
+          "encoding": {
+            "x": {
+              "field": "sugars",
+              "type": "quantitative",
+              "scale": {
+                "domain": [0, 45],
+                "nice": false
+              },
+              "axis": {
+                "title": "Total sugars (g per 100 g)",
+                "values": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45],
+                "grid": true,
+                "labelFontSize": 14,
+                "titleFontSize": 17,
+                "titlePadding": 17,
+                "labelPadding": 9
+              }
+            },
+            "y": {
+              "field": "fibre",
+              "type": "quantitative",
+              "scale": {
+                "domain": [0, 35],
+                "nice": false
+              },
+              "axis": {
+                "title": "Dietary fibre (g per 100 g)",
+                "values": [0, 5, 10, 15, 20, 25, 30, 35],
+                "grid": true,
+                "labelFontSize": 14,
+                "titleFontSize": 17,
+                "titlePadding": 16,
+                "labelPadding": 8
+              }
+            },
+            "color": {
+              "field": "category",
+              "type": "nominal",
+              "scale": {
+                "domain": ["Breakfast cereals", "Snack bars"],
+                "range": ["#B6DDCB", "#FFB52E"]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "food_name",
+                "type": "nominal",
+                "title": "Food profile"
+              },
+              {
+                "field": "category",
+                "type": "nominal",
+                "title": "Food group"
+              },
+              {
+                "field": "sugars",
+                "type": "quantitative",
+                "title": "Total sugars (g/100 g)",
+                "format": ".1f"
+              },
+              {
+                "field": "fibre",
+                "type": "quantitative",
+                "title": "Dietary fibre (g/100 g)",
+                "format": ".1f"
+              },
+              {
+                "field": "sodium",
+                "type": "quantitative",
+                "title": "Sodium (mg/100 g)",
+                "format": ".0f"
+              },
+              {
+                "field": "survey_id",
+                "type": "nominal",
+                "title": "AUSNUT survey ID"
+              }
+            ]
+          },
+          "data": {
+            "url": "../data/AUSNUT_Cereals_SnackBars_Excel_NEW.csv",
+            "format": {
+              "type": "csv",
+              "parse": {
+                "sugars": "number",
+                "fibre": "number",
+                "sodium": "number",
+                "survey_id": "string"
+              }
+            }
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "median_fibre": 7.6
+              }
+            ]
+          },
+          "mark": {
+            "type": "rule",
+            "color": "#C7DBD3",
+            "strokeWidth": 1.65,
+            "strokeDash": [7, 7],
+            "opacity": 0.85
+          },
+          "encoding": {
+            "y": {
+              "field": "median_fibre",
+              "type": "quantitative",
+              "scale": {
+                "domain": [0, 35],
+                "nice": false
+              },
+              "axis": {
+                "title": "Dietary fibre (g per 100 g)"
+              }
+            }
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "s": 43.8,
+                "f": 7.6,
+                "t": "Dataset median fibre: 7.6 g/100 g"
+              }
+            ]
+          },
+          "mark": {
+            "type": "text",
+            "font": "Bricolage Grotesque",
+            "fontSize": 14,
+            "color": "#F8F0E4",
+            "align": "right",
+            "baseline": "bottom",
+            "dy": -7
+          },
+          "encoding": {
+            "x": {
+              "field": "s",
+              "type": "quantitative",
+              "scale": {
+                "domain": [0, 45],
+                "nice": false
+              },
+              "axis": {
+                "title": "Total sugars (g per 100 g)"
+              }
+            },
+            "y": {
+              "field": "f",
+              "type": "quantitative",
+              "scale": {
+                "domain": [0, 35],
+                "nice": false
+              },
+              "axis": {
+                "title": "Dietary fibre (g per 100 g)"
+              }
+            },
+            "text": {
+              "field": "t",
+              "type": "nominal"
+            }
+          }
+        }
+      ],
+      "resolve": {
+        "scale": {
+          "x": "shared",
+          "y": "shared"
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Bricolage Grotesque",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#E0EEE8",
+      "titleColor": "#F8F0E4",
+      "labelFont": "Bricolage Grotesque",
+      "titleFont": "Bricolage Grotesque",
+      "labelFontSize": 14,
+      "titleFontSize": 17,
+      "gridColor": "#8FB0A6",
+      "gridOpacity": 0.22,
+      "tickColor": "#A4C5BB",
+      "domainColor": "#A4C5BB",
+      "titleFontWeight": "normal"
+    },
+    "legend": {
+      "labelFont": "Bricolage Grotesque",
+      "titleFont": "Bricolage Grotesque"
+    }
+  }
+}
+
+
+

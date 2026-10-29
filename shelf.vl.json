@@ -1,0 +1,299 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "#3C6461",
+  "spacing": 2,
+  "center": false,
+
+  "title": {
+    "text": [
+      "How widely can Health Star Ratings vary within the same food type?"
+    ],
+    "anchor": "start",
+    "font": "Bricolage Grotesque",
+    "fontSize": 30,
+    "fontWeight": "bold",
+    "color": "#F8F0E4",
+    "lineHeight": 36,
+    "offset": 22
+  },
+
+  "params": [
+    {
+      "name": "minimum_items",
+      "value": 2,
+      "bind": {
+        "input": "select",
+        "name": "Minimum products per category: ",
+        "options": [2, 3, 5, 8, 12]
+      }
+    }
+  ],
+
+  "vconcat": [
+    {
+      "width": 1050,
+      "height": 88,
+      "data": {"values": [{}]},
+      "layer": [
+        {
+          "mark": {"type": "circle", "size": 180, "filled": true, "color": "#F4EEE3"},
+          "encoding": {"x": {"value": 55}, "y": {"value": 48}}
+        },
+        {
+          "mark": {"type": "text", "align": "left", "baseline": "middle", "font": "Bricolage Grotesque", "fontSize": 19, "color": "#C7DBD3"},
+          "encoding": {"x": {"value": 73}, "y": {"value": 48}, "text": {"value": "each product"}}
+        },
+        {
+          "mark": {"type": "text", "align": "left", "baseline": "middle", "font": "Bricolage Grotesque", "fontSize": 19, "color": "#C7DBD3"},
+          "encoding": {"x": {"value": 208}, "y": {"value": 48}, "text": {"value": "·"}}
+        },
+        {
+          "mark": {"type": "circle", "size": 180, "filled": true, "color": "#E5AA3C"},
+          "encoding": {"x": {"value": 235}, "y": {"value": 48}}
+        },
+        {
+          "mark": {"type": "text", "align": "left", "baseline": "middle", "font": "Bricolage Grotesque", "fontSize": 19, "color": "#C7DBD3"},
+          "encoding": {"x": {"value": 253}, "y": {"value": 48}, "text": {"value": "lowest"}}
+        },
+        {
+          "mark": {"type": "text", "align": "left", "baseline": "middle", "font": "Bricolage Grotesque", "fontSize": 19, "color": "#C7DBD3"},
+          "encoding": {"x": {"value": 346}, "y": {"value": 48}, "text": {"value": "·"}}
+        },
+        {
+          "mark": {"type": "circle", "size": 180, "filled": true, "color": "#A6D0C1"},
+          "encoding": {"x": {"value": 373}, "y": {"value": 48}}
+        },
+        {
+          "mark": {"type": "text", "align": "left", "baseline": "middle", "font": "Bricolage Grotesque", "fontSize": 19, "color": "#C7DBD3"},
+          "encoding": {"x": {"value": 391}, "y": {"value": 48}, "text": {"value": "highest"}}
+        }
+      ]
+    },
+
+    {
+      "width": 1050,
+      "height": {"step": 46},
+      "padding": {"left": 24, "right": 30, "top": 24, "bottom": 18},
+
+      "data": {
+        "url": "../data/OpenHSR.csv",
+        "format": {"type": "csv"}
+      },
+
+      "transform": [
+        {"calculate": "toNumber(datum.HSR)", "as": "star"},
+        {"calculate": "lower(trim(datum['Product type']))", "as": "group_key"},
+        {"filter": "isValid(datum.star) && datum.star >= 0.5 && datum.star <= 5 && isValid(datum.group_key) && datum.group_key != ''"},
+        {"filter": "indexof(['food', 'foods processed', 'processed', 'packaged foods', 'processed foods', 'unknown'], datum.group_key) < 0"},
+        {
+          "calculate": "datum.group_key === 'cereals' ? 'Breakfast cereals' : datum.group_key === 'chips' ? 'Chips & crisps' : datum.group_key === 'soda' ? 'Soft drinks' : datum.group_key === 'meat' ? 'Meat products' : datum.group_key === 'vegetables' ? 'Vegetable products' : datum.group_key === 'sauce' ? 'Sauces' : datum.group_key === 'bakery' ? 'Bakery products' : datum.group_key === 'snacks' ? 'Snacks' : upper(substring(datum.group_key,0,1)) + substring(datum.group_key,1)",
+          "as": "food_type"
+        },
+        {
+          "joinaggregate": [
+            {"op": "count", "as": "num_products"},
+            {"op": "min", "field": "star", "as": "min_star"},
+            {"op": "max", "field": "star", "as": "max_star"}
+          ],
+          "groupby": ["food_type"]
+        },
+        {"filter": "datum.num_products >= minimum_items"},
+        {"calculate": "datum.max_star - datum.min_star", "as": "star_gap"},
+        {"calculate": "((length(datum.product_name) * 7 + datum.star * 13) % 11) - 5", "as": "jitter"}
+      ],
+
+      "encoding": {
+        "x": {
+          "field": "star",
+          "type": "quantitative",
+          "scale": {"domain": [0.5, 5.3], "zero": false, "nice": false},
+          "axis": {
+            "title": "Health Star Rating (0.5–5 stars)",
+            "values": [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5],
+            "grid": true
+          }
+        },
+        "y": {
+          "field": "food_type",
+          "type": "nominal",
+          "sort": {"field": "star_gap", "op": "max", "order": "descending"},
+          "axis": {
+            "title": "Food type",
+            "labelLimit": 235,
+            "ticks": false,
+            "domain": false,
+            "grid": false
+          }
+        }
+      },
+
+      "layer": [
+        {
+          "transform": [
+            {
+              "aggregate": [
+                {"op": "min", "field": "star", "as": "low"},
+                {"op": "max", "field": "star", "as": "high"},
+                {"op": "count", "as": "n"},
+                {"op": "max", "field": "star_gap", "as": "star_gap"}
+              ],
+              "groupby": ["food_type"]
+            },
+            {"fold": ["low", "high"], "as": ["end", "range_value"]}
+          ],
+          "mark": {"type": "line", "stroke": "#86B8AA", "strokeWidth": 3.4, "opacity": 0.75},
+          "encoding": {
+            "x": {
+              "field": "range_value",
+              "type": "quantitative",
+              "scale": {"domain": [0.5, 5.3], "zero": false, "nice": false},
+              "axis": {
+                "title": "Health Star Rating (0.5–5 stars)",
+                "values": [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5],
+                "grid": true
+              }
+            },
+            "detail": {"field": "food_type", "type": "nominal"},
+            "order": {"field": "range_value", "type": "quantitative"},
+            "tooltip": [
+              {"field": "food_type", "type": "nominal", "title": "Food type"},
+              {"field": "n", "type": "quantitative", "title": "Number of products"},
+              {"field": "low", "type": "quantitative", "title": "Lowest HSR", "format": ".1f"},
+              {"field": "high", "type": "quantitative", "title": "Highest HSR", "format": ".1f"}
+            ]
+          }
+        },
+
+        {
+          "mark": {
+            "type": "circle",
+            "size": 100,
+            "filled": true,
+            "color": "#F4EEE3",
+            "opacity": 0.64,
+            "stroke": "#3C6461",
+            "strokeWidth": 0.5
+          },
+          "encoding": {
+            "yOffset": {
+              "field": "jitter",
+              "type": "quantitative",
+              "scale": {"domain": [-5, 5], "range": [20, 26]}
+            },
+            "tooltip": [
+              {"field": "product_name", "type": "nominal", "title": "Product"},
+              {"field": "food_type", "type": "nominal", "title": "Food type"},
+              {"field": "star", "type": "quantitative", "title": "Health Star Rating", "format": ".1f"},
+              {"field": "sugars_g_per_100g", "type": "quantitative", "title": "Sugars (g/100 g)", "format": ".1f"},
+              {"field": "sat_fat_g_per_100g", "type": "quantitative", "title": "Saturated fat (g/100 g)", "format": ".1f"},
+              {"field": "sodium_mg_per_100g", "type": "quantitative", "title": "Sodium (mg/100 g)", "format": ".0f"},
+              {"field": "fiber_g_per_100g", "type": "quantitative", "title": "Fibre (g/100 g)", "format": ".1f"}
+            ]
+          }
+        },
+
+        {
+          "transform": [{"filter": "datum.star === datum.min_star"}],
+          "mark": {"type": "circle", "size": 175, "filled": true, "color": "#E5AA3C", "stroke": "#3C6461", "strokeWidth": 0.8},
+          "encoding": {
+            "tooltip": [
+              {"field": "product_name", "type": "nominal", "title": "Lowest-rated product"},
+              {"field": "food_type", "type": "nominal", "title": "Food type"},
+              {"field": "star", "type": "quantitative", "title": "HSR", "format": ".1f"},
+              {"field": "num_products", "type": "quantitative", "title": "Products in category"}
+            ]
+          }
+        },
+
+        {
+          "transform": [{"filter": "datum.star === datum.max_star"}],
+          "mark": {"type": "circle", "size": 175, "filled": true, "color": "#A6D0C1", "stroke": "#3C6461", "strokeWidth": 0.8},
+          "encoding": {
+            "tooltip": [
+              {"field": "product_name", "type": "nominal", "title": "Highest-rated product"},
+              {"field": "food_type", "type": "nominal", "title": "Food type"},
+              {"field": "star", "type": "quantitative", "title": "HSR", "format": ".1f"},
+              {"field": "num_products", "type": "quantitative", "title": "Products in category"}
+            ]
+          }
+        },
+
+        {
+          "transform": [
+            {
+              "aggregate": [
+                {"op": "count", "as": "n"},
+                {"op": "max", "field": "star_gap", "as": "star_gap"}
+              ],
+              "groupby": ["food_type"]
+            },
+            {"calculate": "'n=' + format(datum.n, ',d')", "as": "n_label"}
+          ],
+          "mark": {
+            "type": "text",
+            "color": "#DCECE5",
+            "font": "Bricolage Grotesque",
+            "fontSize": 12,
+            "align": "left",
+            "baseline": "middle",
+            "dx": 5
+          },
+          "encoding": {
+            "x": {
+              "datum": 5.13,
+              "type": "quantitative",
+              "scale": {"domain": [0.5, 5.3], "zero": false, "nice": false},
+              "axis": {
+                "title": "Health Star Rating (0.5–5 stars)",
+                "values": [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5],
+                "grid": true
+              }
+            },
+            "text": {"field": "n_label", "type": "nominal"}
+          }
+        }
+      ]
+    },
+
+    {
+      "width": 1050,
+      "height": 38,
+      "data": {"values": [{}]},
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "font": "Bricolage Grotesque",
+            "fontSize": 15,
+            "color": "#DCECE5",
+            "align": "left",
+            "baseline": "middle"
+          },
+          "encoding": {
+            "x": {"value": 24},
+            "y": {"value": 18},
+            "text": {"value": "Rows without a visible line have no HSR range."}
+          }
+        }
+      ]
+    }
+  ],
+
+  "config": {
+    "view": {"stroke": null, "strokeWidth": 0},
+    "axis": {
+      "labelColor": "#DCECE5",
+      "titleColor": "#FFF5E7",
+      "gridColor": "#A8C7BD",
+      "gridOpacity": 0.21,
+      "labelFont": "Bricolage Grotesque",
+      "titleFont": "Bricolage Grotesque",
+      "labelFontSize": 13,
+      "titleFontSize": 16,
+      "labelPadding": 9,
+      "titlePadding": 16,
+      "tickColor": "#90AFA6",
+      "domainColor": "#90AFA6"
+    }
+  }
+}

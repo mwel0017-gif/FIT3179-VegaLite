@@ -1,0 +1,339 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "background": "#3C6461",
+  "spacing": 10,
+  "center": false,
+  "title": {
+    "text": [
+      "How does nutritional content differ across everyday food groups?"
+    ],
+    "anchor": "start",
+    "font": "Bricolage Grotesque",
+    "fontSize": 30,
+    "fontWeight": "bold",
+    "color": "#F8F0E4",
+    "lineHeight": 36,
+    "offset": 22
+  },
+  "vconcat": [
+    {
+      "data": {
+        "url": "../data/OpenHSR.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+      "width": 790,
+      "height": {
+        "step": 39
+      },
+      "transform": [
+        {
+          "calculate": "lower(trim(datum['Product type']))",
+          "as": "rawGroup"
+        },
+        {
+          "filter": "isValid(datum.rawGroup) && datum.rawGroup != '' && indexof(['food', 'foods processed', 'processed foods', 'packaged foods'], datum.rawGroup) == -1"
+        },
+        {
+          "calculate": "datum.rawGroup == 'cereals' && (indexof(lower(datum.product_name), 'corn thins') >= 0 || indexof(lower(datum.product_name), 'jatz') >= 0) ? 'snacks' : datum.rawGroup == 'cereals' ? 'breakfast cereals' : datum.rawGroup",
+          "as": "group"
+        },
+        {
+          "calculate": "toNumber(datum.HSR)",
+          "as": "rating"
+        },
+        {
+          "calculate": "toNumber(datum.sugars_g_per_100g)",
+          "as": "sugar"
+        },
+        {
+          "calculate": "toNumber(datum.sat_fat_g_per_100g)",
+          "as": "satFat"
+        },
+        {
+          "calculate": "toNumber(datum.sodium_mg_per_100g)",
+          "as": "sodium"
+        },
+        {
+          "calculate": "toNumber(datum.protein_g_per_100g)",
+          "as": "protein"
+        },
+        {
+          "calculate": "toNumber(datum.fiber_g_per_100g)",
+          "as": "fibre"
+        },
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "productCount"
+            },
+            {
+              "op": "mean",
+              "field": "rating",
+              "as": "avgHSR"
+            },
+            {
+              "op": "mean",
+              "field": "sugar",
+              "as": "avgSugar"
+            },
+            {
+              "op": "mean",
+              "field": "satFat",
+              "as": "avgSatFat"
+            },
+            {
+              "op": "mean",
+              "field": "sodium",
+              "as": "avgSodium"
+            },
+            {
+              "op": "mean",
+              "field": "protein",
+              "as": "avgProtein"
+            },
+            {
+              "op": "mean",
+              "field": "fibre",
+              "as": "avgFibre"
+            }
+          ],
+          "groupby": [
+            "group"
+          ]
+        },
+        {
+          "filter": "datum.productCount >= 5 && isValid(datum.avgHSR)"
+        },
+        {
+          "calculate": "upper(slice(datum.group, 0, 1)) + slice(datum.group, 1) + '  |  ' + format(datum.avgHSR, '.1f') + ' stars'",
+          "as": "groupLabel"
+        },
+        {
+          "fold": [
+            "avgSugar",
+            "avgSatFat",
+            "avgSodium",
+            "avgProtein",
+            "avgFibre"
+          ],
+          "as": [
+            "metric",
+            "average"
+          ]
+        },
+        {
+          "calculate": "datum.metric == 'avgSugar' ? 'Sugar (g)' : datum.metric == 'avgSatFat' ? 'Saturated fat (g)' : datum.metric == 'avgSodium' ? 'Sodium (mg)' : datum.metric == 'avgProtein' ? 'Protein (g)' : 'Fibre (g)'",
+          "as": "nutrient"
+        },
+        {
+          "calculate": "datum.metric == 'avgSodium' ? 'mg' : 'g'",
+          "as": "unit"
+        },
+        {
+          "calculate": "toNumber(datum.average)",
+          "as": "avgValue"
+        },
+        {
+          "filter": "isValid(datum.avgValue) && isFinite(datum.avgValue)"
+        },
+        {
+          "window": [
+            {
+              "op": "percent_rank",
+              "as": "relativeRank"
+            }
+          ],
+          "sort": [
+            {
+              "field": "avgValue",
+              "order": "ascending"
+            }
+          ],
+          "groupby": [
+            "nutrient"
+          ]
+        },
+        {
+          "calculate": "datum.metric == 'avgSodium' ? format(datum.avgValue, ',.0f') : format(datum.avgValue, '.1f')",
+          "as": "displayValue"
+        },
+        {
+          "calculate": "datum.displayValue + ' ' + datum.unit + ' per 100 g'",
+          "as": "fullValue"
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "nutrient",
+          "type": "nominal",
+          "sort": [
+            "Sugar (g)",
+            "Saturated fat (g)",
+            "Sodium (mg)",
+            "Protein (g)",
+            "Fibre (g)"
+          ],
+          "axis": {
+            "title": null,
+            "orient": "top",
+            "labelColor": "#E2EEE8",
+            "labelFont": "Bricolage Grotesque",
+            "labelFontSize": 15,
+            "labelFontWeight": "bold",
+            "labelAngle": 0,
+            "labelPadding": 14,
+            "ticks": false,
+            "domain": false
+          }
+        },
+        "y": {
+          "field": "groupLabel",
+          "type": "nominal",
+          "sort": {
+            "field": "avgHSR",
+            "op": "max",
+            "order": "descending"
+          },
+          "axis": {
+            "title": null,
+            "labelColor": "#E2EEE8",
+            "labelFont": "Bricolage Grotesque",
+            "labelFontSize": 13,
+            "labelPadding": 12,
+            "labelLimit": 285,
+            "ticks": false,
+            "domain": false
+          }
+        }
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "rect",
+            "cornerRadius": 2,
+            "stroke": "#315A58",
+            "strokeWidth": 1.5
+          },
+          "encoding": {
+            "color": {
+              "field": "relativeRank",
+              "type": "quantitative",
+              "title": "Relative rank within each nutrient",
+              "scale": {
+                "domain": [
+                  0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1
+                ],
+                "range": [
+                  "#285856",
+                  "#407B75",
+                  "#6CA99C",
+                  "#A6CCAE",
+                  "#E9B75B"
+                ],
+                "interpolate": "lab"
+              },
+              "legend": {
+                "orient": "bottom",
+                "direction": "horizontal",
+                "type": "gradient",
+                "gradientLength": 375,
+                "gradientThickness": 15,
+                "titleFont": "Bricolage Grotesque",
+                "titleFontSize": 15,
+                "titleColor": "#D5E6DE",
+                "titleLimit": 420,
+                "labelFont": "Bricolage Grotesque",
+                "labelFontSize": 13,
+                "labelColor": "#E2EEE8",
+                "values": [
+                  0,
+                  0.5,
+                  1
+                ],
+                "format": ".0%",
+                "offset": 25
+              }
+            },
+            "tooltip": [
+              {
+                "field": "group",
+                "type": "nominal",
+                "title": "Food group"
+              },
+              {
+                "field": "productCount",
+                "type": "quantitative",
+                "title": "Number of products"
+              },
+              {
+                "field": "avgHSR",
+                "type": "quantitative",
+                "title": "Average HSR",
+                "format": ".1f"
+              },
+              {
+                "field": "nutrient",
+                "type": "nominal",
+                "title": "Nutrient"
+              },
+              {
+                "field": "fullValue",
+                "type": "nominal",
+                "title": "Average nutrient content"
+              },
+              {
+                "field": "relativeRank",
+                "type": "quantitative",
+                "title": "Relative rank within column",
+                "format": ".0%"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "font": "Bricolage Grotesque",
+            "fontSize": 13,
+            "fontWeight": "bold"
+          },
+          "encoding": {
+            "text": {
+              "field": "displayValue",
+              "type": "nominal"
+            },
+            "color": {
+              "condition": {
+                "test": "datum.relativeRank >= 0.58",
+                "value": "#173B3A"
+              },
+              "value": "#FFF5E7"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "font": "Bricolage Grotesque",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Bricolage Grotesque",
+      "titleFont": "Bricolage Grotesque"
+    },
+    "legend": {
+      "labelFont": "Bricolage Grotesque",
+      "titleFont": "Bricolage Grotesque"
+    }
+  }
+}

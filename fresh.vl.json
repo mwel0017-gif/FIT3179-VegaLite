@@ -1,0 +1,2298 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Selected packaged-food availability choropleth with GeoJSON-anchored number markers and dotted geographic leader lines to three regional callouts.",
+  "background": "#3C6461",
+  "spacing": 4,
+  "center": false,
+  "title": {
+    "text": [
+      "How does availability of selected packaged foods",
+      "differ across Australian regions?"
+    ],
+    "anchor": "start",
+    "font": "Bricolage Grotesque",
+    "fontSize": 30,
+    "fontWeight": "bold",
+    "color": "#F8F0E4",
+    "lineHeight": 36,
+    "offset": 22
+  },
+  "datasets": {
+    "processed_foods_table16": [
+      {
+        "code": "101",
+        "total": 154.2,
+        "cereals": 14.7,
+        "sweet": 17.0,
+        "savoury": 10.0,
+        "meat": 23.8,
+        "sauces": 36.2,
+        "snacks": 19.8,
+        "bars": 32.7
+      },
+      {
+        "code": "102",
+        "total": 159.5,
+        "cereals": 15.4,
+        "sweet": 17.7,
+        "savoury": 10.3,
+        "meat": 22.3,
+        "sauces": 37.8,
+        "snacks": 20.9,
+        "bars": 35.1
+      },
+      {
+        "code": "103",
+        "total": 157.2,
+        "cereals": 14.4,
+        "sweet": 18.3,
+        "savoury": 10.1,
+        "meat": 25.9,
+        "sauces": 35.3,
+        "snacks": 20.2,
+        "bars": 33.0
+      },
+      {
+        "code": "104",
+        "total": 151.9,
+        "cereals": 15.2,
+        "sweet": 16.8,
+        "savoury": 10.3,
+        "meat": 23.7,
+        "sauces": 36.4,
+        "snacks": 19.1,
+        "bars": 30.4
+      },
+      {
+        "code": "105",
+        "total": 154.7,
+        "cereals": 12.5,
+        "sweet": 17.2,
+        "savoury": 9.8,
+        "meat": 29.1,
+        "sauces": 34.1,
+        "snacks": 20.5,
+        "bars": 31.5
+      },
+      {
+        "code": "106",
+        "total": 163.6,
+        "cereals": 14.7,
+        "sweet": 18.3,
+        "savoury": 10.6,
+        "meat": 26.5,
+        "sauces": 38.1,
+        "snacks": 21.3,
+        "bars": 34.1
+      },
+      {
+        "code": "107",
+        "total": 161.2,
+        "cereals": 16.7,
+        "sweet": 18.1,
+        "savoury": 10.5,
+        "meat": 19.7,
+        "sauces": 38.6,
+        "snacks": 21.2,
+        "bars": 36.4
+      },
+      {
+        "code": "108",
+        "total": 157.5,
+        "cereals": 15.9,
+        "sweet": 17.7,
+        "savoury": 10.4,
+        "meat": 25.4,
+        "sauces": 37.4,
+        "snacks": 19.0,
+        "bars": 31.7
+      },
+      {
+        "code": "109",
+        "total": 159.8,
+        "cereals": 14.1,
+        "sweet": 17.4,
+        "savoury": 11.4,
+        "meat": 27.1,
+        "sauces": 34.1,
+        "snacks": 20.6,
+        "bars": 35.1
+      },
+      {
+        "code": "110",
+        "total": 156.2,
+        "cereals": 13.5,
+        "sweet": 18.1,
+        "savoury": 10.2,
+        "meat": 27.6,
+        "sauces": 34.9,
+        "snacks": 20.9,
+        "bars": 31.0
+      },
+      {
+        "code": "111",
+        "total": 161.7,
+        "cereals": 16.4,
+        "sweet": 17.3,
+        "savoury": 10.9,
+        "meat": 22.4,
+        "sauces": 38.3,
+        "snacks": 20.8,
+        "bars": 35.6
+      },
+      {
+        "code": "112",
+        "total": 154.7,
+        "cereals": 15.8,
+        "sweet": 15.8,
+        "savoury": 10.7,
+        "meat": 21.9,
+        "sauces": 40.2,
+        "snacks": 19.3,
+        "bars": 31.0
+      },
+      {
+        "code": "113",
+        "total": 154.7,
+        "cereals": 14.1,
+        "sweet": 18.5,
+        "savoury": 10.2,
+        "meat": 25.1,
+        "sauces": 33.8,
+        "snacks": 19.8,
+        "bars": 33.2
+      },
+      {
+        "code": "114",
+        "total": 157.6,
+        "cereals": 16.1,
+        "sweet": 17.6,
+        "savoury": 10.5,
+        "meat": 23.0,
+        "sauces": 36.7,
+        "snacks": 20.3,
+        "bars": 33.4
+      },
+      {
+        "code": "115",
+        "total": 146.3,
+        "cereals": 15.5,
+        "sweet": 17.5,
+        "savoury": 9.6,
+        "meat": 16.4,
+        "sauces": 34.4,
+        "snacks": 20.5,
+        "bars": 32.4
+      },
+      {
+        "code": "116",
+        "total": 137.7,
+        "cereals": 12.8,
+        "sweet": 19.1,
+        "savoury": 7.7,
+        "meat": 15.8,
+        "sauces": 31.2,
+        "snacks": 22.1,
+        "bars": 29.0
+      },
+      {
+        "code": "117",
+        "total": 153.0,
+        "cereals": 15.1,
+        "sweet": 19.1,
+        "savoury": 9.1,
+        "meat": 13.2,
+        "sauces": 35.4,
+        "snacks": 22.0,
+        "bars": 39.1
+      },
+      {
+        "code": "118",
+        "total": 152.4,
+        "cereals": 18.0,
+        "sweet": 15.1,
+        "savoury": 9.9,
+        "meat": 13.1,
+        "sauces": 41.2,
+        "snacks": 19.3,
+        "bars": 35.8
+      },
+      {
+        "code": "119",
+        "total": 139.9,
+        "cereals": 14.0,
+        "sweet": 18.5,
+        "savoury": 8.2,
+        "meat": 13.9,
+        "sauces": 33.7,
+        "snacks": 21.8,
+        "bars": 29.8
+      },
+      {
+        "code": "120",
+        "total": 141.7,
+        "cereals": 16.0,
+        "sweet": 16.2,
+        "savoury": 9.0,
+        "meat": 14.9,
+        "sauces": 33.6,
+        "snacks": 20.8,
+        "bars": 31.2
+      },
+      {
+        "code": "121",
+        "total": 147.8,
+        "cereals": 18.2,
+        "sweet": 16.1,
+        "savoury": 10.1,
+        "meat": 15.2,
+        "sauces": 34.6,
+        "snacks": 19.3,
+        "bars": 34.3
+      },
+      {
+        "code": "122",
+        "total": 156.8,
+        "cereals": 19.3,
+        "sweet": 15.2,
+        "savoury": 11.7,
+        "meat": 16.7,
+        "sauces": 39.2,
+        "snacks": 20.5,
+        "bars": 34.2
+      },
+      {
+        "code": "123",
+        "total": 154.6,
+        "cereals": 14.1,
+        "sweet": 19.3,
+        "savoury": 9.2,
+        "meat": 19.2,
+        "sauces": 35.9,
+        "snacks": 22.8,
+        "bars": 34.1
+      },
+      {
+        "code": "124",
+        "total": 159.0,
+        "cereals": 14.9,
+        "sweet": 18.7,
+        "savoury": 9.7,
+        "meat": 21.3,
+        "sauces": 37.5,
+        "snacks": 22.3,
+        "bars": 34.6
+      },
+      {
+        "code": "125",
+        "total": 134.4,
+        "cereals": 13.7,
+        "sweet": 18.6,
+        "savoury": 8.0,
+        "meat": 12.2,
+        "sauces": 31.7,
+        "snacks": 21.7,
+        "bars": 28.5
+      },
+      {
+        "code": "126",
+        "total": 137.5,
+        "cereals": 15.8,
+        "sweet": 16.9,
+        "savoury": 9.0,
+        "meat": 14.9,
+        "sauces": 30.9,
+        "snacks": 19.3,
+        "bars": 30.7
+      },
+      {
+        "code": "127",
+        "total": 140.0,
+        "cereals": 12.2,
+        "sweet": 18.5,
+        "savoury": 7.9,
+        "meat": 14.6,
+        "sauces": 34.2,
+        "snacks": 23.9,
+        "bars": 28.7
+      },
+      {
+        "code": "128",
+        "total": 162.3,
+        "cereals": 17.8,
+        "sweet": 17.0,
+        "savoury": 11.4,
+        "meat": 18.4,
+        "sauces": 39.1,
+        "snacks": 21.9,
+        "bars": 36.7
+      },
+      {
+        "code": "201",
+        "total": 160.6,
+        "cereals": 15.2,
+        "sweet": 18.7,
+        "savoury": 11.4,
+        "meat": 23.4,
+        "sauces": 35.1,
+        "snacks": 19.5,
+        "bars": 37.3
+      },
+      {
+        "code": "202",
+        "total": 160.0,
+        "cereals": 15.6,
+        "sweet": 17.4,
+        "savoury": 11.9,
+        "meat": 22.4,
+        "sauces": 35.3,
+        "snacks": 21.4,
+        "bars": 36.0
+      },
+      {
+        "code": "203",
+        "total": 163.9,
+        "cereals": 16.2,
+        "sweet": 16.9,
+        "savoury": 12.2,
+        "meat": 21.1,
+        "sauces": 38.7,
+        "snacks": 20.7,
+        "bars": 38.1
+      },
+      {
+        "code": "204",
+        "total": 158.3,
+        "cereals": 14.9,
+        "sweet": 17.4,
+        "savoury": 11.4,
+        "meat": 25.0,
+        "sauces": 35.7,
+        "snacks": 19.4,
+        "bars": 34.5
+      },
+      {
+        "code": "205",
+        "total": 160.5,
+        "cereals": 14.8,
+        "sweet": 17.6,
+        "savoury": 11.2,
+        "meat": 24.9,
+        "sauces": 36.8,
+        "snacks": 19.7,
+        "bars": 35.5
+      },
+      {
+        "code": "206",
+        "total": 152.8,
+        "cereals": 16.2,
+        "sweet": 16.5,
+        "savoury": 10.2,
+        "meat": 13.0,
+        "sauces": 39.2,
+        "snacks": 21.0,
+        "bars": 36.7
+      },
+      {
+        "code": "207",
+        "total": 145.0,
+        "cereals": 17.4,
+        "sweet": 16.0,
+        "savoury": 11.0,
+        "meat": 15.0,
+        "sauces": 34.6,
+        "snacks": 18.2,
+        "bars": 32.8
+      },
+      {
+        "code": "208",
+        "total": 156.7,
+        "cereals": 18.1,
+        "sweet": 15.3,
+        "savoury": 12.1,
+        "meat": 16.0,
+        "sauces": 39.4,
+        "snacks": 19.4,
+        "bars": 36.4
+      },
+      {
+        "code": "209",
+        "total": 152.2,
+        "cereals": 15.8,
+        "sweet": 17.0,
+        "savoury": 10.8,
+        "meat": 16.6,
+        "sauces": 37.5,
+        "snacks": 20.5,
+        "bars": 34.0
+      },
+      {
+        "code": "210",
+        "total": 146.9,
+        "cereals": 14.0,
+        "sweet": 17.8,
+        "savoury": 9.9,
+        "meat": 15.0,
+        "sauces": 35.9,
+        "snacks": 21.9,
+        "bars": 32.4
+      },
+      {
+        "code": "211",
+        "total": 159.1,
+        "cereals": 16.7,
+        "sweet": 17.1,
+        "savoury": 11.8,
+        "meat": 19.7,
+        "sauces": 37.5,
+        "snacks": 20.1,
+        "bars": 36.2
+      },
+      {
+        "code": "212",
+        "total": 142.7,
+        "cereals": 14.0,
+        "sweet": 17.3,
+        "savoury": 9.4,
+        "meat": 16.3,
+        "sauces": 34.0,
+        "snacks": 20.2,
+        "bars": 31.5
+      },
+      {
+        "code": "213",
+        "total": 141.0,
+        "cereals": 13.4,
+        "sweet": 17.2,
+        "savoury": 8.9,
+        "meat": 16.0,
+        "sauces": 34.6,
+        "snacks": 20.8,
+        "bars": 30.1
+      },
+      {
+        "code": "214",
+        "total": 163.7,
+        "cereals": 16.1,
+        "sweet": 17.0,
+        "savoury": 12.2,
+        "meat": 21.2,
+        "sauces": 39.6,
+        "snacks": 20.5,
+        "bars": 37.1
+      },
+      {
+        "code": "215",
+        "total": 153.1,
+        "cereals": 12.6,
+        "sweet": 18.0,
+        "savoury": 10.6,
+        "meat": 26.5,
+        "sauces": 33.4,
+        "snacks": 18.4,
+        "bars": 33.6
+      },
+      {
+        "code": "216",
+        "total": 157.9,
+        "cereals": 14.4,
+        "sweet": 18.2,
+        "savoury": 11.4,
+        "meat": 25.9,
+        "sauces": 34.1,
+        "snacks": 19.5,
+        "bars": 34.4
+      },
+      {
+        "code": "217",
+        "total": 165.8,
+        "cereals": 15.2,
+        "sweet": 18.8,
+        "savoury": 11.8,
+        "meat": 26.4,
+        "sauces": 34.4,
+        "snacks": 19.8,
+        "bars": 39.4
+      },
+      {
+        "code": "301",
+        "total": 160.9,
+        "cereals": 15.4,
+        "sweet": 17.1,
+        "savoury": 10.3,
+        "meat": 25.2,
+        "sauces": 38.3,
+        "snacks": 20.7,
+        "bars": 33.9
+      },
+      {
+        "code": "302",
+        "total": 154.0,
+        "cereals": 15.6,
+        "sweet": 16.8,
+        "savoury": 10.1,
+        "meat": 21.0,
+        "sauces": 37.4,
+        "snacks": 19.7,
+        "bars": 33.4
+      },
+      {
+        "code": "303",
+        "total": 146.3,
+        "cereals": 15.0,
+        "sweet": 16.4,
+        "savoury": 9.2,
+        "meat": 19.2,
+        "sauces": 35.7,
+        "snacks": 19.5,
+        "bars": 31.3
+      },
+      {
+        "code": "304",
+        "total": 152.1,
+        "cereals": 16.7,
+        "sweet": 15.6,
+        "savoury": 10.3,
+        "meat": 19.9,
+        "sauces": 36.5,
+        "snacks": 19.8,
+        "bars": 33.3
+      },
+      {
+        "code": "305",
+        "total": 156.5,
+        "cereals": 15.6,
+        "sweet": 16.1,
+        "savoury": 10.0,
+        "meat": 17.7,
+        "sauces": 39.2,
+        "snacks": 21.0,
+        "bars": 36.9
+      },
+      {
+        "code": "306",
+        "total": 149.1,
+        "cereals": 13.5,
+        "sweet": 15.0,
+        "savoury": 9.2,
+        "meat": 27.3,
+        "sauces": 38.6,
+        "snacks": 18.4,
+        "bars": 27.1
+      },
+      {
+        "code": "307",
+        "total": 154.0,
+        "cereals": 12.8,
+        "sweet": 17.4,
+        "savoury": 9.9,
+        "meat": 29.7,
+        "sauces": 33.7,
+        "snacks": 21.0,
+        "bars": 29.5
+      },
+      {
+        "code": "308",
+        "total": 161.1,
+        "cereals": 13.0,
+        "sweet": 16.8,
+        "savoury": 10.2,
+        "meat": 31.9,
+        "sauces": 38.4,
+        "snacks": 20.2,
+        "bars": 30.6
+      },
+      {
+        "code": "309",
+        "total": 158.6,
+        "cereals": 14.9,
+        "sweet": 16.4,
+        "savoury": 10.2,
+        "meat": 21.7,
+        "sauces": 40.2,
+        "snacks": 20.7,
+        "bars": 34.5
+      },
+      {
+        "code": "310",
+        "total": 154.3,
+        "cereals": 13.6,
+        "sweet": 17.7,
+        "savoury": 9.2,
+        "meat": 24.7,
+        "sauces": 36.3,
+        "snacks": 21.5,
+        "bars": 31.3
+      },
+      {
+        "code": "311",
+        "total": 154.3,
+        "cereals": 13.8,
+        "sweet": 17.7,
+        "savoury": 9.2,
+        "meat": 23.6,
+        "sauces": 37.6,
+        "snacks": 21.1,
+        "bars": 31.3
+      },
+      {
+        "code": "312",
+        "total": 159.8,
+        "cereals": 12.5,
+        "sweet": 16.0,
+        "savoury": 10.3,
+        "meat": 30.9,
+        "sauces": 40.0,
+        "snacks": 19.3,
+        "bars": 30.8
+      },
+      {
+        "code": "313",
+        "total": 159.4,
+        "cereals": 14.2,
+        "sweet": 17.6,
+        "savoury": 9.7,
+        "meat": 26.5,
+        "sauces": 37.4,
+        "snacks": 20.9,
+        "bars": 33.1
+      },
+      {
+        "code": "314",
+        "total": 159.4,
+        "cereals": 14.6,
+        "sweet": 17.4,
+        "savoury": 10.2,
+        "meat": 24.1,
+        "sauces": 37.1,
+        "snacks": 22.1,
+        "bars": 33.9
+      },
+      {
+        "code": "315",
+        "total": 143.8,
+        "cereals": 11.2,
+        "sweet": 13.3,
+        "savoury": 8.9,
+        "meat": 34.0,
+        "sauces": 33.2,
+        "snacks": 17.1,
+        "bars": 26.1
+      },
+      {
+        "code": "316",
+        "total": 161.6,
+        "cereals": 15.8,
+        "sweet": 15.4,
+        "savoury": 11.0,
+        "meat": 23.4,
+        "sauces": 40.9,
+        "snacks": 21.8,
+        "bars": 33.3
+      },
+      {
+        "code": "317",
+        "total": 157.7,
+        "cereals": 14.8,
+        "sweet": 18.2,
+        "savoury": 10.3,
+        "meat": 25.2,
+        "sauces": 35.9,
+        "snacks": 20.4,
+        "bars": 32.9
+      },
+      {
+        "code": "318",
+        "total": 156.5,
+        "cereals": 13.3,
+        "sweet": 16.2,
+        "savoury": 9.6,
+        "meat": 30.0,
+        "sauces": 39.4,
+        "snacks": 17.9,
+        "bars": 30.1
+      },
+      {
+        "code": "319",
+        "total": 155.5,
+        "cereals": 14.3,
+        "sweet": 17.4,
+        "savoury": 9.7,
+        "meat": 28.8,
+        "sauces": 37.3,
+        "snacks": 19.3,
+        "bars": 28.7
+      },
+      {
+        "code": "401",
+        "total": 152.3,
+        "cereals": 15.9,
+        "sweet": 16.4,
+        "savoury": 11.3,
+        "meat": 18.4,
+        "sauces": 35.9,
+        "snacks": 19.1,
+        "bars": 35.3
+      },
+      {
+        "code": "402",
+        "total": 154.3,
+        "cereals": 14.2,
+        "sweet": 18.0,
+        "savoury": 9.8,
+        "meat": 22.4,
+        "sauces": 36.6,
+        "snacks": 20.5,
+        "bars": 32.8
+      },
+      {
+        "code": "403",
+        "total": 160.0,
+        "cereals": 16.0,
+        "sweet": 17.0,
+        "savoury": 11.1,
+        "meat": 21.9,
+        "sauces": 38.9,
+        "snacks": 19.7,
+        "bars": 35.4
+      },
+      {
+        "code": "404",
+        "total": 149.8,
+        "cereals": 14.8,
+        "sweet": 16.4,
+        "savoury": 10.3,
+        "meat": 19.6,
+        "sauces": 36.7,
+        "snacks": 19.1,
+        "bars": 32.9
+      },
+      {
+        "code": "405",
+        "total": 156.9,
+        "cereals": 12.0,
+        "sweet": 17.7,
+        "savoury": 10.4,
+        "meat": 31.2,
+        "sauces": 32.2,
+        "snacks": 19.9,
+        "bars": 33.5
+      },
+      {
+        "code": "406",
+        "total": 158.9,
+        "cereals": 12.3,
+        "sweet": 16.6,
+        "savoury": 10.4,
+        "meat": 31.4,
+        "sauces": 35.4,
+        "snacks": 19.8,
+        "bars": 33.0
+      },
+      {
+        "code": "407",
+        "total": 159.1,
+        "cereals": 14.0,
+        "sweet": 17.4,
+        "savoury": 10.9,
+        "meat": 28.7,
+        "sauces": 36.1,
+        "snacks": 18.5,
+        "bars": 33.5
+      },
+      {
+        "code": "501",
+        "total": 157.8,
+        "cereals": 15.4,
+        "sweet": 16.5,
+        "savoury": 10.5,
+        "meat": 24.5,
+        "sauces": 38.2,
+        "snacks": 18.3,
+        "bars": 34.4
+      },
+      {
+        "code": "502",
+        "total": 159.1,
+        "cereals": 14.4,
+        "sweet": 17.9,
+        "savoury": 9.7,
+        "meat": 27.2,
+        "sauces": 36.1,
+        "snacks": 20.0,
+        "bars": 33.8
+      },
+      {
+        "code": "503",
+        "total": 154.1,
+        "cereals": 17.5,
+        "sweet": 16.3,
+        "savoury": 10.4,
+        "meat": 16.1,
+        "sauces": 35.9,
+        "snacks": 18.7,
+        "bars": 39.2
+      },
+      {
+        "code": "504",
+        "total": 153.1,
+        "cereals": 14.9,
+        "sweet": 17.1,
+        "savoury": 9.1,
+        "meat": 21.7,
+        "sauces": 37.1,
+        "snacks": 19.1,
+        "bars": 34.1
+      },
+      {
+        "code": "505",
+        "total": 158.9,
+        "cereals": 16.4,
+        "sweet": 17.2,
+        "savoury": 9.9,
+        "meat": 19.9,
+        "sauces": 39.6,
+        "snacks": 20.0,
+        "bars": 35.9
+      },
+      {
+        "code": "506",
+        "total": 148.0,
+        "cereals": 14.8,
+        "sweet": 17.3,
+        "savoury": 8.8,
+        "meat": 19.8,
+        "sauces": 35.5,
+        "snacks": 18.7,
+        "bars": 33.1
+      },
+      {
+        "code": "507",
+        "total": 157.1,
+        "cereals": 15.6,
+        "sweet": 16.8,
+        "savoury": 9.9,
+        "meat": 21.1,
+        "sauces": 38.5,
+        "snacks": 19.6,
+        "bars": 35.6
+      },
+      {
+        "code": "509",
+        "total": 150.6,
+        "cereals": 13.6,
+        "sweet": 16.7,
+        "savoury": 9.6,
+        "meat": 27.0,
+        "sauces": 34.1,
+        "snacks": 16.8,
+        "bars": 32.8
+      },
+      {
+        "code": "510",
+        "total": null,
+        "cereals": null,
+        "sweet": null,
+        "savoury": null,
+        "meat": null,
+        "sauces": null,
+        "snacks": null,
+        "bars": null
+      },
+      {
+        "code": "511",
+        "total": null,
+        "cereals": null,
+        "sweet": null,
+        "savoury": null,
+        "meat": null,
+        "sauces": null,
+        "snacks": null,
+        "bars": null
+      },
+      {
+        "code": "601",
+        "total": null,
+        "cereals": null,
+        "sweet": null,
+        "savoury": null,
+        "meat": null,
+        "sauces": null,
+        "snacks": null,
+        "bars": null
+      },
+      {
+        "code": "602",
+        "total": null,
+        "cereals": null,
+        "sweet": null,
+        "savoury": null,
+        "meat": null,
+        "sauces": null,
+        "snacks": null,
+        "bars": null
+      },
+      {
+        "code": "603",
+        "total": null,
+        "cereals": null,
+        "sweet": null,
+        "savoury": null,
+        "meat": null,
+        "sauces": null,
+        "snacks": null,
+        "bars": null
+      },
+      {
+        "code": "604",
+        "total": null,
+        "cereals": null,
+        "sweet": null,
+        "savoury": null,
+        "meat": null,
+        "sauces": null,
+        "snacks": null,
+        "bars": null
+      },
+      {
+        "code": "701",
+        "total": null,
+        "cereals": null,
+        "sweet": null,
+        "savoury": null,
+        "meat": null,
+        "sauces": null,
+        "snacks": null,
+        "bars": null
+      },
+      {
+        "code": "702",
+        "total": 137.1,
+        "cereals": 12.4,
+        "sweet": 13.1,
+        "savoury": 7.3,
+        "meat": 30.6,
+        "sauces": 29.9,
+        "snacks": 18.6,
+        "bars": 25.2
+      },
+      {
+        "code": "801",
+        "total": 149.1,
+        "cereals": 16.7,
+        "sweet": 16.3,
+        "savoury": 9.7,
+        "meat": 17.3,
+        "sauces": 36.0,
+        "snacks": 19.1,
+        "bars": 34.0
+      }
+    ],
+    "wa_outback_retail_2024": [
+      {
+        "sa4_code": "510",
+        "supermarkets_assessed": 17,
+        "population_per_supermarket": 5755,
+        "year": 2024
+      },
+      {
+        "sa4_code": "511",
+        "supermarkets_assessed": 36,
+        "population_per_supermarket": 3465,
+        "year": 2024
+      }
+    ]
+  },
+  "vconcat": [
+    {
+      "hconcat": [
+        {
+          "width": 700,
+          "height": 625,
+          "data": {
+            "url": "../data/SA4_free_sugars_2023_24.geojson",
+            "format": {
+              "type": "json",
+              "property": "features"
+            }
+          },
+          "transform": [
+            {
+              "lookup": "properties.SA4_CODE21",
+              "from": {
+                "data": {
+                  "name": "processed_foods_table16"
+                },
+                "key": "code",
+                "fields": [
+                  "total",
+                  "cereals",
+                  "sweet",
+                  "savoury",
+                  "meat",
+                  "sauces",
+                  "snacks",
+                  "bars"
+                ]
+              }
+            },
+            {
+              "lookup": "properties.SA4_CODE21",
+              "from": {
+                "data": {
+                  "name": "wa_outback_retail_2024"
+                },
+                "key": "sa4_code",
+                "fields": [
+                  "supermarkets_assessed",
+                  "population_per_supermarket",
+                  "year"
+                ]
+              }
+            },
+            {
+              "calculate": "isValid(datum.total) && isFinite(datum.total) ? 'Published' : 'Not published'",
+              "as": "publication_status"
+            },
+            {
+              "calculate": "'Grams per 10,000 kJ'",
+              "as": "display_unit"
+            }
+          ],
+          "projection": {
+            "type": "mercator"
+          },
+          "layer": [
+            {
+              "mark": {
+                "type": "geoshape",
+                "fill": "#587A74",
+                "stroke": "#C3DCD1",
+                "strokeWidth": 0.45
+              },
+              "encoding": {
+                "tooltip": [
+                  {
+                    "field": "properties.SA4_NAME21",
+                    "type": "nominal",
+                    "title": "SA4 region"
+                  },
+                  {
+                    "field": "properties.STE_NAME21",
+                    "type": "nominal",
+                    "title": "State / territory"
+                  },
+                  {
+                    "field": "publication_status",
+                    "type": "nominal",
+                    "title": "Data status"
+                  }
+                ]
+              }
+            },
+            {
+              "transform": [
+                {
+                  "filter": "!isValid(datum.total) && isValid(datum.supermarkets_assessed)"
+                }
+              ],
+              "mark": {
+                "type": "geoshape",
+                "fill": "#587A74",
+                "stroke": "#C3DCD1",
+                "strokeWidth": 0.55
+              },
+              "encoding": {
+                "tooltip": [
+                  {
+                    "field": "properties.SA4_NAME21",
+                    "type": "nominal",
+                    "title": "SA4 region"
+                  },
+                  {
+                    "field": "properties.STE_NAME21",
+                    "type": "nominal",
+                    "title": "State / territory"
+                  },
+                  {
+                    "field": "publication_status",
+                    "type": "nominal",
+                    "title": "Food quantity data"
+                  },
+                  {
+                    "field": "supermarkets_assessed",
+                    "type": "quantitative",
+                    "title": "Supermarkets assessed",
+                    "format": ".0f"
+                  },
+                  {
+                    "field": "population_per_supermarket",
+                    "type": "quantitative",
+                    "title": "Population per supermarket",
+                    "format": ",.0f"
+                  },
+                  {
+                    "field": "year",
+                    "type": "quantitative",
+                    "title": "Retail data year",
+                    "format": "d"
+                  }
+                ]
+              }
+            },
+            {
+              "transform": [
+                {
+                  "filter": "isValid(datum.total) && isFinite(datum.total)"
+                }
+              ],
+              "mark": {
+                "type": "geoshape",
+                "stroke": "#E2F0E9",
+                "strokeWidth": 0.48
+              },
+              "encoding": {
+                "color": {
+                  "field": "total",
+                  "type": "quantitative",
+                  "scale": {
+                    "domain": [
+                      134,
+                      150,
+                      166
+                    ],
+                    "range": [
+                      "#76C2B3",
+                      "#A9CBA2",
+                      "#E9B75B"
+                    ],
+                    "interpolate": "lab",
+                    "clamp": true
+                  },
+                  "legend": {
+                    "title": "Selected food-group availability (g per 10,000 kJ)",
+                    "orient": "bottom",
+                    "direction": "horizontal",
+                    "gradientLength": 410,
+                    "gradientThickness": 14,
+                    "titleColor": "#C7DBD3",
+                    "titleFontSize": 15,
+                    "titleLimit": 610,
+                    "titlePadding": 8,
+                    "labelColor": "#E2EEE8",
+                    "labelFontSize": 13,
+                    "values": [
+                      134,
+                      140,
+                      150,
+                      160,
+                      166
+                    ],
+                    "offset": 14
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "properties.SA4_NAME21",
+                    "type": "nominal",
+                    "title": "SA4 region"
+                  },
+                  {
+                    "field": "properties.STE_NAME21",
+                    "type": "nominal",
+                    "title": "State / territory"
+                  },
+                  {
+                    "field": "publication_status",
+                    "type": "nominal",
+                    "title": "Data status"
+                  },
+                  {
+                    "field": "display_unit",
+                    "type": "nominal",
+                    "title": "All values in"
+                  },
+                  {
+                    "field": "total",
+                    "type": "quantitative",
+                    "title": "Combined total",
+                    "format": ".1f"
+                  },
+                  {
+                    "field": "cereals",
+                    "type": "quantitative",
+                    "title": "Ready-to-eat cereals",
+                    "format": ".1f"
+                  },
+                  {
+                    "field": "sweet",
+                    "type": "quantitative",
+                    "title": "Sweet biscuits",
+                    "format": ".1f"
+                  },
+                  {
+                    "field": "savoury",
+                    "type": "quantitative",
+                    "title": "Savoury biscuits",
+                    "format": ".1f"
+                  },
+                  {
+                    "field": "meat",
+                    "type": "quantitative",
+                    "title": "Processed meat",
+                    "format": ".1f"
+                  },
+                  {
+                    "field": "sauces",
+                    "type": "quantitative",
+                    "title": "Savoury sauces",
+                    "format": ".1f"
+                  },
+                  {
+                    "field": "snacks",
+                    "type": "quantitative",
+                    "title": "Snack foods",
+                    "format": ".1f"
+                  },
+                  {
+                    "field": "bars",
+                    "type": "quantitative",
+                    "title": "Confectionery and bars",
+                    "format": ".1f"
+                  }
+                ]
+              }
+            },
+            {
+              "description": "Highest published SA4 region outline, keyed to regional totals.",
+              "transform": [
+                {
+                  "filter": "toString(datum.properties.SA4_CODE21) == '217'"
+                }
+              ],
+              "mark": {
+                "type": "geoshape",
+                "filled": false,
+                "stroke": "#E5B456",
+                "strokeWidth": 2.5,
+                "strokeOpacity": 1
+              }
+            },
+            {
+              "description": "Lowest published SA4 region outline, keyed to regional totals.",
+              "transform": [
+                {
+                  "filter": "toString(datum.properties.SA4_CODE21) == '125'"
+                }
+              ],
+              "mark": {
+                "type": "geoshape",
+                "filled": false,
+                "stroke": "#9FC7BC",
+                "strokeWidth": 2.5,
+                "strokeOpacity": 1
+              }
+            },
+            {
+              "description": "Unpublished WA Outback and Tasmanian SA4 polygons visibly outlined; these are missing values, not zero.",
+              "transform": [
+                {
+                  "filter": "toString(datum.properties.SA4_CODE21) == '510' || toString(datum.properties.SA4_CODE21) == '511' || toString(datum.properties.SA4_CODE21) == '601' || toString(datum.properties.SA4_CODE21) == '602' || toString(datum.properties.SA4_CODE21) == '603' || toString(datum.properties.SA4_CODE21) == '604'"
+                }
+              ],
+              "mark": {
+                "type": "geoshape",
+                "filled": false,
+                "stroke": "#DFEDE7",
+                "strokeWidth": 1.7,
+                "strokeDash": [
+                  4,
+                  3
+                ],
+                "strokeOpacity": 0.92
+              }
+            },
+            {
+              "description": "Data-driven elbow leader: starts at GeoJSON centroid of SA4 ['217'], ends at the corresponding callout-row on the right edge of the map.",
+              "transform": [
+                {
+                  "filter": "toString(datum.properties.SA4_CODE21) == '217'"
+                },
+                {
+                  "calculate": "geoCentroid(null, datum)",
+                  "as": "geoAnchor"
+                },
+                {
+                  "calculate": "datum.geoAnchor[0]",
+                  "as": "anchorLon"
+                },
+                {
+                  "calculate": "datum.geoAnchor[1]",
+                  "as": "anchorLat"
+                },
+                {
+                  "calculate": "155.2",
+                  "as": "edgeLon"
+                },
+                {
+                  "calculate": "-18.2",
+                  "as": "edgeLat"
+                }
+              ],
+              "layer": [
+                {
+                  "mark": {
+                    "type": "rule",
+                    "stroke": "#E5B456",
+                    "strokeWidth": 1.9,
+                    "strokeDash": [
+                      5,
+                      4
+                    ],
+                    "opacity": 0.9
+                  },
+                  "encoding": {
+                    "longitude": {
+                      "field": "anchorLon",
+                      "type": "quantitative"
+                    },
+                    "latitude": {
+                      "field": "anchorLat",
+                      "type": "quantitative"
+                    },
+                    "longitude2": {
+                      "field": "edgeLon"
+                    },
+                    "latitude2": {
+                      "field": "anchorLat"
+                    }
+                  }
+                },
+                {
+                  "mark": {
+                    "type": "rule",
+                    "stroke": "#E5B456",
+                    "strokeWidth": 1.9,
+                    "strokeDash": [
+                      5,
+                      4
+                    ],
+                    "opacity": 0.9
+                  },
+                  "encoding": {
+                    "longitude": {
+                      "field": "edgeLon",
+                      "type": "quantitative"
+                    },
+                    "latitude": {
+                      "field": "anchorLat",
+                      "type": "quantitative"
+                    },
+                    "longitude2": {
+                      "field": "edgeLon"
+                    },
+                    "latitude2": {
+                      "field": "edgeLat"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "description": "Data-driven elbow leader: starts at GeoJSON centroid of SA4 ['125'], ends at the corresponding callout-row on the right edge of the map.",
+              "transform": [
+                {
+                  "filter": "toString(datum.properties.SA4_CODE21) == '125'"
+                },
+                {
+                  "calculate": "geoCentroid(null, datum)",
+                  "as": "geoAnchor"
+                },
+                {
+                  "calculate": "datum.geoAnchor[0]",
+                  "as": "anchorLon"
+                },
+                {
+                  "calculate": "datum.geoAnchor[1]",
+                  "as": "anchorLat"
+                },
+                {
+                  "calculate": "155.2",
+                  "as": "edgeLon"
+                },
+                {
+                  "calculate": "-28.1",
+                  "as": "edgeLat"
+                }
+              ],
+              "layer": [
+                {
+                  "mark": {
+                    "type": "rule",
+                    "stroke": "#9FC7BC",
+                    "strokeWidth": 1.9,
+                    "strokeDash": [
+                      5,
+                      4
+                    ],
+                    "opacity": 0.9
+                  },
+                  "encoding": {
+                    "longitude": {
+                      "field": "anchorLon",
+                      "type": "quantitative"
+                    },
+                    "latitude": {
+                      "field": "anchorLat",
+                      "type": "quantitative"
+                    },
+                    "longitude2": {
+                      "field": "edgeLon"
+                    },
+                    "latitude2": {
+                      "field": "anchorLat"
+                    }
+                  }
+                },
+                {
+                  "mark": {
+                    "type": "rule",
+                    "stroke": "#9FC7BC",
+                    "strokeWidth": 1.9,
+                    "strokeDash": [
+                      5,
+                      4
+                    ],
+                    "opacity": 0.9
+                  },
+                  "encoding": {
+                    "longitude": {
+                      "field": "edgeLon",
+                      "type": "quantitative"
+                    },
+                    "latitude": {
+                      "field": "anchorLat",
+                      "type": "quantitative"
+                    },
+                    "longitude2": {
+                      "field": "edgeLon"
+                    },
+                    "latitude2": {
+                      "field": "edgeLat"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "description": "Data-driven elbow leader: starts at GeoJSON centroid of SA4 ['601'], ends at the corresponding callout-row on the right edge of the map.",
+              "transform": [
+                {
+                  "filter": "toString(datum.properties.SA4_CODE21) == '601'"
+                },
+                {
+                  "calculate": "geoCentroid(null, datum)",
+                  "as": "geoAnchor"
+                },
+                {
+                  "calculate": "datum.geoAnchor[0]",
+                  "as": "anchorLon"
+                },
+                {
+                  "calculate": "datum.geoAnchor[1]",
+                  "as": "anchorLat"
+                },
+                {
+                  "calculate": "155.2",
+                  "as": "edgeLon"
+                },
+                {
+                  "calculate": "-38.3",
+                  "as": "edgeLat"
+                }
+              ],
+              "layer": [
+                {
+                  "mark": {
+                    "type": "rule",
+                    "stroke": "#DFEDE7",
+                    "strokeWidth": 1.9,
+                    "strokeDash": [
+                      5,
+                      4
+                    ],
+                    "opacity": 0.9
+                  },
+                  "encoding": {
+                    "longitude": {
+                      "field": "anchorLon",
+                      "type": "quantitative"
+                    },
+                    "latitude": {
+                      "field": "anchorLat",
+                      "type": "quantitative"
+                    },
+                    "longitude2": {
+                      "field": "edgeLon"
+                    },
+                    "latitude2": {
+                      "field": "anchorLat"
+                    }
+                  }
+                },
+                {
+                  "mark": {
+                    "type": "rule",
+                    "stroke": "#DFEDE7",
+                    "strokeWidth": 1.9,
+                    "strokeDash": [
+                      5,
+                      4
+                    ],
+                    "opacity": 0.9
+                  },
+                  "encoding": {
+                    "longitude": {
+                      "field": "edgeLon",
+                      "type": "quantitative"
+                    },
+                    "latitude": {
+                      "field": "anchorLat",
+                      "type": "quantitative"
+                    },
+                    "longitude2": {
+                      "field": "edgeLon"
+                    },
+                    "latitude2": {
+                      "field": "edgeLat"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "description": "Numbered map anchor 1, computed from the actual GeoJSON geometry of SA4 code(s) ['217'].",
+              "transform": [
+                {
+                  "filter": "toString(datum.properties.SA4_CODE21) == '217'"
+                },
+                {
+                  "calculate": "geoCentroid(null, datum)",
+                  "as": "geoAnchor"
+                },
+                {
+                  "calculate": "datum.geoAnchor[0]",
+                  "as": "anchorLon"
+                },
+                {
+                  "calculate": "datum.geoAnchor[1]",
+                  "as": "anchorLat"
+                }
+              ],
+              "layer": [
+                {
+                  "mark": {
+                    "type": "circle",
+                    "filled": true,
+                    "fill": "#FFFBF2",
+                    "stroke": "#E5B456",
+                    "strokeWidth": 2.8,
+                    "size": 230
+                  },
+                  "encoding": {
+                    "longitude": {
+                      "field": "anchorLon",
+                      "type": "quantitative"
+                    },
+                    "latitude": {
+                      "field": "anchorLat",
+                      "type": "quantitative"
+                    },
+                    "tooltip": [
+                      {
+                        "field": "properties.SA4_NAME21",
+                        "type": "nominal",
+                        "title": "Linked region"
+                      },
+                      {
+                        "field": "total",
+                        "type": "quantitative",
+                        "title": "Availability (g per 10,000 kJ)",
+                        "format": ".1f"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "mark": {
+                    "type": "text",
+                    "font": "Bricolage Grotesque",
+                    "fontSize": 11,
+                    "fontWeight": "bold",
+                    "color": "#1E2F2C",
+                    "baseline": "middle",
+                    "align": "center"
+                  },
+                  "encoding": {
+                    "longitude": {
+                      "field": "anchorLon",
+                      "type": "quantitative"
+                    },
+                    "latitude": {
+                      "field": "anchorLat",
+                      "type": "quantitative"
+                    },
+                    "text": {
+                      "value": "1"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "description": "Numbered map anchor 2, computed from the actual GeoJSON geometry of SA4 code(s) ['125'].",
+              "transform": [
+                {
+                  "filter": "toString(datum.properties.SA4_CODE21) == '125'"
+                },
+                {
+                  "calculate": "geoCentroid(null, datum)",
+                  "as": "geoAnchor"
+                },
+                {
+                  "calculate": "datum.geoAnchor[0]",
+                  "as": "anchorLon"
+                },
+                {
+                  "calculate": "datum.geoAnchor[1]",
+                  "as": "anchorLat"
+                }
+              ],
+              "layer": [
+                {
+                  "mark": {
+                    "type": "circle",
+                    "filled": true,
+                    "fill": "#FFFBF2",
+                    "stroke": "#9FC7BC",
+                    "strokeWidth": 2.8,
+                    "size": 230
+                  },
+                  "encoding": {
+                    "longitude": {
+                      "field": "anchorLon",
+                      "type": "quantitative"
+                    },
+                    "latitude": {
+                      "field": "anchorLat",
+                      "type": "quantitative"
+                    },
+                    "tooltip": [
+                      {
+                        "field": "properties.SA4_NAME21",
+                        "type": "nominal",
+                        "title": "Linked region"
+                      },
+                      {
+                        "field": "total",
+                        "type": "quantitative",
+                        "title": "Availability (g per 10,000 kJ)",
+                        "format": ".1f"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "mark": {
+                    "type": "text",
+                    "font": "Bricolage Grotesque",
+                    "fontSize": 11,
+                    "fontWeight": "bold",
+                    "color": "#1E2F2C",
+                    "baseline": "middle",
+                    "align": "center"
+                  },
+                  "encoding": {
+                    "longitude": {
+                      "field": "anchorLon",
+                      "type": "quantitative"
+                    },
+                    "latitude": {
+                      "field": "anchorLat",
+                      "type": "quantitative"
+                    },
+                    "text": {
+                      "value": "2"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "description": "Numbered map anchor 3, computed from the actual GeoJSON geometry of SA4 code(s) ['510', '601'].",
+              "transform": [
+                {
+                  "filter": "toString(datum.properties.SA4_CODE21) == '510' || toString(datum.properties.SA4_CODE21) == '601'"
+                },
+                {
+                  "calculate": "geoCentroid(null, datum)",
+                  "as": "geoAnchor"
+                },
+                {
+                  "calculate": "datum.geoAnchor[0]",
+                  "as": "anchorLon"
+                },
+                {
+                  "calculate": "datum.geoAnchor[1]",
+                  "as": "anchorLat"
+                }
+              ],
+              "layer": [
+                {
+                  "mark": {
+                    "type": "circle",
+                    "filled": true,
+                    "fill": "#FFFBF2",
+                    "stroke": "#DFEDE7",
+                    "strokeWidth": 2.8,
+                    "size": 200
+                  },
+                  "encoding": {
+                    "longitude": {
+                      "field": "anchorLon",
+                      "type": "quantitative"
+                    },
+                    "latitude": {
+                      "field": "anchorLat",
+                      "type": "quantitative"
+                    },
+                    "tooltip": [
+                      {
+                        "field": "properties.SA4_NAME21",
+                        "type": "nominal",
+                        "title": "Linked region"
+                      },
+                      {
+                        "field": "total",
+                        "type": "quantitative",
+                        "title": "Availability (g per 10,000 kJ)",
+                        "format": ".1f"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "mark": {
+                    "type": "text",
+                    "font": "Bricolage Grotesque",
+                    "fontSize": 11,
+                    "fontWeight": "bold",
+                    "color": "#1E2F2C",
+                    "baseline": "middle",
+                    "align": "center"
+                  },
+                  "encoding": {
+                    "longitude": {
+                      "field": "anchorLon",
+                      "type": "quantitative"
+                    },
+                    "latitude": {
+                      "field": "anchorLat",
+                      "type": "quantitative"
+                    },
+                    "text": {
+                      "value": "3"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "description": "Three numbered callout cards, keyed to the markers and outlines of actual SA4 polygons on the map.",
+          "width": 325,
+          "height": 625,
+          "data": {
+            "values": [
+              {
+                "n": "1",
+                "top": 84,
+                "bottom": 213,
+                "mid": 148,
+                "head": 106,
+                "valY": 140,
+                "noteY": 170,
+                "note2Y": 189,
+                "accent": "#E5B456",
+                "tag": "HIGHER AVAILABILITY",
+                "val": "165.8 g / 10,000 kJ",
+                "note": "VIC SA4 217 · highest value",
+                "note2": "Gold outline marks this region"
+              },
+              {
+                "n": "2",
+                "top": 248,
+                "bottom": 377,
+                "mid": 312,
+                "head": 270,
+                "valY": 304,
+                "noteY": 334,
+                "note2Y": 353,
+                "accent": "#9FC7BC",
+                "tag": "LOWER AVAILABILITY",
+                "val": "134.4 g / 10,000 kJ",
+                "note": "NSW SA4 125 · lowest value",
+                "note2": "Mint outline marks this region"
+              },
+              {
+                "n": "3",
+                "top": 412,
+                "bottom": 541,
+                "mid": 476,
+                "head": 434,
+                "valY": 468,
+                "noteY": 498,
+                "note2Y": 517,
+                "accent": "#DFEDE7",
+                "tag": "NO PUBLISHED VALUE",
+                "val": "WA Outback + Tasmania",
+                "note": "Missing values do not mean zero",
+                "note2": "Dotted outlines show those areas"
+              }
+            ]
+          },
+          "layer": [
+            {
+              "data": {
+                "values": [
+                  {}
+                ]
+              },
+              "mark": {
+                "type": "text",
+                "font": "Bricolage Grotesque",
+                "fontWeight": "bold",
+                "fontSize": 18,
+                "color": "#F8F0E4",
+                "align": "left"
+              },
+              "encoding": {
+                "x": {
+                  "value": 25
+                },
+                "y": {
+                  "value": 42
+                },
+                "text": {
+                  "value": "THREE REGIONAL TAKEAWAYS"
+                }
+              }
+            },
+            {
+              "data": {
+                "values": [
+                  {}
+                ]
+              },
+              "mark": {
+                "type": "rule",
+                "stroke": "#9FC7BC",
+                "strokeWidth": 1
+              },
+              "encoding": {
+                "x": {
+                  "value": 25
+                },
+                "x2": {
+                  "value": 298
+                },
+                "y": {
+                  "value": 62
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "rule",
+                "strokeWidth": 2
+              },
+              "encoding": {
+                "x": {
+                  "value": 0
+                },
+                "x2": {
+                  "value": 25
+                },
+                "y": {
+                  "field": "mid",
+                  "type": "quantitative",
+                  "scale": {
+                    "domain": [
+                      0,
+                      625
+                    ],
+                    "range": [
+                      0,
+                      625
+                    ]
+                  },
+                  "axis": null
+                },
+                "stroke": {
+                  "field": "accent",
+                  "type": "nominal",
+                  "scale": null,
+                  "legend": null
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "fill": "#FFFBF2",
+                "stroke": "#1E2F2C",
+                "strokeWidth": 2,
+                "cornerRadius": 9
+              },
+              "encoding": {
+                "x": {
+                  "value": 25
+                },
+                "x2": {
+                  "value": 316
+                },
+                "y": {
+                  "field": "top",
+                  "type": "quantitative",
+                  "scale": {
+                    "domain": [
+                      0,
+                      625
+                    ],
+                    "range": [
+                      0,
+                      625
+                    ]
+                  },
+                  "axis": null
+                },
+                "y2": {
+                  "field": "bottom"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "rect",
+                "stroke": null
+              },
+              "encoding": {
+                "x": {
+                  "value": 25
+                },
+                "x2": {
+                  "value": 31
+                },
+                "y": {
+                  "field": "top",
+                  "type": "quantitative",
+                  "scale": {
+                    "domain": [
+                      0,
+                      625
+                    ],
+                    "range": [
+                      0,
+                      625
+                    ]
+                  },
+                  "axis": null
+                },
+                "y2": {
+                  "field": "bottom"
+                },
+                "color": {
+                  "field": "accent",
+                  "type": "nominal",
+                  "scale": null,
+                  "legend": null
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "circle",
+                "filled": true,
+                "fill": "#FFFBF2",
+                "strokeWidth": 2,
+                "size": 270
+              },
+              "encoding": {
+                "x": {
+                  "value": 10
+                },
+                "y": {
+                  "field": "mid",
+                  "type": "quantitative",
+                  "scale": {
+                    "domain": [
+                      0,
+                      625
+                    ],
+                    "range": [
+                      0,
+                      625
+                    ]
+                  },
+                  "axis": null
+                },
+                "stroke": {
+                  "field": "accent",
+                  "type": "nominal",
+                  "scale": null,
+                  "legend": null
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "font": "Bricolage Grotesque",
+                "fontSize": 11,
+                "fontWeight": "bold",
+                "color": "#1E2F2C",
+                "align": "center",
+                "baseline": "middle"
+              },
+              "encoding": {
+                "x": {
+                  "value": 10
+                },
+                "y": {
+                  "field": "mid",
+                  "type": "quantitative",
+                  "scale": {
+                    "domain": [
+                      0,
+                      625
+                    ],
+                    "range": [
+                      0,
+                      625
+                    ]
+                  },
+                  "axis": null
+                },
+                "text": {
+                  "field": "n",
+                  "type": "nominal"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "font": "Bricolage Grotesque",
+                "fontSize": 12,
+                "fontWeight": "bold",
+                "color": "#3C6461",
+                "align": "left",
+                "baseline": "middle"
+              },
+              "encoding": {
+                "x": {
+                  "value": 44
+                },
+                "y": {
+                  "field": "head",
+                  "type": "quantitative",
+                  "scale": {
+                    "domain": [
+                      0,
+                      625
+                    ],
+                    "range": [
+                      0,
+                      625
+                    ]
+                  },
+                  "axis": null
+                },
+                "text": {
+                  "field": "tag",
+                  "type": "nominal"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "font": "Bricolage Grotesque",
+                "fontSize": 19,
+                "fontWeight": "bold",
+                "color": "#1E2F2C",
+                "align": "left",
+                "baseline": "middle"
+              },
+              "encoding": {
+                "x": {
+                  "value": 44
+                },
+                "y": {
+                  "field": "valY",
+                  "type": "quantitative",
+                  "scale": {
+                    "domain": [
+                      0,
+                      625
+                    ],
+                    "range": [
+                      0,
+                      625
+                    ]
+                  },
+                  "axis": null
+                },
+                "text": {
+                  "field": "val",
+                  "type": "nominal"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "font": "Bricolage Grotesque",
+                "fontSize": 13,
+                "color": "#3C6461",
+                "align": "left",
+                "baseline": "middle"
+              },
+              "encoding": {
+                "x": {
+                  "value": 44
+                },
+                "y": {
+                  "field": "noteY",
+                  "type": "quantitative",
+                  "scale": {
+                    "domain": [
+                      0,
+                      625
+                    ],
+                    "range": [
+                      0,
+                      625
+                    ]
+                  },
+                  "axis": null
+                },
+                "text": {
+                  "field": "note",
+                  "type": "nominal"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "font": "Bricolage Grotesque",
+                "fontSize": 13,
+                "color": "#3C6461",
+                "align": "left",
+                "baseline": "middle"
+              },
+              "encoding": {
+                "x": {
+                  "value": 44
+                },
+                "y": {
+                  "field": "note2Y",
+                  "type": "quantitative",
+                  "scale": {
+                    "domain": [
+                      0,
+                      625
+                    ],
+                    "range": [
+                      0,
+                      625
+                    ]
+                  },
+                  "axis": null
+                },
+                "text": {
+                  "field": "note2",
+                  "type": "nominal"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "spacing": 14,
+      "center": false
+    },
+    {
+      "width": 1040,
+      "height": 34,
+      "data": {
+        "values": [
+          {}
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "square",
+            "size": 220,
+            "filled": true,
+            "color": "#587A74",
+            "stroke": "#C3DCD1",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "x": {
+              "value": 8
+            },
+            "y": {
+              "value": 17
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "middle",
+            "font": "Bricolage Grotesque",
+            "fontSize": 15,
+            "color": "#E2EEE8"
+          },
+          "encoding": {
+            "x": {
+              "value": 26
+            },
+            "y": {
+              "value": 17
+            },
+            "text": {
+              "value": "No published value (WA Outback, Tasmania)"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "font": "Bricolage Grotesque",
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFont": "Bricolage Grotesque",
+      "titleFont": "Bricolage Grotesque"
+    }
+  }
+}

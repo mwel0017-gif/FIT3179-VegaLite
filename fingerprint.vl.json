@@ -1,0 +1,347 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "background": "#3C6461",
+  "spacing": 8,
+  "center": false,
+  "params": [
+    {
+      "name": "selected_type",
+      "value": "All food types",
+      "bind": {
+        "input": "select",
+        "name": "Food category: ",
+        "options": [
+          "All food types",
+          "cereals",
+          "milk",
+          "snacks",
+          "meat",
+          "cheese",
+          "bakery",
+          "frozen foods",
+          "canned foods",
+          "juice",
+          "soda",
+          "yoghurt",
+          "vegetables",
+          "sauce",
+          "butter",
+          "cream"
+        ],
+        "labels": [
+          "All food types",
+          "Breakfast cereals",
+          "Milk",
+          "Snacks",
+          "Meat products",
+          "Cheese",
+          "Bakery",
+          "Frozen foods",
+          "Canned foods",
+          "Juice",
+          "Soft drinks",
+          "Yoghurt",
+          "Vegetables",
+          "Sauces",
+          "Butter",
+          "Cream"
+        ]
+      }
+    }
+  ],
+  "vconcat": [
+    {
+      "width": 1200,
+      "height": 400,
+      "data": {
+        "url": "../data/OpenHSR.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "toNumber(datum.HSR)",
+          "as": "hsr"
+        },
+        {
+          "calculate": "lower(trim(datum['Product type']))",
+          "as": "type_key"
+        },
+        {
+          "filter": "isValid(datum.hsr) && datum.hsr >= 0.5 && datum.hsr <= 5 && isValid(datum.product_name) && isValid(datum.type_key)"
+        },
+        {
+          "filter": "selected_type === 'All food types' || datum.type_key === selected_type"
+        },
+        {
+          "calculate": "datum.hsr <= 2 ? 'Highlighted (low HSR)' : 'Other products'",
+          "as": "rating_group"
+        },
+        {
+          "calculate": "datum.product_name + ' | ' + datum.type_key + ' | ' + datum.HSR",
+          "as": "product_id"
+        },
+        {
+          "calculate": "abs(sin(length(datum.product_name) * 19.19 + datum.hsr * 101.7 + length(datum.type_key) * 67.3 + toNumber(datum.sodium_mg_per_100g) * 0.117))",
+          "as": "display_order"
+        },
+        {
+          "window": [
+            {
+              "op": "row_number",
+              "as": "draw_rank"
+            }
+          ],
+          "sort": [
+            {
+              "field": "display_order",
+              "order": "ascending"
+            },
+            {
+              "field": "product_name",
+              "order": "ascending"
+            }
+          ],
+          "groupby": [
+            "rating_group"
+          ]
+        },
+        {
+          "filter": "datum.draw_rank <= 16"
+        },
+        {
+          "fold": [
+            "sugars_g_per_100g",
+            "sat_fat_g_per_100g",
+            "sodium_mg_per_100g",
+            "protein_g_per_100g",
+            "fiber_g_per_100g"
+          ],
+          "as": [
+            "metric",
+            "rawValue"
+          ]
+        },
+        {
+          "calculate": "datum.metric === 'sugars_g_per_100g' ? 'Sugar' : datum.metric === 'sat_fat_g_per_100g' ? 'Saturated fat' : datum.metric === 'sodium_mg_per_100g' ? 'Sodium' : datum.metric === 'protein_g_per_100g' ? 'Protein' : 'Fibre'",
+          "as": "nutrient"
+        },
+        {
+          "calculate": "datum.nutrient === 'Sugar' ? 0 : datum.nutrient === 'Saturated fat' ? 1 : datum.nutrient === 'Sodium' ? 2 : datum.nutrient === 'Protein' ? 3 : 4",
+          "as": "axisOrder"
+        },
+        {
+          "calculate": "toNumber(datum.rawValue)",
+          "as": "actualValue"
+        },
+        {
+          "filter": "isValid(datum.actualValue) && datum.actualValue >= 0"
+        },
+        {
+          "calculate": "datum.nutrient === 'Sugar' ? 40 : datum.nutrient === 'Saturated fat' ? 11 : datum.nutrient === 'Sodium' ? 550 : datum.nutrient === 'Protein' ? 12 : 11",
+          "as": "referenceMax"
+        },
+        {
+          "calculate": "min(1, max(0, datum.actualValue / datum.referenceMax))",
+          "as": "scaled"
+        },
+        {
+          "calculate": "datum.nutrient === 'Sodium' ? format(datum.actualValue, ',.0f') + ' mg per 100 g' : format(datum.actualValue, '.1f') + ' g per 100 g'",
+          "as": "actualDisplay"
+        },
+        {
+          "calculate": "format(datum.scaled * 100, '.0f') + '% of comparison scale'",
+          "as": "scaleDisplay"
+        },
+        {
+          "calculate": "datum.actualValue > datum.referenceMax ? 'Yes · capped at 100%' : 'No'",
+          "as": "capped"
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "nutrient",
+          "type": "ordinal",
+          "sort": [
+            "Sugar",
+            "Saturated fat",
+            "Sodium",
+            "Protein",
+            "Fibre"
+          ],
+          "axis": {
+            "title": null,
+            "labelAngle": 0,
+            "labelColor": "#F8F0E4",
+            "labelFont": "Bricolage Grotesque",
+            "labelFontSize": 17,
+            "labelFontWeight": "bold",
+            "labelPadding": 13,
+            "tickSize": 0,
+            "domainColor": "#9EBEB3"
+          }
+        },
+        "y": {
+          "field": "scaled",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 1],
+            "nice": false,
+            "zero": true
+          },
+          "axis": {
+            "title": "Scaled nutrient level · 0–100%",
+            "values": [0, 0.25, 0.5, 0.75, 1],
+            "format": ".0%",
+            "grid": true,
+            "gridColor": "#9EBEB3",
+            "gridOpacity": 0.23,
+            "labelColor": "#D8E9E1",
+            "titleColor": "#FFF5E7",
+            "labelFontSize": 13,
+            "titleFontSize": 16,
+            "titlePadding": 18,
+            "labelPadding": 8,
+            "domain": false,
+            "tickColor": "#9EBEB3"
+          }
+        },
+        "color": {
+          "field": "rating_group",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Highlighted (low HSR)",
+              "Other products"
+            ],
+            "range": [
+              "#E8B44B",
+              "#629C8B"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "bottom",
+            "direction": "horizontal",
+            "labelFont": "Bricolage Grotesque",
+            "labelFontSize": 14,
+            "labelColor": "#E5F0E9",
+            "symbolType": "stroke",
+            "symbolStrokeWidth": 3,
+            "symbolSize": 140,
+            "offset": 12
+          }
+        },
+        "tooltip": [
+          {
+            "field": "product_name",
+            "type": "nominal",
+            "title": "Packaged product"
+          },
+          {
+            "field": "type_key",
+            "type": "nominal",
+            "title": "Food category"
+          },
+          {
+            "field": "hsr",
+            "type": "quantitative",
+            "title": "Health Star Rating",
+            "format": ".1f"
+          },
+          {
+            "field": "nutrient",
+            "type": "nominal",
+            "title": "Nutrient"
+          },
+          {
+            "field": "actualDisplay",
+            "type": "nominal",
+            "title": "Actual amount"
+          },
+          {
+            "field": "scaleDisplay",
+            "type": "nominal",
+            "title": "Scaled position"
+          },
+          {
+            "field": "capped",
+            "type": "nominal",
+            "title": "Above fixed scale limit?"
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "line",
+            "strokeWidth": 1.5
+          },
+          "encoding": {
+            "detail": {
+              "field": "product_id",
+              "type": "nominal"
+            },
+            "order": {
+              "field": "axisOrder",
+              "type": "quantitative"
+            },
+            "opacity": {
+              "condition": {
+                "test": "datum.rating_group === 'Highlighted (low HSR)'",
+                "value": 0.54
+              },
+              "value": 0.6
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "circle",
+            "size": 38,
+            "filled": true,
+            "stroke": "#3C6461",
+            "strokeWidth": 0.3
+          },
+          "encoding": {
+            "opacity": {
+              "condition": {
+                "test": "datum.rating_group === 'Highlighted (low HSR)'",
+                "value": 0.72
+              },
+              "value": 0.22
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Bricolage Grotesque",
+    "axis": {
+      "labelFont": "Bricolage Grotesque",
+      "titleFont": "Bricolage Grotesque"
+    },
+    "legend": {
+      "labelFont": "Bricolage Grotesque"
+    }
+  },
+  "title": {
+    "text": [
+      "How do five key nutrients vary across Australian",
+       "packaged foods?"
+    ],
+    "anchor": "start",
+    "font": "Bricolage Grotesque",
+    "fontSize": 30,
+    "fontWeight": "bold",
+    "color": "#F8F0E4",
+    "lineHeight": 36,
+    "offset": 22
+  }
+}
