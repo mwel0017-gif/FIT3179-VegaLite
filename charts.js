@@ -1,89 +1,64 @@
-/* CHART 1: HSR TARGET WAFFLE */
-
-vegaEmbed("#chart-stars", "charts/stars.vl.json", {
+// CHART 1: HSR Target Waffle
+vegaEmbed("#chart-stars", "stars.vl.json", {
   actions: false
 }).catch(console.error);
 
-
-/* CHART 2: BREAKFAST CEREAL RADAR */
-
-vegaEmbed("#chart-radar", "charts/radar.vl.json", {
+// CHART 2: Breakfast Cereal Radar
+vegaEmbed("#chart-radar", "radar.vl.json", {
   actions: false
 }).catch(console.error);
 
-
-/* CHART 3: SUGAR AND FIBRE SCATTER */
-
-vegaEmbed("#chart-balance", "charts/balance.vl.json", {
+// CHART 3: Sugar and Fibre Scatter
+vegaEmbed("#chart-balance", "balance.vl.json", {
   actions: false
 }).catch(console.error);
 
-
-/* CHART 4: HEALTH STAR RATING DOT PLOT */
-
-vegaEmbed("#chart-shelf", "charts/shelf.vl.json", {
+// CHART 4: HSR Dot Plot
+vegaEmbed("#chart-shelf", "shelf.vl.json", {
   actions: false
 }).catch(console.error);
 
-
-/* CHART 5: ADDED SUGAR STACKED BAR */
-
-vegaEmbed("#chart-sugar", "charts/sugar.vl.json", {
+// CHART 5: Added Sugar Stacked Bar
+vegaEmbed("#chart-sugar", "sugar.vl.json", {
   actions: false
 }).catch(console.error);
 
-
-/* CHART 6: SODIUM LOLLIPOP */
-
-vegaEmbed("#chart-salt", "charts/salt.vl.json", {
+// CHART 6: Sodium Lollipop
+vegaEmbed("#chart-salt", "salt.vl.json", {
   actions: false
 }).catch(console.error);
 
-
-/* CHART 7: NUTRIENT HEATMAP */
-
-vegaEmbed("#chart-divide", "charts/divide.vl.json", {
+// CHART 7: Nutrient Heatmap
+vegaEmbed("#chart-divide", "divide.vl.json", {
   actions: false
 }).catch(console.error);
 
-
-/* CHART 8: PARALLEL COORDINATES */
-
-vegaEmbed("#chart-fingerprint", "charts/fingerprint.vl.json", {
+// CHART 8: Parallel Coordinates
+vegaEmbed("#chart-fingerprint", "fingerprint.vl.json", {
   actions: false
 }).catch(console.error);
 
-
-/* CHART 9: AUSTRALIAN CHOROPLETH */
-
-vegaEmbed("#chart-fresh", "charts/fresh.vl.json", {
+// CHART 9: Australian Choropleth
+vegaEmbed("#chart-fresh", "fresh.vl.json", {
   actions: false
 }).catch(console.error);
 
-
-/* CHART 10: REGIONAL NUTRIENT SYMBOL MAP */
-
-vegaEmbed("#chart-basket", "charts/basket.vl.json", {
+// CHART 10: Regional Nutrient Symbol Map
+vegaEmbed("#chart-basket", "basket.vl.json", {
   actions: false
 }).catch(console.error);
 
-
-/* CHART 11: SWEET DRINK LOCATION MAP */
-
-vegaEmbed("#chart-sweet-drinks", "charts/sweet-drinks.vl.json", {
+// CHART 11: Sweet Drink Location Map
+vegaEmbed("#chart-sweet-drinks", "sweet-drinks.vl.json", {
   actions: false
 }).catch(console.error);
 
-
-/* CHART 12: HSR PICTOGRAM */
-
-vegaEmbed("#chart-hsr-distribution", "charts/hsr-distribution.vl.json", {
+// CHART 12: HSR Pictogram
+vegaEmbed("#chart-hsr-distribution", "hsr-distribution.vl.json", {
   actions: false
 }).catch(console.error);
 
-
-/* CHART 13: HEALTH STAR RATING RIDGELINE */
-
-vegaEmbed("#chart-ridgeline", "charts/ridgeline.vl.json", {
+// CHART 13: HSR Ridgeline
+vegaEmbed("#chart-ridgeline", "ridgeline.vl.json", {
   actions: false
 }).catch(console.error);
