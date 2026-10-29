@@ -1,0 +1,59 @@
+﻿"This tab contains table 24.2, the margin of error of proportion of daily free sugars from sweetened beverages for persons 2 years and over. Age groups in years are on the x-axis. Sweetened beverage types are on the y-axis. This table is split by sex into three vertical segments/parts. All person values are at the top. Male values are in the middle. Female values are at the bottom. These data (including table headings and footnotes) range from A5 to L57. Table headers start in B5.",,,,,,,,,,,
+Australian Bureau of Statistics,,,,,,,,,,,
+"Table 24.2 Daily free sugars from sweetened beverages(a)(b), by age and sex(c) — Persons 2 years and over, 95% Margin of Error of proportion",,,,,,,,,,,
+"National Nutrition and Physical Activity Survey: Food and Nutrients, 2023",,,,,,,,,,,
+,Age group (years),,,,,,,,,,
+,2–4,5–11,12–17,18–29,30–49,50–64,65–74,75 years and over,2–17,18 years and over,"Total 
+2 years 
+and over"
+,95% Margin of Error of proportion (±),,,,,,,,,,
+,Persons aged 2 years and over(d),,,,,,,,,,
+Selected sweetened beverages,,,,,,,,,,,
+Cordials,np,0.8,0.4,0.7,0.6,0.8,0.7,1.0,0.5,0.4,0.3
+"Soft drinks, and flavoured mineral waters(e)",1.4,2.1,5.6,3.7,4.2,3.3,3.0,2.8,2.7,1.8,1.5
+"Electrolyte and energy drinks, and fortified water(f)",0.0,np,1.5,1.5,1.2,1.2,0.5,np,0.8,0.6,0.5
+Fruit and vegetable drinks(g),np,0.9,0.6,np,0.3,0.4,0.7,0.7,0.5,0.2,0.2
+Total selected sweetened beverages,3.5,2.5,5.4,4.1,4.4,3.3,2.7,3.1,2.8,2.0,1.6
+Other selected beverages,,,,,,,,,,,
+Flavoured milks and milkshakes,1.2,1.2,1.4,1.4,0.6,0.6,1.0,1.0,0.8,0.4,0.4
+Total other selected beverages(h),1.2,1.2,1.5,1.5,0.6,0.7,1.0,1.0,0.8,0.5,0.4
+Total selected beverages,3.5,2.7,5.5,3.9,4.3,3.4,2.9,3.2,2.9,1.9,1.6
+Total food and beverages,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Total free sugars from food and beverages (Relative Standard Error of mean – %),6.7,4.1,3.6,3.4,3.9,3.2,4.0,4.2,2.4,1.9,1.6
+,Males aged 2 years and over,,,,,,,,,,
+Selected sweetened beverages,,,,,,,,,,,
+Cordials,np,1.4,0.8,1.0,1.0,1.2,1.2,1.6,0.7,0.6,0.5
+"Soft drinks, and flavoured mineral waters(e)",2.6,2.7,7.7,5.9,3.3,5.2,4.5,4.1,3.9,2.4,2.0
+"Electrolyte and energy drinks, and fortified water(f)",0.0,np,2.4,2.1,2.2,1.0,0.7,np,1.3,1.0,0.9
+Fruit and vegetable drinks(g),np,np,np,np,0.3,0.6,np,np,0.7,0.4,0.4
+Total selected sweetened beverages,3.1,3.4,7.7,6.2,4.0,5.2,4.2,4.7,4.1,2.6,2.3
+Other selected beverages,,,,,,,,,,,
+Flavoured milks and milkshakes,2.1,1.7,1.9,1.8,1.0,0.9,1.3,1.3,1.3,0.6,0.6
+Total other selected beverages(h),2.0,1.7,2.0,1.9,1.0,1.0,1.4,1.3,1.3,0.6,0.6
+Total selected beverages,3.8,3.7,7.8,6.0,4.1,5.0,4.4,4.8,4.1,2.7,2.4
+Total food and beverages,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Total free sugars from food and beverages (Relative Standard Error of mean – %),8.1,5.4,5.2,5.0,4.0,5.4,5.8,5.4,3.4,2.2,1.9
+,Females aged 2 years and over,,,,,,,,,,
+Selected sweetened beverages,,,,,,,,,,,
+Cordials,np,0.7,0.4,0.9,0.8,0.8,0.7,np,0.8,0.4,0.4
+"Soft drinks, and flavoured mineral waters(e)",np,3.0,6.5,5.3,7.7,3.4,3.6,3.5,3.3,3.4,2.8
+"Electrolyte and energy drinks, and fortified water(f)",0.0,np,1.2,1.8,0.6,2.4,np,np,0.5,0.6,0.5
+Fruit and vegetable drinks(g),np,np,1.3,0.0,0.4,0.5,0.6,1.2,0.8,0.2,0.2
+Total selected sweetened beverages,np,3.2,6.4,5.3,8.3,3.8,3.7,3.6,3.5,3.6,3.0
+Other selected beverages,,,,,,,,,,,
+Flavoured milks and milkshakes,0.9,1.8,1.6,2.1,0.6,0.8,1.4,1.5,1.0,0.6,0.5
+Total other selected beverages(h),1.0,1.8,1.7,2.1,0.7,0.9,1.6,1.5,1.0,0.6,0.5
+Total selected beverages,np,3.8,6.7,5.3,8.1,3.8,3.9,3.7,3.8,3.4,2.8
+Total food and beverages,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Total free sugars from food and beverages (Relative Standard Error of mean – %),10.3,3.7,5.2,4.6,7.4,4.8,4.6,7.3,3.0,3.4,2.8
+Footnotes,,,,,,,,,,,
+"np not available for publication as estimate has a relative standard error greater than 50%, but included in totals where applicable, unless otherwise indicated.",,,,,,,,,,,
+(a) See the methodology for definitions of sweetened beverages.,,,,,,,,,,,
+(b) Represents proportion of total free sugars from selected sweetened beverages as reported on day prior to interview (Day 1).,,,,,,,,,,,
+(c) Sex recorded at birth refers to what was determined by sex characteristics observed at birth or infancy.,,,,,,,,,,,
+(d) Includes persons whose sex recorded at birth was another term (other than male or female).,,,,,,,,,,,
+(e) Includes commercial ice tea (eight digit food code: 11103001 and 11103003) and kombucha (eight digit food code: 11103004). See the AUSNUT 2023 food and dietary supplement classification for further information.,,,,,,,,,,,
+(f) Includes fortified packaged water (five digit food code: 11803) and flavoured packaged water (five digit food code: 11804). See the AUSNUT 2023 food and dietary supplement classification for further information.,,,,,,,,,,,
+(g) Includes aloe vera juice (eight digit food code: 11302001). See the AUSNUT 2023 food and dietary supplement classification for further information.,,,,,,,,,,,
+"(h) Includes flavoured dairy milk substitutes (three digit food code: 202), breakfast cereal beverages (five digit food code: 11905), and de-alcoholised beverages (three digit food code: 296). See the AUSNUT 2023 food and dietary supplement classification for further information.",,,,,,,,,,,
+© Commonwealth of Australia,,,,,,,,,,,

@@ -1,0 +1,46 @@
+﻿"Table S4: Proportion of adults aged 18 and over not meeting the daily fruit and vegetable recommendations, by selected population characteristics and sex, 2022",,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,Did not meet recommended daily fruit consumption,,,Did not meet recommended daily vegetable consumption,,,Did not meet recommended daily fruit consumption,,,Did not meet recommended daily vegetable consumption,,,Did not meet recommended daily fruit consumption,,,Did not meet recommended daily vegetable consumption,
+,Per cent,95% CI,,Per cent,95% CI,,Per cent,95% CI,,Per cent,95% CI,,Per cent,95% CI,,Per cent,95% CI
+,Males,,,,,,Females,,,,,,Persons,,,,
+Crude rates,,,,,,,,,,,,,,,,,
+Remoteness,,,,,,,,,,,,,,,,,
+Major cities,58.3,56.1–60.6,,97.5,96.9–98.2,,53.2,51.4–55.0,,90.9,89.9–91.8,,55.7,54.3–57.2,,94.2,93.6–94.7
+Inner regional,55.5,51.4–59.6,,94.9,93.1–96.7,,54.2,50.1–58.4,,88.2,85.9–90.5,,54.9,51.8–57.9,,91.4,89.9–92.8
+Outer regional/Remote,63.8,58.7–68.8,,95.5,93.3–97.7,,53.7,48.7–58.6,,88.5,85.5–91.6,,58.7,55.2–62.2,,92.0,90.0–94.0
+,,,,,,,,,,,,,,,,,
+Socioeconomic areas,,,,,,,,,,,,,,,,,
+1 (lowest socioeconomic areas),65.0,61.6–68.5,,98.0,97.1–98.9,,57.0,52.9–61.0,,93.2,91.4–94.9,,61.0,57.8–64.2,,95.6,94.5–96.6
+2,57.4,53.3–61.5,,97.2,96.1–98.4,,53.5,49.8–57.2,,89.2,87.1–91.4,,55.4,52.7–58.1,,93.2,91.9–94.5
+3,58.9,54.7–63.2,,96.5,95.2–97.8,,56.7,52.5–60.8,,90.2,88.0–92.4,,57.7,55.0–60.5,,93.2,91.9–94.5
+4,56.7,53.1–60.4,,96.1,94.8–97.5,,48.2,44.8–51.6,,90.9,89.2–92.6,,52.5,50.0–55.0,,93.5,92.4–94.7
+5 (highest socioeconomic areas),54.1,50.2–58.1,,96.8,95.5–98.1,,51.7,48.4–55.0,,87.9,85.6–90.1,,52.9,50.1–55.6,,92.1,90.8–93.5
+,,,,,,,,,,,,,,,,,
+Age-standardised rates,,,,,,,,,,,,,,,,,
+Remoteness,,,,,,,,,,,,,,,,,
+Major cities,58.5,56.5–60.6,,97.6,97.0–98.2,,53.9,51.9–55.8,,91.0,90.0–92.1,,56.1,54.7–57.6,,94.2,93.6–94.8
+Inner regional,56.5,51.7–61.3,,96.1,94.3–97.8,,56.5,51.9–61.1,,89.6,87.3–91.8,,56.9,53.4–60.3,,92.8,91.4–94.2
+Outer regional/Remote,65.8,60.4–71.2,,96.3,94.4–98.1,,55.0,49.6–60.3,,88.7,85.5–92.0,,59.9,56.1–63.7,,92.6,90.7–94.5
+,,,,,,,,,,,,,,,,,
+Socioeconomic areas,,,,,,,,,,,,,,,,,
+1 (lowest socioeconomic areas),65.3,61.6–69.0,,98.2,97.3–99.1,,58.8,54.9–62.7,,93.3,91.3–95.2,,61.9,59.2–64.5,,95.8,94.7–96.9
+2,58.0,54.0–62.1,,97.7,96.7–98.7,,54.4,50.5–58.4,,89.5,87.2–91.8,,56.2,53.3–59.1,,93.6,92.3–94.8
+3,59.0,54.9–63.1,,96.4,94.9–97.9,,57.5,53.8–61.2,,90.3,88.3–92.3,,58.3,55.6–61.0,,93.3,92.0–94.5
+4,57.4,53.4–61.5,,96.2,94.6–97.8,,48.9,44.8–53.0,,91.1,89.2–93.1,,53.2,50.3–56.1,,93.7,92.4–95.0
+5 (highest socioeconomic areas),54.8,51.2–58.4,,96.7,95.5–97.9,,53.0,49.0–56.9,,88.2,86.1–90.4,,53.9,51.4–56.5,,92.3,91.0–93.6
+,,,,,,,,,,,,,,,,,
+Notes,,,,,,,,,,,,,,,,,
+1. Sex recorded at birth refers to what was determined by sex charactertistics observed at birth or infancy.,,,,,,,,,,,,,,,,,
+"2. National Health and Medical Research Council's (NHMRC) 2013 Australian Dietary Guidelines recommend a minimum numbers of serves of fruit and vegetables each day, depending on a person's age and sex, to ensure good nutrition and health. For more information, see Australian Dietary Guidelines. Excludes 'Unable to be determined.",,,,,,,,,,,,,,,,,
+"3. The ABS 2022 National Health Survey uses the Standard for Sex, Gender, Variations of Sex Characteristics and Sexual Orientation Variables, 2020 to collect the Sex at birth variable used in this data table. Due to small numbers and the need to protect privacy, people who reported sex at birth as a term other than male or female are not reported separately or included in the total Persons category.",,,,,,,,,,,,,,,,,
+"4. Remoteness area uses Australian Statistical Geography Standard Remoteness Structure, 2021. Excludes Very remote areas of Australia",,,,,,,,,,,,,,,,,
+"5. Socioeconomic areas are quintiles of Socioeconomic Indexes for Areas 2021, specifically the Index of Relativel Socio-Economic Disadvantage (IRSD). A lower Index of Disadvantage quintile (e.g. the first quintile) indicates relatively greater disadvantage and a lack of advantage in general. A higher Index of Disadvantage (e.g. the fifth quintile) indicates a relative lack of disadvantage and greater advantage in general. See Socio-Economic Indexes for Areas (SEIFA), Australia, 2021.",,,,,,,,,,,,,,,,,
+6. Rates presented are age standaridsed to the 2001 Australian standard population,,,,,,,,,,,,,,,,,
+7. 95% CI = 95% confidence interval. We can be 95% confident that the true value is within this confidence interval.,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+Source: ,,,,,,,,,,,,,,,,,
+"ABS (2023) Microdata: National Health Survey 2022, AIHW analysis of detailed microdata, ABS website, accessed 29 April 2024.",,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,

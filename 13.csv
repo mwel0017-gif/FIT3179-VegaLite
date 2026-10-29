@@ -1,0 +1,77 @@
+﻿"This tab has one table with estimates for nutrients available per 10,000 kilojoules, by State or Territory. It ranges from cell A1 to K56.",,,,,,,,,,
+Australian Bureau of Statistics,,,,,,,,,,
+"Table 13: Nutrients available per 10,000 kJ, by State or Territory(a) – Estimates",,,,,,,,,,
+"Apparent Consumption of Selected Foodstuffs, 2023–24: Geospatial Dietary Indicators",,,,,,,,,,
+Nutrient,Unit,State or Territory,,,,,,,,
+,,NSW,Vic.,Qld,SA,WA,Tas.,NT,ACT,Australia
+,,"Estimates per 10,000 kJ",,,,,,,,
+Protein,g,89.0,88.4,91.6,90.2,91.0,np,89.7,88.4,89.7
+Total fat,g,106.4,105.7,105.8,105.3,105.3,np,101.5,104.4,105.9
+Saturated fat,g,40.8,40.8,42.5,41.7,41.6,np,39.0,40.5,41.3
+Monounsaturated fat,g,41.3,40.7,40.2,39.9,40.0,np,39.1,40.0,40.6
+Polyunsaturated fat,g,16.1,16.0,15.0,15.5,15.4,np,15.5,15.7,15.7
+Linoleic acid,g,13.5,13.5,12.6,13.1,13.0,np,13.0,13.3,13.2
+Alpha-linolenic acid,g,2.0,2.0,1.8,1.9,1.9,np,1.9,1.9,1.9
+Long chain omega-3 fatty acids,mg,238.5,227.7,225.5,201.9,225.6,np,206.9,219.2,227.5
+Trans fatty acids,mg,"1,871.6","1,888.5","1,959.9","1,903.9","1,903.2",np,"1,838.7","1,829.8","1,903.7"
+Carbohydrate,g,260.1,261.9,259.7,261.6,260.7,np,271.2,264.3,260.8
+Total sugars,g,124.8,122.3,129.2,127.0,124.8,np,126.5,124.7,125.3
+Free sugars,g,75.7,72.9,81.0,77.9,75.5,np,83.2,72.7,76.3
+Added sugars,g,69.6,67.2,74.8,72.5,69.6,np,76.3,65.4,70.4
+Starch,g,132.0,136.3,127.1,131.3,132.6,np,142.0,135.9,132.2
+Dietary fibre,g,23.9,24.5,22.7,23.8,23.8,np,22.4,25.4,23.8
+Alcohol(b),g,0.0,0.0,0.0,0.0,0.0,np,0.0,0.0,0.0
+Preformed vitamin A,µg,410.9,406.7,434.7,433.5,430.5,np,415.3,402.1,419.0
+Pro vitamin A,µg,"2,634.3","2,702.3","2,509.0","2,659.1","2,725.1",np,"2,340.1","2,907.2","2,641.5"
+Vitamin A retinol equivalents,µg,953.9,969.5,948.6,985.6,992.3,np,896.8,"1,006.1",964.8
+Thiamin (B1),mg,1.7,1.7,1.7,1.7,1.7,np,1.6,1.7,1.7
+Riboflavin (B2),mg,2.1,2.0,2.1,2.1,2.1,np,2.0,2.1,2.1
+Niacin (B3),mg,25.3,24.8,25.6,26.0,25.0,np,25.0,24.8,25.2
+Niacin equivalents,µg,42.5,41.9,43.4,43.5,42.7,np,42.4,42.0,42.6
+"Folate, natural",µg,315.8,315.5,309.4,309.9,311.3,np,296.7,329.8,313.4
+Folic acid,µg,184.0,186.4,190.2,193.5,184.6,np,177.9,181.9,186.8
+Total folates,µg,499.7,501.9,499.5,503.4,495.8,np,474.5,511.7,500.2
+Folate equivalents,µg,623.0,626.9,627.0,633.2,619.6,np,593.9,633.7,625.4
+Vitamin B6,mg,1.9,1.9,1.9,1.9,1.9,np,1.9,1.8,1.9
+Vitamin B12,mg,4.7,4.6,5.0,4.8,4.8,np,4.9,4.5,4.7
+Vitamin C,mg,106.4,106.2,98.5,100.5,103.9,np,99.9,113.6,103.9
+Vitamin E,mg,15.4,15.4,13.9,14.7,14.7,np,14.0,15.2,14.9
+Calcium,mg,869.2,878.5,894.5,908.8,892.3,np,808.4,904.0,882.8
+Iodine,µg,183.3,183.2,183.5,180.2,177.9,np,176.2,184.7,182.4
+Iron,mg,11.5,11.6,11.2,11.6,11.6,np,11.2,11.9,11.5
+Magnesium,mg,330.7,330.3,323.4,330.1,332.2,np,314.1,339.6,329.0
+Phosphorus,mg,"1,537.4","1,536.9","1,578.2","1,568.6","1,562.3",np,"1,552.8","1,547.1","1,551.3"
+Potassium,mg,"3,122.1","3,123.7","3,101.8","3,168.8","3,129.0",np,"2,916.3","3,200.2","3,121.5"
+Selenium,mg,83.5,82.1,84.8,82.7,85.1,np,85.9,80.9,83.4
+Sodium,mg,"3,433.6","3,495.3","3,475.6","3,446.8","3,478.7",np,"3,463.1","3,289.1","3,459.6"
+Zinc,mg,10.2,10.2,10.3,10.4,10.4,np,10.2,10.4,10.3
+Caffeine,mg,193.3,188.0,185.9,208.8,176.6,np,174.6,193.8,189.7
+Cholesterol,mg,339.6,330.4,354.4,325.3,348.2,np,346.5,323.2,339.8
+Moisture,g,"1,307.8","1,220.7","1,320.7","1,271.7","1,312.0",np,"1,382.2","1,187.3","1,281.7"
+Energy,kJ,"10,000.0","10,000.0","10,000.0","10,000.0","10,000.0",np,"10,000.0","10,000.0","10,000.0"
+Footnotes,,,,,,,,,,
+"np not available for publication but included in totals where applicable, unless otherwise indicated.",,,,,,,,,,
+"(a) See the Glossary in the Apparent Consumption of Selected Foodstuffs Methodology, 2023–24 for definitions of terms used in this publication.",,,,,,,,,,
+"(b) Alcoholic beverages as a food group are not available from source data. However, alcohol as a macronutrient may be present in food items (e.g. desserts). See the Explanatory Notes in the Apparent Consumption of Selected Foodstuffs Methodology, 2023–24 for more information.",,,,,,,,,,
+© Commonwealth of Australia,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
