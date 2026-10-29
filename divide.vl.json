@@ -19,7 +19,7 @@
   "vconcat": [
     {
       "data": {
-        "url": "../data/OpenHSR.csv",
+        "url": "OpenHSR.csv",
         "format": {
           "type": "csv"
         }
