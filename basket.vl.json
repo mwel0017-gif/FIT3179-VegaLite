@@ -201,7 +201,7 @@
       "layer": [
         {
           "data": {
-            "url": "../data/SA4_free_sugars_2023_24.geojson",
+            "url": "SA4_free_sugars_2023_24.geojson",
             "format": {
               "type": "json",
               "property": "features"
@@ -233,7 +233,7 @@
 
         {
           "data": {
-            "url": "../data/SA4_regional_nutrient_points.csv",
+            "url": "SA4_regional_nutrient_points.csv",
             "format": {
               "type": "csv",
               "parse": {
