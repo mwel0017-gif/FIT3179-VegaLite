@@ -1010,7 +1010,7 @@
           "width": 700,
           "height": 625,
           "data": {
-            "url": "../data/SA4_free_sugars_2023_24.geojson",
+            "url": "SA4_free_sugars_2023_24.geojson",
             "format": {
               "type": "json",
               "property": "features"
