@@ -1,0 +1,1653 @@
+
+<!DOCTYPE html>
+<html lang="en-AU">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="The Trolley Check: exploring nutrition labels, Health Star Ratings and food availability across Australia."
+  >
+
+  <title>The Trolley Check | FIT3179</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Vega libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+
+  <style>
+
+    /* MAIN PAGE WIDTH */
+
+    .page-frame {
+      box-sizing: border-box;
+      width: 97% !important;
+      max-width: 1600px !important;
+      margin: 0 auto !important;
+    }
+
+    .aisle > .chart-card {
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      margin: 24px auto;
+    }
+
+
+    /* FLEXIBLE VEGA CHART CONTAINER */
+
+    .chart-card .chart-stage,
+    .chart-card .chart-host {
+      display: block !important;
+      box-sizing: border-box;
+      width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      overflow: visible !important;
+    }
+
+    .chart-card .chart-host {
+      position: relative !important;
+      text-align: center;
+    }
+
+    .chart-card .chart-host > .vega-embed {
+      position: static !important;
+      display: inline-block !important;
+      vertical-align: top;
+      width: max-content !important;
+      height: auto !important;
+      max-width: none !important;
+      margin: 0 auto !important;
+      transform: none !important;
+      text-align: left;
+    }
+
+    .chart-card .vega-bindings {
+      max-width: 100%;
+      white-space: normal;
+    }
+
+    .chart-card .vega-bindings input,
+    .chart-card .vega-bindings select {
+      max-width: 100%;
+    }
+
+    #aisle-1 .chart-pair,
+    #aisle-4 .chart-pair {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      align-items: stretch;
+      width: 100%;
+      margin: 24px 0 30px;
+    }
+
+    #aisle-1 .chart-pair > .chart-card,
+    #aisle-4 .chart-pair > .chart-card {
+      display: flex !important;
+      flex-direction: column;
+      box-sizing: border-box;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      margin: 0;
+      padding: 18px;
+    }
+
+    #aisle-4 .chart-pair > #basket {
+      display: flex !important;
+      flex-direction: column;
+      grid-template-columns: none !important;
+    }
+
+    #aisle-1 .chart-pair .chart-heading,
+    #aisle-4 .chart-pair .chart-heading {
+      width: 100%;
+      min-width: 0;
+    }
+
+    #aisle-1 .chart-pair .chart-heading > div:first-child,
+    #aisle-4 .chart-pair .chart-heading > div:first-child {
+      min-width: 0;
+      flex-basis: 100%;
+    }
+
+    #aisle-1 .chart-pair .chart-stage,
+    #aisle-1 .chart-pair .chart-host,
+    #aisle-4 .chart-pair .chart-stage,
+    #aisle-4 .chart-pair .chart-host {
+      min-width: 0 !important;
+      max-width: 100% !important;
+      overflow-x: auto !important;
+    }
+
+    #aisle-1 .chart-pair .chart-stage,
+    #aisle-4 .chart-pair .chart-stage {
+      margin: 16px 0 !important;
+      padding: 10px;
+    }
+
+    #aisle-1 .chart-pair .chart-host,
+    #aisle-4 .chart-pair .chart-host {
+      text-align: center !important;
+    }
+
+    #aisle-1 .chart-pair .chart-host > .vega-embed,
+    #aisle-4 .chart-pair .chart-host > .vega-embed {
+      position: static !important;
+      display: inline-block !important;
+      vertical-align: top;
+      transform: none !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    #aisle-1 .chart-pair .chart-explanation,
+    #aisle-4 .chart-pair .chart-explanation {
+      box-sizing: border-box;
+      display: block;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      margin: 0;
+      padding: 8px 0;
+    }
+
+    #aisle-2 > #hsr-distribution {
+      display: grid !important;
+      grid-template-columns:
+        minmax(0, 3fr)
+        minmax(0, 1fr);
+      column-gap: 22px;
+      row-gap: 18px;
+      align-items: start;
+    }
+
+    #hsr-distribution > .chart-heading {
+      grid-column: 1 / -1;
+      min-width: 0;
+    }
+
+    #hsr-distribution > .chart-stage {
+      grid-column: 1;
+      width: 100% !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 14px;
+      overflow-x: auto !important;
+    }
+
+    #hsr-distribution .chart-host {
+      width: 100% !important;
+      min-width: 0 !important;
+      text-align: center !important;
+      overflow-x: auto !important;
+    }
+
+    #hsr-distribution > .chart-explanation {
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-self: stretch;
+      width: 100%;
+      min-width: 0;
+      margin: 0;
+      padding: 12px 6px;
+      gap: 75px;
+    }
+
+    #hsr-distribution .hsr-text-block h4 {
+      margin-bottom: 8px;
+    }
+
+    #hsr-distribution .hsr-text-block p {
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
+    #hsr-distribution .hsr-text-block + .hsr-text-block {
+      padding-top: 12px;
+      border-top: 1px solid #cbd1c8;
+    }
+
+
+    /* AISLE 4: CHOROPLETH MAP */
+
+    #aisle-4 > #fresh {
+      display: grid !important;
+      grid-template-columns:
+        minmax(0, 17fr)
+        minmax(0, 3fr);
+      column-gap: 18px;
+      row-gap: 16px;
+      align-items: start;
+    }
+
+    #fresh > .chart-heading {
+      grid-column: 1 / -1;
+      min-width: 0;
+    }
+
+    #fresh > .chart-stage {
+      grid-column: 1;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 12px;
+      overflow-x: auto !important;
+    }
+
+    #fresh .chart-host {
+      width: 100% !important;
+      min-width: 0 !important;
+      text-align: center !important;
+      overflow-x: auto !important;
+    }
+
+    #fresh > .chart-explanation {
+      grid-column: 2;
+      align-self: center;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      padding: 8px 0;
+      margin: 0;
+    }
+
+    #fresh > .chart-explanation h4 {
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    #fresh > .chart-explanation p {
+      font-size: 17px;
+      line-height: 1.6;
+      margin-bottom: 0;
+      overflow-wrap: break-word;
+    }
+
+    #fresh > .chart-explanation hr {
+      border: none;
+      border-top: 1px solid #cbd1c8;
+      margin: 16px 0;
+    }
+
+
+    /*FULL-WIDTH AISLE EXPLANATIONS */
+
+    .aisle .aisle-intro {
+      max-width: none !important;
+      width: 100%;
+    }
+
+    .aisle .aisle-intro p {
+      max-width: none !important;
+      width: 100%;
+      text-align: justify;
+      text-align-last: left;
+    }
+
+    #introduction > p:not(.receipt-thanks) {
+      max-width: none !important;
+      width: 100%;
+      margin: 0 0 16px !important;
+      text-align: justify !important;
+      text-align-last: left;
+    }
+
+
+    /*  CONCLUSION AND AI ACKNOWLEDGEMENT */
+
+    #conclusion > p,
+    #ai-acknowledgement > p {
+      max-width: none !important;
+      width: 100%;
+      margin: 0 0 16px !important;
+      text-align: justify !important;
+      text-align-last: left;
+    }
+
+
+    /* DATA SOURCE LINKS */
+
+    #data-sources .dashboard-source-list {
+      text-align: left;
+      max-width: none;
+      padding-left: 23px;
+      margin: 12px 0 0;
+    }
+
+    #data-sources .dashboard-source-list li {
+      margin-bottom: 16px;
+    }
+
+    #data-sources .dashboard-source-list strong,
+    #data-sources .dashboard-source-list span,
+    #data-sources .dashboard-source-list a {
+      display: block;
+    }
+
+    #data-sources .dashboard-source-list a {
+      overflow-wrap: anywhere;
+    }
+
+
+    /* RESPONSIVE LAYOUT */
+
+    @media (max-width: 1100px) {
+      #aisle-1 .chart-pair,
+      #aisle-4 .chart-pair {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 1050px) {
+
+      #aisle-2 > #hsr-distribution,
+      #aisle-4 > #fresh {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 16px;
+      }
+
+      #hsr-distribution > .chart-heading,
+      #hsr-distribution > .chart-stage,
+      #hsr-distribution > .chart-explanation,
+      #fresh > .chart-heading,
+      #fresh > .chart-stage,
+      #fresh > .chart-explanation {
+        grid-column: 1;
+      }
+
+      #hsr-distribution > .chart-explanation,
+      #fresh > .chart-explanation {
+        align-self: start;
+        padding: 12px 0;
+      }
+
+      #hsr-distribution > .chart-explanation {
+        justify-content: flex-start;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+<div class="page-frame" id="top">
+
+  <!-- NAVIGATION -->
+
+  <nav class="site-nav" aria-label="Dashboard sections">
+
+    <a class="brand" href="#top">
+      🛒 The Trolley Check
+    </a>
+
+    <div class="nav-links">
+      <a href="#aisle-1">Nutrition Label</a>
+      <a href="#aisle-2">Health Stars</a>
+      <a href="#aisle-3">Beyond the Stars</a>
+      <a href="#aisle-4">Across Australia</a>
+      <a href="#aisle-5">Final Checkout</a>
+    </div>
+
+  </nav>
+
+  <header class="hero">
+
+    <div class="hero-copy">
+
+      <p class="section-label">
+        FIT3179 · Food Product Nutrition
+      </p>
+
+      <h1>The Trolley <em>Check</em></h1>
+
+      <p>
+        What is really inside the packaged foods
+        in our supermarket trolleys, and how much
+        nutrition do these foods provide?
+      </p>
+
+    </div>
+
+    <div
+      class="hero-sticker"
+      aria-label="39 percent HSR uptake compared with the 70 percent target"
+    >
+      <span>39%</span>
+
+      <p>
+        Health Star Rating uptake<br>
+        2025 target: 70%
+      </p>
+
+    </div>
+
+  </header>
+
+
+  <main>
+
+    <!-- INTRODUCTION -->
+
+    <section class="intro-receipt" id="introduction">
+
+      <h2>Your Shopping Receipt</h2>
+
+      <p>
+        This dashboard takes you on a journey through
+        Australia's packaged food landscape, exploring
+        what goes into everyday foods and what Health
+        Star Ratings really tell us.
+      </p>
+
+      <p>
+        The Trolley Check takes you through five supermarket
+        aisles. We begin by uncovering the nutrients hidden
+        behind food labels, before exploring how Health Star
+        Ratings are distributed and why similar products can
+        receive different scores. We then look beyond a single
+        star rating to understand the nutrients that shape
+        these differences. Moving beyond supermarket shelves,
+        we explore how packaged food availability and nutritional
+        patterns vary across Australia. Finally, we examine how
+        widely Health Star Ratings are displayed on products
+        and how close Australia is to its 70% target.
+      </p>
+
+      <div class="barcode" aria-hidden="true"></div>
+
+      <p class="receipt-thanks">
+        Thank you for shopping with data
+      </p>
+
+    </section>
+
+
+    <!--  AISLE 1: BEHIND THE NUTRITION LABEL -->
+
+    <section class="aisle aisle-1" id="aisle-1">
+
+      <header class="aisle-heading">
+        <span class="aisle-icon" aria-hidden="true">🏷️</span>
+        <h2>1. Behind the Nutrition Label</h2>
+      </header>
+
+      <div class="aisle-intro">
+
+        <h3>What's Really Inside Packaged Foods?</h3>
+
+        <p>
+          Everyday foods can have very different nutrient
+          profiles. In this aisle, we take a closer look
+          at the nutritional content of everyday packaged
+          foods, exploring how nutrients differ across food
+          categories, how much of their sugar comes from
+          added sugars, and how sodium levels vary across
+          Australian packaged food products.
+        </p>
+
+      </div>
+
+
+      <!-- CHART 1: NUTRIENT HEATMAP -->
+
+      <article class="chart-card" id="divide">
+
+        <div class="chart-heading">
+          <div>
+            <p class="shelf-label">Aisle 01 · Shelf 1</p>
+            <h3>The Nutrient Divide</h3>
+          </div>
+        </div>
+
+        <div class="chart-stage">
+          <div
+            id="chart-divide"
+            class="chart-host visualisation"
+            aria-label="Heatmap comparing five nutrients across food groups">
+          </div>
+        </div>
+
+        <div class="chart-explanation">
+
+          <h4>How to read</h4>
+
+          <p>
+            Each cell shows the amount of a nutrient
+            per 100 g of food. The colour indicates
+            how high or low that value is compared
+            to other foods for the same nutrient,
+            rather than comparing different nutrients
+            with each other.
+          </p>
+
+          <hr>
+
+          <h4>Key insight</h4>
+
+          <p>
+            Nutritional strengths often come with trade-offs.
+            Breakfast cereals lead in fibre (7.8 g) but
+            also contain 20.1 g of sugar per 100 g.
+            Snacks stand out for high sugar (32.1 g),
+            while canned foods have the most sodium
+            (813 mg). These contrasts reveal why
+            understanding packaged foods requires
+            looking beyond a single nutrient.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <!-- CHART PAIR: SUGAR AND SODIUM -->
+
+      <div class="chart-pair nutrient-pair">
+
+
+        <!-- CHART 2: SUGAR -->
+
+        <article class="chart-card" id="sugar">
+
+          <div class="chart-heading">
+            <div>
+              <p class="shelf-label">Aisle 01 · Shelf 2</p>
+              <h3>The Hidden Sugar Story</h3>
+            </div>
+          </div>
+
+          <div class="chart-stage">
+            <div
+              id="chart-sugar"
+              class="chart-host visualisation"
+              aria-label="Stacked bar chart of added and other sugars">
+            </div>
+          </div>
+
+          <div class="chart-explanation">
+
+            <h4>How to read</h4>
+
+            <p>
+              Each bar shows average sugars per 100 g.
+              Gold represents added sugars, while
+              mint represents other sugars.
+            </p>
+
+            <hr>
+
+            <h4>Key insight</h4>
+
+            <p>
+              Not all sugar comes from the same source.
+              Sweet biscuits contain the most sugar
+              (32.5 g per 100 g), largely from added sugars,
+              while savoury sauces reveal how added sugar
+              can hide in unexpected foods. Fruit juice
+              contains mostly other sugars (10.2 g),
+              whereas nearly all the sugar in soft drinks
+              (7.3 g) is added. This highlights why
+              the source of sugar matters just as much
+              as the total amount.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- CHART 3: SODIUM -->
+
+        <article class="chart-card" id="salt">
+
+          <div class="chart-heading">
+            <div>
+              <p class="shelf-label">Aisle 01 · Shelf 3</p>
+              <h3>Salt in Unexpected Places</h3>
+            </div>
+          </div>
+
+          <div class="chart-stage">
+            <div
+              id="chart-salt"
+              class="chart-host visualisation"
+              aria-label="Lollipop chart comparing median sodium levels">
+            </div>
+          </div>
+
+          <div class="chart-explanation">
+
+            <h4>How to read</h4>
+
+            <p>
+              Each lollipop shows median sodium
+              in milligrams per 100 g. Use the
+              dropdown to highlight a food group.
+            </p>
+
+            <hr>
+
+            <h4>Key insight</h4>
+
+            <p>
+              Sodium isn't just found in obviously salty
+              foods. Commercial savoury sauces lead with
+              913 mg per 100 g, followed by cheese
+              (602.5 mg) and potato crisps (591.5 mg).
+              Surprisingly, bread and rolls contain
+              more than twice the sodium of breakfast
+              cereals (481 mg vs. 215 mg). This reveals
+              how sodium can be present in everyday
+              foods where we might least expect it.
+            </p>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- AISLE 2: THE HEALTH STAR PUZZLE -->
+
+    <section class="aisle aisle-2" id="aisle-2">
+
+      <header class="aisle-heading">
+        <span class="aisle-icon" aria-hidden="true">⭐</span>
+        <h2>2. The Health Star Puzzle</h2>
+      </header>
+
+      <div class="aisle-intro">
+
+        <h3>What Do the Stars Actually Reveal?</h3>
+
+        <p>
+          Health Star Ratings can help shoppers compare
+          packaged foods, but ratings are not evenly
+          distributed. Examine the overall ratings,
+          the differences between products within
+          a food type, and the shapes of rating
+          distributions across categories.
+        </p>
+
+      </div>
+
+
+      <!--  CHART 4: HSR PICTOGRAM -->
+
+      <article class="chart-card" id="hsr-distribution">
+
+        <div class="chart-heading">
+          <div>
+            <p class="shelf-label">Aisle 02 · Shelf 1</p>
+            <h3>What the Stars Add Up To</h3>
+          </div>
+        </div>
+
+        <div class="chart-stage">
+          <div
+            id="chart-hsr-distribution"
+            class="chart-host visualisation"
+            aria-label="Pictogram of 100 stars divided into lower, middle and higher rating bands">
+          </div>
+        </div>
+
+        <div class="chart-explanation">
+
+          <div class="hsr-text-block">
+
+            <h4>How to read</h4>
+
+            <p>
+              Each star represents about 1% of the
+              246 rated products. Gold indicates
+              0.5–2.0 stars, teal 2.5–3.5,
+              and mint 4.0–5.0.
+            </p>
+
+          </div>
+
+          <div class="hsr-text-block">
+
+            <h4>Key insight</h4>
+
+            <p>
+              Lower-rated products make up the largest
+              group, with 94 of 246 products (38.2%)
+              receiving just 0.5–2 stars. Another
+              76 products (30.9%) fall in the middle
+              range of 2.5–3.5 stars, while only 30.9%
+              receive 4–5 stars. This means 69.1% of
+              products (170 of 246), or about 7 in every
+              10, have a Health Star Rating below 4,
+              showing that lower and middle ratings
+              are more common than higher ratings in
+              this dataset. These results are based
+              on the 246 products analysed and may
+              not represent all packaged foods sold
+              in Australia.
+            </p>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- CHART 5: HSR DOT PLOT -->
+
+      <article class="chart-card" id="shelf">
+
+        <div class="chart-heading">
+          <div>
+            <p class="shelf-label">Aisle 02 · Shelf 2</p>
+            <h3>Same Shelf, Different Stars</h3>
+          </div>
+        </div>
+
+        <div class="chart-stage">
+          <div
+            id="chart-shelf"
+            class="chart-host visualisation"
+            aria-label="Range and dot plot of product ratings within food categories">
+          </div>
+        </div>
+
+        <div class="chart-explanation">
+
+          <h4>How to read</h4>
+
+          <p>
+            Small dots are individual products.
+            Gold marks the lowest rating and mint
+            the highest rating in each category.
+            The line shows the range.
+          </p>
+
+          <hr>
+
+          <h4>Key insight</h4>
+
+          <p>
+            Even within the same food category, Health
+            Star Ratings can differ dramatically.
+            Breakfast cereals show the widest possible
+            range, from 0.5 to 5 stars, while milk
+            products range from 1 to 5 stars and
+            snacks from 0.5 to 4 stars. Each dot
+            represents a product, and the lines
+            highlight the gap between the lowest
+            and highest ratings. These differences
+            reveal that products of the same type
+            aren't necessarily nutritionally alike,
+            making it important to compare Health
+            Star Ratings even when choosing between
+            similar foods.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <!-- CHART 6: RIDGELINE -->
+
+      <article class="chart-card" id="ridgeline">
+
+        <div class="chart-heading">
+          <div>
+            <p class="shelf-label">Aisle 02 · Shelf 3</p>
+            <h3>How Are the Stars Spread?</h3>
+          </div>
+        </div>
+
+        <div class="chart-stage">
+          <div
+            id="chart-ridgeline"
+            class="chart-host visualisation"
+            aria-label="Ridgeline chart comparing Health Star Rating distributions">
+          </div>
+        </div>
+
+        <div class="chart-explanation">
+
+          <h4>How to read</h4>
+
+          <p>
+            Each ridge represents the distribution
+            of ratings within a food category.
+            Compare the peaks, spread and category
+            median.
+          </p>
+
+          <hr>
+
+          <h4>Key insight</h4>
+
+          <p>
+            Even within the same food category,
+            Health Star Ratings can tell very
+            different stories. Breakfast cereals
+            spread across nearly the entire rating
+            scale, while vegetable products cluster
+            towards higher ratings and snacks concentrate
+            near the lowest. Milk products show distinct
+            peaks at both lower and higher ratings,
+            revealing considerable variation within
+            one category. These patterns highlight
+            that a food category alone cannot determine
+            nutritional quality, and similar products
+            may offer very different nutritional profiles.
+          </p>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- AISLE 3: BEYOND THE STARS -->
+
+    <section class="aisle aisle-3" id="aisle-3">
+
+      <header class="aisle-heading">
+        <span class="aisle-icon" aria-hidden="true">🔎</span>
+        <h2>3. Beyond the Stars</h2>
+      </header>
+
+      <div class="aisle-intro">
+
+        <h3>What Lies Behind a Single Score?</h3>
+
+        <p>
+          A Health Star Rating summarises a product,
+          but its underlying nutrients tell a more
+          detailed story. Compare five-nutrient profiles,
+          investigate the sugar–fibre balance of cereals
+          and snack bars, then examine four individual
+          cereals with contrasting ratings.
+        </p>
+
+      </div>
+
+
+      <!-- CHART 7: PARALLEL COORDINATES -->
+
+      <article class="chart-card" id="fingerprint">
+
+        <div class="chart-heading">
+          <div>
+            <p class="shelf-label">Aisle 03 · Shelf 1</p>
+            <h3>A Nutritional Fingerprint</h3>
+          </div>
+        </div>
+
+        <div class="chart-stage">
+          <div
+            id="chart-fingerprint"
+            class="chart-host visualisation"
+            aria-label="Interactive parallel coordinates of five nutrients">
+          </div>
+        </div>
+
+        <div class="chart-explanation">
+
+          <h4>How to read</h4>
+
+          <p>
+            Each line represents a packaged food product,
+            showing its nutritional profile across five
+            key nutrients. Values are scaled separately
+            from 0–100% for each nutrient, allowing
+            relative comparisons rather than actual
+            nutrient percentages. Gold lines highlight
+            lower-rated products, while teal lines
+            represent other products. Use the food
+            category filter to explore differences
+            within specific groups.
+          </p>
+
+          <hr>
+
+          <h4>Key insight</h4>
+
+          <p>
+            Lower-rated products often show higher relative
+            levels of sugar, saturated fat or sodium,
+            alongside lower fibre levels. However,
+            nutritional profiles vary considerably,
+            with some products sharing similar protein
+            or sodium levels despite having different
+            ratings. This highlights that a single Health
+            Star Rating cannot fully capture a product's
+            nutritional profile, making it valuable to
+            examine multiple nutrients together.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <!-- CHART 8: SCATTER PLOT -->
+
+      <article class="chart-card" id="balance">
+
+        <div class="chart-heading">
+          <div>
+            <p class="shelf-label">Aisle 03 · Shelf 2</p>
+            <h3>The Sugar and Fibre Balance</h3>
+          </div>
+        </div>
+
+        <div class="chart-stage">
+          <div
+            id="chart-balance"
+            class="chart-host visualisation"
+            aria-label="Scatter plot of sugar versus fibre for breakfast cereals and snack bars">
+          </div>
+        </div>
+
+        <div class="chart-explanation">
+
+          <h4>How to read</h4>
+
+          <p>
+            Each dot represents a packaged food product,
+            with colour distinguishing breakfast cereals
+            from snack bars. Products further to the right
+            contain more sugar, while those higher up
+            contain more fibre, both measured per 100 g.
+            The dashed line marks the dataset's median
+            fibre level of 7.6 g per 100 g, helping
+            identify products with higher or lower
+            fibre content.
+          </p>
+
+          <hr>
+
+          <h4>Key insight</h4>
+
+          <p>
+            Breakfast cereals show considerable nutritional
+            variation, with some containing less than 10 g
+            of sugar and more than 15 g of fibre per 100 g.
+            In contrast, many snack bars contain relatively
+            high sugar levels while falling below the median
+            fibre level of 7.6 g. These differences reveal
+            that products within familiar food categories
+            can offer very different nutritional benefits,
+            highlighting the importance of considering
+            both sugar and fibre rather than judging
+            foods by their category alone.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <!-- CHART 9: RADAR CHARTS -->
+
+      <article class="chart-card" id="radar">
+
+        <div class="chart-heading">
+          <div>
+            <p class="shelf-label">Aisle 03 · Shelf 3</p>
+            <h3>Behind the Breakfast Stars</h3>
+          </div>
+        </div>
+
+        <div class="chart-stage">
+          <div
+            id="chart-radar"
+            class="chart-host visualisation"
+            aria-label="Four radar charts comparing nutrients in Weet-Bix, Corn Flakes, Coco Pops and Splitstix">
+          </div>
+        </div>
+
+        <div class="chart-explanation">
+
+          <h4>How to read</h4>
+
+          <p>
+            Each radar chart shows the nutritional profile
+            of a cereal across five key nutrients: sugar,
+            saturated fat, sodium, protein and fibre.
+            Values are scaled separately from 0–100%
+            for each nutrient, with points further from
+            the centre indicating higher relative levels.
+            These percentages represent scaled values,
+            not actual nutrient percentages, allowing
+            comparisons of nutritional patterns
+            across cereals.
+          </p>
+
+          <hr>
+
+          <h4>Key insight</h4>
+
+          <p>
+            Even within breakfast cereals, nutritional
+            profiles differ significantly. Weet-Bix
+            (5.0 stars) stands out for its high relative
+            fibre and protein levels, while Splitstix
+            (0.5 stars) shows particularly high sugar
+            and saturated fat with very little fibre.
+            Corn Flakes (3.5 stars) stand out for sodium,
+            whereas Coco Pops (2.0 stars) have relatively
+            high sugar levels. These contrasts reveal
+            that cereals in the same category can offer
+            very different nutritional benefits and
+            trade-offs, helping explain why their
+            Health Star Ratings vary so widely.
+          </p>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- AISLE 4: BEYOND THE SUPERMARKET SHELF -->
+
+    <section class="aisle aisle-4" id="aisle-4">
+
+      <header class="aisle-heading">
+        <span class="aisle-icon" aria-hidden="true">🗺️</span>
+        <h2>4. Beyond the Supermarket Shelf</h2>
+      </header>
+
+      <div class="aisle-intro">
+
+        <h3>How Does Food Availability Vary Across Australia?</h3>
+
+        <p>
+          The nutrition story extends beyond individual
+          packages. Explore geographic differences in
+          estimated nutrient availability,
+          sugar-sweetened beverages and selected
+          packaged foods across Australia.
+          These figures concern food availability,
+          not what individuals actually eat.
+        </p>
+
+      </div>
+
+
+      <!-- CHART PAIR: REGIONAL MAPS -->
+
+      <div class="chart-pair map-pair">
+
+
+        <!-- CHART 10: REGIONAL NUTRIENT MAP -->
+
+        <article class="chart-card" id="basket">
+
+          <div class="chart-heading">
+            <div>
+              <p class="shelf-label">Aisle 04 · Shelf 1</p>
+              <h3>Inside the Regional Basket</h3>
+            </div>
+          </div>
+
+          <div class="chart-stage">
+            <div
+              id="chart-basket"
+              class="chart-host visualisation"
+              aria-label="Proportional symbol map of nutrient availability by SA4 region">
+            </div>
+          </div>
+
+          <div class="chart-explanation">
+
+            <h4>How to read</h4>
+
+            <p>
+              Circles show estimated nutrient availability
+              per 10,000 kJ. Gold marks metropolitan
+              clusters and mint marks regional clusters.
+              Hover over a circle to see regional
+              nutrient details.
+            </p>
+
+            <hr>
+
+            <h4>Key insight</h4>
+
+            <p>
+              Free sugar availability varies considerably
+              across Australian regions, ranging from
+              approximately 63.9 g to 92.8 g per
+              10,000 kJ. Some regional areas show higher
+              levels than metropolitan areas, although
+              this pattern is not consistent across
+              the country. These differences highlight
+              how the nutritional mix of packaged food
+              purchases can vary by location, revealing
+              regional patterns that national averages
+              may overlook. The figures represent
+              estimated sugar availability, not
+              actual individual consumption.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- CHART 11: SWEET DRINK MAP -->
+
+        <article class="chart-card" id="sweet-drinks">
+
+          <div class="chart-heading">
+            <div>
+              <p class="shelf-label">Aisle 04 · Shelf 2</p>
+              <h3>Australia's Sweet Drink Divide</h3>
+            </div>
+          </div>
+
+          <div class="chart-stage">
+            <div
+              id="chart-sweet-drinks"
+              class="chart-host visualisation"
+              aria-label="Australian state and territory symbol map of sugar-sweetened beverage availability">
+            </div>
+          </div>
+
+          <div class="chart-explanation">
+
+            <h4>How to read</h4>
+
+            <p>
+              The circle area shows estimated availability;
+              the number in each circle is grams per
+              10,000 kJ. Tasmania has no published
+              estimate in this chart.
+            </p>
+
+            <hr>
+
+            <h4>Key insight</h4>
+
+            <p>
+              Sweet drink availability varies considerably
+              across Australia. The Northern Territory
+              records the highest published estimate
+              at 234.8 g per 10,000 kJ, nearly 1.8 times
+              the ACT's 128 g, while Queensland also
+              shows a relatively high level at 191 g.
+              These differences highlight significant
+              regional variation in sweet drink
+              availability, suggesting that the beverage
+              landscape is not the same across Australia.
+              These figures reflect estimated availability,
+              not actual individual consumption.
+            </p>
+
+          </div>
+
+        </article>
+
+      </div>
+
+
+      <!-- CHART 12: CHOROPLETH
+           85% CHART / 15% DESCRIPTION -->
+
+      <article class="chart-card" id="fresh">
+
+        <div class="chart-heading">
+          <div>
+            <p class="shelf-label">Aisle 04 · Shelf 3</p>
+            <h3>Beyond the Fresh Aisle</h3>
+          </div>
+        </div>
+
+        <div class="chart-stage">
+          <div
+            id="chart-fresh"
+            class="chart-host visualisation"
+            aria-label="Choropleth of selected packaged-food availability across Australian SA4 regions">
+          </div>
+        </div>
+
+        <div class="chart-explanation">
+
+          <h4>How to read</h4>
+
+          <p>
+            Mint indicates lower and gold higher estimated
+            availability per 10,000 kJ. Uncoloured regions
+            have no published value and should not be
+            treated as having low availability.
+          </p>
+
+          <hr>
+
+          <h4>Key insight</h4>
+
+          <p>
+            Packaged food availability varies across
+            Australian regions, with the highest
+            recorded level in Victoria (165.8 g per
+            10,000 kJ) and the lowest in New South
+            Wales (134.4 g). This difference of 31.4 g
+            highlights how the availability of selected
+            packaged foods can differ considerably
+            by location, even within the same state.
+            The WA Outback and Tasmania have no published
+            values, which indicates missing data rather
+            than low availability. These findings reveal
+            regional differences that national averages
+            may overlook.
+          </p>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- AISLE 5: THE FINAL CHECKOUT -->
+
+    <section class="aisle aisle-5" id="aisle-5">
+
+      <header class="aisle-heading">
+        <span class="aisle-icon" aria-hidden="true">🛒</span>
+        <h2>5. The Final Checkout</h2>
+      </header>
+
+      <div class="aisle-intro">
+
+        <h3>Are Health Star Ratings Reaching Shoppers?</h3>
+
+        <p>
+          Finish the journey by comparing reported
+          use of Health Star Rating labels with
+          the 70% uptake target.
+        </p>
+
+      </div>
+
+
+      <!-- CHART 13: WAFFLE CHART -->
+
+      <article class="chart-card" id="stars">
+
+        <div class="chart-heading">
+          <div>
+            <p class="shelf-label">Aisle 05 · Shelf 1</p>
+            <h3>The Missing Stars</h3>
+          </div>
+        </div>
+
+        <div class="chart-stage">
+          <div
+            id="chart-stars"
+            class="chart-host visualisation"
+            aria-label="Two waffle charts comparing 39% uptake against a 70% target">
+          </div>
+        </div>
+
+        <div class="chart-explanation">
+
+          <h4>How to read</h4>
+
+          <p>
+            Each square represents one percentage point.
+            The two grids compare reported Health Star
+            Rating uptake with the 2025 target.
+          </p>
+
+          <hr>
+
+          <h4>Key insight</h4>
+
+          <p>
+            Reported uptake is 39%, compared with
+            the 70% target: a shortfall of 31 percentage
+            points. That means 61 of every 100 products
+            in the measured group did not display a
+            rating. Health Star Ratings can support
+            comparison, but nutrition labels remain
+            essential when stars are missing.
+          </p>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- CONCLUSION -->
+
+    <section class="intro-receipt" id="conclusion">
+
+      <h2>Conclusion: What Did We Find at the Checkout?</h2>
+
+      <p>
+        Our journey through Australia's supermarket
+        aisles reveals one important lesson: there
+        is more to packaged food nutrition than
+        a single number or star rating. From
+        differences in sugar, sodium, fat, protein
+        and fibre to the wide variation in Health
+        Star Ratings among similar products, our
+        findings show that foods within the same
+        category are not always nutritionally alike.
+      </p>
+
+      <p>
+        Looking beyond the shelves, we also uncovered
+        regional differences in packaged food availability,
+        highlighting how Australia's food landscape varies
+        by location. Yet, with reported Health Star Rating
+        uptake at just 39%, Australia remains well short
+        of its 70% target, limiting how consistently
+        shoppers can use these ratings.
+      </p>
+
+      <p>
+        So, what's the final takeaway? Health Star Ratings
+        offer a useful starting point, but they don't tell
+        the whole story. Understanding what's in our food
+        means looking beyond the stars, comparing similar
+        products and reading the nutritional information
+        behind every label. Because making informed choices
+        starts with knowing what's really in our trolley.
+      </p>
+
+    </section>
+
+
+    <!--  DATA SOURCES -->
+
+    <section class="intro-receipt" id="data-sources">
+
+      <h2>Data Sources</h2>
+
+      <ul class="dashboard-source-list">
+
+        <li>
+          <strong>
+            Open Health Star Rating (OpenHSR) — Zenodo (2025)
+          </strong>
+          <span>
+            Nutritional information and Health Star Ratings
+            for 246 packaged food products sold in Australia.
+          </span>
+          <a
+            href="https://zenodo.org/records/17469191"
+            target="_blank"
+            rel="noopener noreferrer">
+            https://zenodo.org/records/17469191
+          </a>
+        </li>
+
+        <li>
+          <strong>
+            Australian Food Composition Database —
+            Food Standards Australia New Zealand (FSANZ)
+          </strong>
+          <span>
+            Detailed nutrient composition information
+            for foods commonly available in Australia.
+          </span>
+          <a
+            href="https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd"
+            target="_blank"
+            rel="noopener noreferrer">
+            https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd
+          </a>
+        </li>
+
+        <li>
+          <strong>
+            Apparent Consumption of Selected Foodstuffs,
+            Australia — Australian Bureau of Statistics (ABS)
+          </strong>
+          <span>
+            Estimates of food and beverage availability
+            based on retail sales, including nutritional
+            and geographical comparisons.
+          </span>
+          <a
+            href="https://www.abs.gov.au/statistics/health/food-and-nutrition/apparent-consumption-selected-foodstuffs-australia/latest-release#data-downloads"
+            target="_blank"
+            rel="noopener noreferrer">
+            https://www.abs.gov.au/statistics/health/food-and-nutrition/apparent-consumption-selected-foodstuffs-australia/latest-release#data-downloads
+          </a>
+        </li>
+
+        <li>
+          <strong>
+            National Nutrition and Physical Activity Survey,
+            2023 — ABS
+          </strong>
+          <a
+            href="https://www.abs.gov.au/statistics/health/food-and-nutrition/national-nutrition-and-physical-activity-survey/2023#data-downloads"
+            target="_blank"
+            rel="noopener noreferrer">
+            https://www.abs.gov.au/statistics/health/food-and-nutrition/national-nutrition-and-physical-activity-survey/2023#data-downloads
+          </a>
+        </li>
+
+        <li>
+          <strong>
+            National Health Survey, 2022 — ABS
+          </strong>
+          <a
+            href="https://www.abs.gov.au/statistics/health/health-conditions-and-risks/national-health-survey/2022#data-downloads"
+            target="_blank"
+            rel="noopener noreferrer">
+            https://www.abs.gov.au/statistics/health/health-conditions-and-risks/national-health-survey/2022#data-downloads
+          </a>
+        </li>
+
+        <li>
+          <strong>
+            Diet — Australian Institute of Health and Welfare (AIHW)
+          </strong>
+          <a
+            href="https://www.aihw.gov.au/reports/diet"
+            target="_blank"
+            rel="noopener noreferrer">
+            https://www.aihw.gov.au/reports/diet
+          </a>
+        </li>
+
+      </ul>
+
+    </section>
+
+
+    <!-- AI ACKNOWLEDGEMENT -->
+
+    <section class="intro-receipt" id="ai-acknowledgement">
+
+      <h2>AI Acknowledgement</h2>
+
+      <p>
+        I used ChatGPT as a supporting tool throughout
+        the development of this dashboard. It assisted
+        with writing, debugging and refining HTML, CSS,
+        JavaScript, and Vega-Lite/Vega code, as well as
+        improving the clarity, structure and presentation
+        of written explanations and key insights.
+        I reviewed and refined the final dashboard.
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <!--   FOOTER -->
+
+  <footer class="site-footer">
+
+    <p>
+      The Trolley Check · FIT3179 Data Visualisation 2
+    </p>
+
+    <p>
+      Author: Mayashi Weliwita · Student ID: 35512199
+    </p>
+
+    <p>
+      Submission Date: 28 October 2026
+    </p>
+
+  </footer>
+
+</div>
+
+<script src="js/charts.js"></script>
+
+<!--FIT CHARTS TO AVAILABLE SPACE -->
+
+<script>
+(() => {
+
+  const hosts = document.querySelectorAll(".chart-host");
+
+  let frame = 0;
+
+  function fitCharts() {
+
+    frame = 0;
+
+    for (const host of hosts) {
+
+      const embed = host.querySelector(
+        ":scope > .vega-embed"
+      );
+
+      if (
+        !embed ||
+        !embed.querySelector("svg, canvas")
+      ) {
+        continue;
+      }
+
+      embed.style.zoom = "1";
+
+      const width = Math.max(
+        embed.scrollWidth,
+        embed.offsetWidth
+      );
+
+      const height = Math.max(
+        embed.scrollHeight,
+        embed.offsetHeight
+      );
+
+      const availableWidth = host.clientWidth - 8;
+
+      if (
+        !width ||
+        !height ||
+        availableWidth <= 0
+      ) {
+        continue;
+      }
+
+      const isDotPlot = host.id === "chart-shelf";
+
+      const heightLimit = Math.min(
+        isDotPlot ? 680 : 570,
+        Math.max(
+          320,
+          window.innerHeight * (
+            isDotPlot ? 0.76 : 0.66
+          )
+        )
+      );
+
+      const scale = Math.min(
+        1,
+        availableWidth / width,
+        heightLimit / height
+      );
+
+      embed.style.zoom = String(
+        Math.max(0.05, scale)
+      );
+    }
+  }
+
+  function scheduleFit() {
+
+    if (frame) {
+      cancelAnimationFrame(frame);
+    }
+
+    frame = requestAnimationFrame(fitCharts);
+  }
+
+  for (const host of hosts) {
+    new MutationObserver(scheduleFit).observe(
+      host,
+      {
+        childList: true,
+        subtree: true
+      }
+    );
+  }
+
+  window.addEventListener(
+    "resize",
+    scheduleFit,
+    { passive: true }
+  );
+
+  window.addEventListener(
+    "load",
+    scheduleFit,
+    { once: true }
+  );
+
+  scheduleFit();
+
+})();
+</script>
+
+</body>
+</html>
